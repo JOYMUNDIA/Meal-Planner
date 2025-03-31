@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planner Restructuring</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="body-div">
+        <!-- Navigation section (10% of the body height) -->
+        <div class="nav-div">
+            <!-- register-div on the left -->
+            <div class="register-div">
+                <button class="register-login">Register/Login</button><br>
+            </div>
+
+            <!-- Navigation links section -->
+            <div class="nav-links">
+                
+
+                <button class="active">Home</button>
+                
+                <!-- Create dropdown button -->
+                <div class="dropdown">
+                    <button class="dropbtn">Create</button>
+                    <div class="dropdown-content">
+                        <a href="#">Family Meal Plan</a>
+                        <a href="#">School Lunch Meal Plan</a>
+                        <a href="#">Work Meal Plan</a>
+                        <!--<a href="#">Special Occasion/Festival Meal Plan</a>-->
+                    </div>
+                </div>
+
+                <button>Contact</button>
+                
+            </div>
+
+            <!-- Hamburger menu for smaller screens -->
+            <div class="hamburger-menu" onclick="toggleNav()">
+                &#9776;
+            </div>
+        </div>
+
+        <!-- Side Navbar (for smaller screens) -->
+        <div class="side-nav" id="sideNav">
+            <!-- Close button to close the sidebar -->
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+
+            <button onclick="closeNav()">Home</button>
+            <div class="dropdown">
+                <button class="dropbtn">Create</button>
+                <div class="dropdown-content">
+                    <!-- Inside the .dropdown-content -->
+                        <a href="#" onclick="handleDropdownSelection(this)">Family Meal Plan</a>
+                        <a href="#" onclick="handleDropdownSelection(this)">School Lunch Meal Plan</a>
+                        <a href="#" onclick="handleDropdownSelection(this)">Work Meal Plan</a>
+                        <!--<a href="#" onclick="handleDropdownSelection(this)">Special Occasion/Festival Meal Plan</a>-->
+
+                </div>
+            </div>
+            <button class="contact-button" onclick="closeNav()">Contact</button>
+            
+        </div>
+
+        <!-- Contents section (90% of the body height) -->
+        <div class="contents-div">
+            <!--Meal Plan Categories-->
+            <div class="meal-plan-categories">
+                <div class="intro-text">
+                    <h1>Meal Plan Categories</h1>
+                </div>
+
+                <div class="categories-container">
+                    <!--Family Meal Plan-->
+                    <div class="category-display family-option">
+                        <img src="images/category-platform.png" alt="Marble platform with coffee">
+                        <div class="miniature-family-plan-body-div">
+                            <div class="family-plan-parent-container">
+                                <div class="family-plan-card-container">
+                                    <div class="family-plan-card">
+                                        <div class="ribbon-holder">
+                                            <div class="ribbon ribbon-outlined">
+                                                <span>Family Plan</span>
+                                            </div>
+                                        </div>
+                    
+                                        <h1>Monday Meal Plan</h1>
+                    
+                                        <div class="meal-sections">
+                    
+                                            <div class="breakfast-section" data-title="Breakfast">
+                                                <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                                                <div class="text-area">
+                                                    <p>Oats topped with raspberries and blueberries, served alongside a glass of orange juice.</p>
+                                                </div>
+                                                
+                                            </div>
+                    
+                                            <div class="lunch-section" data-title="Lunch">
+                                                <img src="images/spaghetti.png" alt="Spaghetti">
+                                                <div class="text-area">
+                                                    <p>Spaghetti Bolognese</p>
+                                                </div>
+                                            </div>
+                    
+                                            <div class="snacks-section" data-title="Snacks">
+                                                <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                                                <div class="text-area">
+                                                    <p>Granola Bars with some Yoghurt</p>
+                                                </div>
+                                            </div>
+                    
+                                            <div class="dinner-section" data-title="Dinner">
+                                                <img src="images/sandwich.png" alt="Sandwich">
+                                                <div class="text-area">
+                                                    <p>A ham Sandwich</p>
+                                                </div>
+                                            </div>
+                    
+                                        </div>
+                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--School Meal Plan-->
+                    <div class="category-display school-option">
+                        <img src="images/category-platform.png" alt="Marble platform with coffee">
+                        <div class="miniature-school-plan-body-div">
+                            <div class="school-lunch-plan-parent-container">
+                                <div class="school-lunch-plan-card-container">
+                                    <div class="school-lunch-plan-card">
+                                        <div class="image-container">
+                                            <div class="header">School Lunch Meal Plan</div>
+                                            <img class="circle-img" src="images/meal.jpg" alt="Meal Image">
+                                        </div>
+                                        <div class="text-container">
+                                            <div class="layout-selection">
+                                                <div class="selection-question">
+                                                    <span>Choose Layout:</span>
+                                                </div>
+                                                <div class="layout-options">
+                                                    <div class="meal-selection-layout-radio-btn">
+                                                        <label><input type="radio" name="layout"> General Layout</label>
+                                                    </div>
+                                                    <div class="meal-selection-layout-radio-btn">
+                                                        <label><input type="radio" name="layout" checked> Break System Layout</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="break-system">
+                                                <div class="recess" data-title="Recess Meal">
+                                                    <div class="meal-image">
+                                                        <img class="lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Lunchbox">
+                                                    </div>
+                                                    <div class="text-area">
+                                                        <p>Ham and cheese skewers, carrot sticks, deviled egg, granola bars</p>
+                                                    </div>
+                                                </div>
+                                                <div class="lunch" data-title="Main Lunch">
+                                                    <div class="meal-image">
+                                                        <img class="lunchbox-image" src="images/lunchbox.jpeg" alt="Main Lunchbox">
+                                                    </div>
+                                                    <div class="text-area">
+                                                        <p>Spicy curry rice, ham and cheese wrap, yogurt, mango juice</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--End of Meal Plan Categories Section-->
+        </div>
+    </div>
+</body>
+</html>

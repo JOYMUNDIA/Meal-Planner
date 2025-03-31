@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School lunch Meal Plan</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            font-family: 'Cormorant', sans-serif;
+        }
+
+        .body-div {
+            width: 100vw;
+            background-image: url('images/white-wall.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .school-lunch-plan-parent-container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .school-lunch-plan-card-container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 1rem;
+            overflow-x: hidden;
+        }
+
+        .school-lunch-plan-card {
+            width: 88%;
+            position: relative;
+            padding: 1rem;
+            background-color: whitesmoke;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+            overflow: hidden;
+        }
+
+        @media screen and (max-width: 768px) {
+            .school-lunch-plan-card-container {
+                padding: 2rem;
+            }
+
+            .school-lunch-plan-card {
+                width: 80%;
+            }
+        }
+
+        .school-lunch-plan-card .image-container,
+        .school-lunch-plan-card .text-container{
+            position: relative;
+            width: 100%;
+        }
+
+        .school-lunch-plan-card .image-container{
+            height: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url(images/gray-abstract-wireframe-technolo.jpg);
+            background-size: cover;
+            position: relative; /* For absolute positioning of Bento Lunchbox and School Bag */
+        }
+
+        .school-lunch-plan-card .image-container .header{
+            height: 15%;
+            font-family: 'Mea Culpa', 'Cormorant', sans-serif;
+            font-weight: 400;
+            font-size: 4rem;
+            padding: 1rem;
+        }
+
+        .school-lunch-plan-card .image-container img{
+            width: 15%;
+            aspect-ratio: 1/1;
+        }
+
+        /* Bento Lunchbox positioned at the top-left corner and made larger */
+        .school-lunch-plan-card .image-container .circle-img{
+            position: absolute;
+            top: -45px; /* Moves Bento Lunchbox slightly off the top */
+            left: -45px; /* Moves Bento Lunchbox slightly off the left */
+            width: 20vw;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            border: 3px solid grey;
+            object-fit: cover;
+            z-index: 2; /* Ensures it's above the background image */
+        }
+
+        /* Main Body Css */
+
+        .school-lunch-plan-card .text-container{
+            height: 80%;
+            padding: 1rem;
+            width: 90%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Default state for all sections */
+        .school-lunch-plan-card .text-container .meal-sections,
+        .school-lunch-plan-card .text-container .break-system,
+        .school-lunch-plan-card .text-container .meal-categories {
+        display: none;  /* Initially hidden */
+        opacity: 0;  /* Make them invisible */
+        visibility: hidden; /* Ensure they are hidden from interaction */
+        transition: opacity 0.5s ease, visibility 0.5s ease; /* Smooth fade transition */
+        }
+
+        /* Specific layout styles */
+        .school-lunch-plan-card .text-container .meal-sections.flex,
+        .school-lunch-plan-card .text-container .break-system.flex,
+        .school-lunch-plan-card .text-container .meal-categories.grid {
+            opacity: 1;  /* Fully visible */
+            visibility: visible;  /* Ensure they are interactable */
+        }
+
+        .school-lunch-plan-card .text-container .layout-selection{
+            width: 98%;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .school-lunch-plan-card .text-container .layout-selection .selection-question{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            font-size: 1.3rem;
+        }
+
+        .school-lunch-plan-card .text-container .layout-selection .layout-options{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 0.5rem;
+        }
+
+        /* Layout Selection Radio Button */
+                        
+        .meal-selection-layout-radio-btn label {
+            display: flex;
+            align-items: flex-start;
+            text-align: left;
+            min-width: 140px;
+            justify-content: space-between;
+            padding: 11px;
+            border: none;
+            border-radius: 6px;
+            box-shadow: 0 0 0 1px #d8dee4;
+            transition: all 0.2s ease;
+            font-size: 1.2rem;
+        }
+                            
+        .meal-selection-layout-radio-btn label:not(:has(input:disabled)):hover {
+            background: #f5f6f8;
+        }
+                            
+        .meal-selection-layout-radio-btn label:has(input:disabled) {
+            opacity: .8;
+            cursor: not-allowed;
+            background: #f5f6f8;
+        }
+                            
+        .meal-selection-layout-radio-btn label:has(input:checked) {
+            box-shadow: 0 0 0 1.5px rgb(37 99 235), 0 0 0 1px #d8dee4;
+        }
+                            
+        .meal-selection-layout-radio-btn label:has(input:focus) {
+            box-shadow: 0 0 0 1.5px rgb(37 99 235), 0 0 0 4px rgb(191 219 254), 0 0 0 1px #d8dee4;
+        }
+                            
+        .meal-selection-layout-radio-btn label .inputAndLeftText {
+            display: flex;
+            gap: .75em;
+        }
+                            
+        .meal-selection-layout-radio-btn label .inputAndLeftText div {
+            color: rgb(55 65 81);
+            line-height: 1.25rem;
+            display: flex;
+            flex-direction: column;
+        }
+                            
+        .meal-selection-layout-radio-btn label .title {
+            font-weight: 600;
+        }
+                            
+        .meal-selection-layout-radio-btn label .desc {
+            color: rgb(94, 99, 109);
+            font-size: 1.1rem;
+        }
+                            
+        .meal-selection-layout-radio-btn input {
+            color: rgb(37 99 235);
+        }
+                            
+        .meal-selection-layout-radio-btn input {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            display: inline-block;
+            vertical-align: middle;
+            background-origin: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+                            
+            border: 1px solid rgb(209 213 219);
+                            
+            box-shadow: 0 1px 2px 0 #0000000d;
+            border-radius: 9999px;
+            width: 1rem;
+            height: 1rem;
+                            
+            margin: 2px 0 0;
+        }
+                            
+        .meal-selection-layout-radio-btn input:checked {
+            border-color: #0000;
+            background-color: currentColor;
+            background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTYgMTYiIGZpbGw9IiNmZmYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iOCIgY3k9IjgiIHI9IjMiLz48L3N2Zz4=);
+        }
+                            
+        .meal-selection-layout-radio-btn input:focus {
+            box-shadow: 0 0 0 3px rgb(191 219 254), 0 1px 2px 0 #0000000d;
+        }
+                            
+        .meal-selection-layout-radio-btn input:disabled{
+            color: rgb(156 163 175);
+        }
+
+        /* General Menu Layout Css */
+
+        .school-lunch-plan-card .meal-sections.flex {
+            display: flex;
+        }
+
+        .school-lunch-plan-card .meal-sections {
+            position: relative;
+            width: 100%;
+            padding: 3rem 2rem;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .school-lunch-plan-card .meal-sections .appetizer,
+        .school-lunch-plan-card .meal-sections .main-course,
+        .school-lunch-plan-card .meal-sections .laitage,
+        .school-lunch-plan-card .meal-sections .dessert,
+        .school-lunch-plan-card .meal-sections .snacks {
+            width: 90%;
+            min-height: 10rem;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 3.125rem 6.25rem -1.25rem,
+                        rgba(0, 0, 0, 0.3) 0px 1.875rem 3.75rem -1.875rem,
+                        rgba(10, 37, 64, 0.35) 0px -0.125rem 0.375rem 0px inset;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Position text closer to the top boundary */
+        .school-lunch-plan-card .meal-sections .appetizer::before,
+        .school-lunch-plan-card .meal-sections .main-course::before,
+        .school-lunch-plan-card .meal-sections .laitage::before,
+        .school-lunch-plan-card .meal-sections .dessert::before,
+        .school-lunch-plan-card .meal-sections .snacks::before {
+            content: attr(data-title);
+            font-size: 2.5rem;
+            color: rgb(0, 0, 0);
+            position: absolute;
+            top: -1.8rem; /* Adjust to move the text closer to the top */
+            left: 50%;
+            transform: translateX(-50%); /* Center the text horizontally */
+            z-index: 3;
+            background-color: rgba(255, 255, 255, 0.75);
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 3.125rem 6.25rem -1.25rem,
+                        rgba(0, 0, 0, 0.3) 0px 1.875rem 3.75rem -1.875rem,
+                        rgba(10, 37, 64, 0.35) 0px -0.125rem 0.375rem 0px inset;
+            padding: 0.8rem;
+            font-family: 'Mea Culpa', 'Roboto', sans-serif;
+        }
+
+        /* Image positioning */
+        .school-lunch-plan-card .meal-sections .appetizer img,
+        .school-lunch-plan-card .meal-sections .main-course img,
+        .school-lunch-plan-card .meal-sections .laitage img,
+        .school-lunch-plan-card .meal-sections .dessert img,
+        .school-lunch-plan-card .meal-sections .snacks img {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            width: auto;
+        }
+
+        .school-lunch-plan-card .meal-sections .appetizer img {
+            height: 8rem; /* Set height of image */
+            left: -3.5rem; /* Image on the left boundary of breakfast */
+        }
+        @media screen and (max-width: 748px) {
+            .school-lunch-plan-card .meal-sections .appetizer img {
+                height: 7rem;
+            }
+        }
+
+        @media screen and (max-width: 537px) {
+            .school-lunch-plan-card .meal-sections .appetizer img {
+                height: 7rem;
+            }
+        }
+
+        @media screen and (max-width: 510px) {
+            .school-lunch-plan-card .meal-sections .appetizer img {
+                height: 6rem;
+            }
+        }
+
+        .school-lunch-plan-card .meal-sections .main-course img {
+            height: 12rem;
+            right: -2rem; /* Image on the right boundary of lunch */
+        }
+
+        @media screen and (max-width: 768px) {
+            .school-lunch-plan-card .meal-sections .main-course img {
+                height: 10rem;
+            }
+        }
+
+        @media screen and (max-width: 619px) {
+            .school-lunch-plan-card .meal-sections .main-course img {
+                height: 9rem;
+            }
+        }
+
+        .school-lunch-plan-card .meal-sections .laitage img {
+            height: 9rem;
+            left: -2rem; /* Image on the left boundary of snacks */
+        }
+
+        .school-lunch-plan-card .meal-sections .dessert img {
+            height: 6rem; /* Set height of image */
+            right: -2.5rem; /* Image on the right boundary of dinner */
+        }
+        @media screen and (max-width: 748px) {
+            .school-lunch-plan-card .meal-sections .dessert img {
+                height: 5rem;
+            }
+        }
+
+        @media screen and (max-width: 541px) {
+            .school-lunch-plan-card .meal-sections .laitage img {
+                height: 8rem;
+            }
+
+            .school-lunch-plan-card .meal-sections .dessert img {
+                height: 4rem;
+            }
+
+            .school-lunch-plan-card .meal-sections .snacks img {
+                height: 9rem;
+            }
+        }
+
+        .school-lunch-plan-card .meal-sections .snacks img {
+            height: 10rem;
+            left: -3rem;
+        }
+
+        @media screen and (max-width: 555px) {
+            .school-lunch-plan-card .meal-sections .snacks img {
+                height: 9rem;
+                left: -4rem;
+            }
+        }
+
+        .school-lunch-plan-card .meal-sections .appetizer p,
+        .school-lunch-plan-card .meal-sections .main-course p,
+        .school-lunch-plan-card .meal-sections .laitage p,
+        .school-lunch-plan-card .meal-sections .dessert p,
+        .school-lunch-plan-card .meal-sections .snacks p {
+            position: relative;
+            color: #000000;
+            padding: 0.5rem;
+            padding-top: 1rem;
+            font-size: 1.65rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 768px) {
+            .school-lunch-plan-card .meal-sections .appetizer p {
+                padding-top: 5rem;
+            }
+        }
+
+        @media screen and (max-width: 736px) {
+            .school-lunch-plan-card .meal-sections .laitage p {
+                padding-top: 5rem;
+            }
+        }
+
+        @media screen and (max-width: 418px) {
+            .school-lunch-plan-card .meal-sections .laitage p {
+                padding-top: 10rem;
+            }
+        }
+
+        @media screen and (max-width: 619px) {
+            .school-lunch-plan-card .meal-sections .main-course p {
+                padding-top: 5rem;
+            }
+        }
+
+        @media screen and (max-width: 574px) {
+            .school-lunch-plan-card .meal-sections .snacks p {
+                padding-top: 5rem;
+            }
+        }
+
+        .school-lunch-plan-card .meal-sections .appetizer .text-area,
+        .school-lunch-plan-card .meal-sections .main-course .text-area,
+        .school-lunch-plan-card .meal-sections .laitage .text-area,
+        .school-lunch-plan-card .meal-sections .dessert .text-area,
+        .school-lunch-plan-card .meal-sections .snacks .text-area  {
+            position: relative;
+            width: 50%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        /* Break System Css */
+        .school-lunch-plan-card .break-system.flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            row-gap: 9rem;
+        }
+
+        .school-lunch-plan-card .break-system {
+            position: relative;
+            width: 100%;
+            padding: 6rem 2rem;
+        }
+
+        .school-lunch-plan-card .break-system .recess,
+        .school-lunch-plan-card .break-system .lunch {
+            width: 30rem;
+            min-height: 10rem;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 3.125rem 6.25rem -1.25rem,
+                        rgba(0, 0, 0, 0.3) 0px 1.875rem 3.75rem -1.875rem,
+                        rgba(10, 37, 64, 0.35) 0px -0.125rem 0.375rem 0px inset;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 4rem;
+        }
+
+        .school-lunch-plan-card .break-system .recess .meal-image,
+        .school-lunch-plan-card .break-system .lunch .meal-image{
+            position: absolute;
+            top: -7rem; /* Adjust to move the text closer to the top */
+            left: 50%;
+            transform: translateX(-50%); /* Center the text horizontally */
+            z-index: 3;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(0deg, #ddd, #fff);
+            padding: 0.5rem;
+            width: 12rem;
+            height: 12rem;
+            border-radius: 50%;
+        }
+
+        .school-lunch-plan-card .break-system .recess .meal-image .lunchbox-image,
+        .school-lunch-plan-card .break-system .lunch .meal-image .lunchbox-image{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        .school-lunch-plan-card .break-system .recess::before,
+        .school-lunch-plan-card .break-system .lunch::before {
+            content: attr(data-title);
+            font-size: 2.5rem;
+            color: rgb(0, 0, 0);
+            position: absolute;
+            left: -11%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            width: 8rem;
+            background-color: rgba(255, 255, 255, 0.75);
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 3.125rem 6.25rem -1.25rem,
+                        rgba(0, 0, 0, 0.3) 0px 1.875rem 3.75rem -1.875rem,
+                        rgba(10, 37, 64, 0.35) 0px -0.125rem 0.375rem 0px inset;
+            padding: 0.8rem;
+            padding-left: 1.4rem;
+            padding-right: 0.6rem;
+            font-family: 'Mea Culpa', 'Roboto', sans-serif;
+        }
+
+        .school-lunch-plan-card .break-system .recess .text-area,
+        .school-lunch-plan-card .break-system .lunch .text-area  {
+            position: relative;
+            left: 8%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 4rem;
+        }
+
+        @media screen and (max-width: 480px) {
+            .school-lunch-plan-card .break-system .recess .text-area,
+            .school-lunch-plan-card .break-system .lunch .text-area  {
+                left: 17%;
+            }
+        }
+
+        .school-lunch-plan-card .break-system .recess .text-area p,
+        .school-lunch-plan-card .break-system .lunch .text-area p {
+            position: relative;
+            color: #000000;
+            padding: 0.5rem;
+            padding-top: 1.5rem;
+            font-size: 1.65rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        /* Meal Categories Css */
+        .school-lunch-plan-card .meal-categories.grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
+            gap: 3rem;
+        }
+
+        .school-lunch-plan-card .meal-categories {
+            position: relative;
+            width: 100%;
+            margin-bottom: 2.5rem; /* 40px / 16 = 2.5rem */
+        }
+
+        .school-lunch-plan-card .meal-categories .card {
+            background-color: #fff;
+            border-radius: 0.5rem; /* 8px / 16 = 0.5rem */
+            overflow: hidden;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 3.125rem 6.25rem -1.25rem,
+                        rgba(0, 0, 0, 0.3) 0px 1.875rem 3.75rem -1.875rem,
+                        rgba(10, 37, 64, 0.35) 0px -0.125rem 0.375rem 0px inset;
+            padding: 1.25rem; /* 20px / 16 = 1.25rem */
+            min-width: 12rem;
+            min-height: 5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        .school-lunch-plan-card .meal-categories .card:hover {
+            transform: translateY(-0.5rem); /* Lift card by 8px */
+            box-shadow: rgba(50, 50, 93, 0.4) 0px 6.25rem 12.5rem -2.5rem,
+                        rgba(0, 0, 0, 0.4) 0px 3.75rem 7.5rem -3.75rem,
+                        rgba(10, 37, 64, 0.4) 0px -0.25rem 0.625rem 0px inset;
+        }
+
+
+        .school-lunch-plan-card .meal-categories .card h1{
+            text-align: center;
+            width: 90%;
+            font-size: 2rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .school-lunch-plan-card .meal-categories .card li{
+            text-align: left;
+            font-size: 1.6rem;
+            color: black;
+            font-weight: 450;
+            padding: 0.3rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="body-div">
+        <div class="body-div">
+            <!-- Navigation section (10% of the body height) -->
+            <div class="nav-div">
+                <!-- register-div on the left -->
+                <div class="register-div">
+                    <button class="register-login">Register/Login</button><br>
+                </div>
+    
+                <!-- Navigation links section -->
+                <div class="nav-links">
+                    
+    
+                    <a href="index.html"><button>Home</button></a>
+                    
+                    <!-- Create dropdown button -->
+                    <div class="dropdown">
+                        <button class="dropbtn active">Create</button>
+                        <div class="dropdown-content">
+                            <a href="#">Family Meal Plan</a>
+                            <a href="#">School Lunch Meal Plan</a>
+                            <!--<a href="#">Work Meal Plan</a>-->
+                            <!--<a href="#">Special Occasion/Festival Meal Plan</a>-->
+                        </div>
+                    </div>
+    
+                    <button>Contact</button>
+                    
+                </div>
+    
+                <!-- Hamburger menu for smaller screens -->
+                <div class="hamburger-menu" onclick="toggleNav()">
+                    &#9776;
+                </div>
+            </div>
+    
+            <!-- Side Navbar (for smaller screens) -->
+            <div class="side-nav" id="sideNav">
+                <!-- Close button to close the sidebar -->
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    
+                <button onclick="closeNav()">Home</button>
+                <div class="dropdown">
+                    <button class="dropbtn">Create</button>
+                    <div class="dropdown-content">
+                        <!-- Inside the .dropdown-content -->
+                            <a href="#" onclick="handleDropdownSelection(this)">Family Meal Plan</a>
+                            <a href="#" onclick="handleDropdownSelection(this)">School Lunch Meal Plan</a>
+                            <!--<a href="#" onclick="handleDropdownSelection(this)">Work Meal Plan</a>-->
+                            <!--<a href="#" onclick="handleDropdownSelection(this)">Special Occasion/Festival Meal Plan</a>-->
+    
+                    </div>
+                </div>
+                <button class="contact-button" onclick="closeNav()">Contact</button>
+                
+            </div>
+
+        <div class="school-lunch-plan-parent-container">
+            <div class="school-lunch-plan-card-container">
+                <div class="school-lunch-plan-card">
+                    <div class="image-container">
+                        <!-- Bento Lunchbox Image -->
+                        <img class="circle-img" src="images/bento-lunchbox1.png" alt="Bento Lunch Box">
+                        <div class="header">
+                            <p>School Lunch Meal Plan</p>
+                        </div>
+                    </div>
+
+                    <div class="text-container">
+
+                        <div class="layout-selection">
+
+                            <div class="selection-question">
+                                <p><i>Please Select a Meal Plan Layout...</i></p>
+                            </div>
+
+                            <div class="layout-options">
+                                <div class="meal-selection-layout-radio-btn">
+                                    <label for="General-layout">
+                                        <div class="inputAndLeftText">
+                                            <input id="General-layout" type="radio" name="radio-examples" checked>
+                                            <div>
+                                            <span class="title">General Layout</span>
+                                            <span class="desc">Appetizer, Main Course, Laitage, Dessert, Side Snacks.</span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+    
+                                <div class="meal-selection-layout-radio-btn">
+                                    <label for="General-layout">
+                                        <div class="inputAndLeftText">
+                                            <input id="break-system-layout" type="radio" name="radio-examples">
+                                            <div>
+                                            <span class="title">Break System Layout</span>
+                                            <span class="desc">Recess Meal Break, Main Lunch Break</span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+    
+                                <div class="meal-selection-layout-radio-btn">
+                                    <label for="General-layout">
+                                        <div class="inputAndLeftText">
+                                            <input id="meal-category-layout" type="radio" name="radio-examples">
+                                            <div>
+                                            <span class="title">Meal Category Layout</span>
+                                            <span class="desc">Fruits, Vegetables, Carbs and Fibre, Treats/Snacks...</span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!--Menu By General Meal Layout-->
+                        <div class="meal-sections">
+
+                            <div class="appetizer" data-title="Appetizer / Entrée">
+                                <img src="images/appetizer.png" alt="Ham & Cheese Skewers">
+                                <div class="text-area">
+                                    <p>
+                                        Ham &amp; Cheese Skewers<br>
+                                        Carrot Sticks with Tomato Ketchup Dip<br>
+                                        Deviled Eggs.
+                                    </p>
+                                </div>
+                                
+                            </div>
+    
+                            <div class="main-course" data-title="Main Course">
+                                <img src="images/main-course.png" alt="Curry Rice with Smoked Sausages">
+                                <div class="text-area">
+                                    <p>
+                                        Curry Rice with Smoked Sausages<br>
+                                        Ham &amp; Cheese Wrap<br>
+                                        With Mango Juice.
+                                    </p>
+                                </div>
+                            </div>
+    
+                            <div class="laitage" data-title="Laitage / Dairy">
+                                <img src="images/fruity-Yoghurt.png" alt="Yoghurt with tons of fruit">
+                                <div class="text-area">
+                                    <p>
+                                        Yoghurt topped with Fruits.
+                                    </p>
+                                </div>
+                            </div>
+    
+                            <div class="dessert" data-title="Dessert">
+                                <img src="images/muffin-fruit-salad.png" alt="Muffin with a bowl of Fruit Salad">
+                                <div class="text-area">
+                                    <p>
+                                        Muffin<br>
+                                        Fruit Salad: A mix of Kiwi, Papaya, and Grapes.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="snacks" data-title="Side Snacks">
+                                <img src="images/side-snack.png" alt="Granola Bars, Almonds, Chocolate Chip Cookies">
+                                <div class="text-area">
+                                    <p>
+                                        Granola Bars<br>
+                                        Almonds<br>
+                                        Chocolate Chip Cookies.
+                                    </p>
+                                </div>
+                            </div>
+    
+                        </div>
+                        <!--End of Menu By General Meal Layout-->
+
+                        <!--Menu By School Break System-->
+                        <div class="break-system">
+                            <div class="recess" data-title="Recess Meal Break">
+                                <div class="meal-image">
+                                    <img class = "lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                                </div>
+                                <div class="text-area">
+                                    <p>
+                                        Ham and cheese skewers.<br>
+                                        Carrot sticks with a side of tomato ketchup dip.<br>
+                                        Deviled egg.<br>
+                                        Almond seeds.<br>
+                                        Granola Bars.<br>
+                                        Fruit salad.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="lunch" data-title="Main Lunch Break">
+                                <div class="meal-image">
+                                    <img class = "lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                                </div>
+                                <div class="text-area">
+                                    <p>
+                                        Spicy curry rice with smoked sausages.<br>
+                                        Ham and cheese wrap.<br>
+                                        Mango juice.<br>
+                                        Yogurt with fruit.<br>
+                                        Muffin.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End of Menu By School Break System-->
+
+                        <!--Menu By Meal Categories-->
+                        <div class="meal-categories">
+
+                            <div class="card">
+                                <div class="category-heading">
+                                    <h1>Fruits</h1>
+                                </div>
+                                <ul>
+                                    <li>Kiwi</li>
+                                    <li>Papaya</li>
+                                    <li>Grapes</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Vegetables</h1>
+                                <ul>
+                                    <li>Carrots</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Dairy</h1>
+                                <ul>
+                                    <li>Yoghurt</li>
+                                    <li>Chedder Cheese</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Treats/Snacks</h1>
+                                <ul>
+                                    <li>Chocolate Chip Cookies</li>
+                                    <li>Muffin</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Meats, Fish and Meat Alternatives</h1>
+                                <ul>
+                                    <li>Ham</li>
+                                    <li>Smoked Sausages</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Non-Meat Protein Sources</h1>
+                                <ul>
+                                    <li>Deviled Eggs</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Carbs and Fibre</h1>
+                                <ul>
+                                    <li>Curry Rice</li>
+                                    <li>Granola Bars</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Nuts and Seeds</h1>
+                                <ul>
+                                    <li>Almonds</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Sauces/ Condiments / Dips</h1>
+                                <ul>
+                                    <li>Tomato Ketchup</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Drinks</h1>
+                                <ul>
+                                    <li>Water</li>
+                                    <li>Mango Juice</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--End of Menu By Meal Categories-->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+        // Get all the radio buttons
+            const generalLayoutRadio = document.getElementById('General-layout');
+            const breakSystemLayoutRadio = document.getElementById('break-system-layout');
+            const mealCategoryLayoutRadio = document.getElementById('meal-category-layout');
+
+        // Get the sections
+            const mealSections = document.querySelector('.meal-sections');
+            const breakSystem = document.querySelector('.break-system');
+            const mealCategories = document.querySelector('.meal-categories');
+
+        // Function to set the correct display styles based on selected layout
+            function updateLayout() {
+                // Reset all sections to be invisible
+                    mealSections.classList.remove('flex');
+                    breakSystem.classList.remove('flex');
+                    mealCategories.classList.remove('grid');
+
+                // Hide all sections initially by removing the visibility classes
+                    mealSections.style.visibility = 'hidden';
+                    breakSystem.style.visibility = 'hidden';
+                    mealCategories.style.visibility = 'hidden';
+
+                // Add transitions to the selected section
+                    if (generalLayoutRadio.checked) {
+                        mealSections.classList.add('flex');
+                        mealSections.style.visibility = 'visible';  // Make it visible
+                    }
+                    else if (breakSystemLayoutRadio.checked) {
+                        breakSystem.classList.add('flex');
+                        breakSystem.style.visibility = 'visible';  // Make it visible
+                    }
+                    else if (mealCategoryLayoutRadio.checked) {
+                        mealCategories.classList.add('grid');
+                        mealCategories.style.visibility = 'visible';  // Make it visible
+                    }
+            }
+
+            // Add event listeners for the radio buttons
+                generalLayoutRadio.addEventListener('change', updateLayout);
+                breakSystemLayoutRadio.addEventListener('change', updateLayout);
+                mealCategoryLayoutRadio.addEventListener('change', updateLayout);
+
+            // Initialize the layout on page load
+                updateLayout();
+        });
+
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

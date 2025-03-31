@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Meal Plan</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            font-family: 'Cormorant', sans-serif;
+        }
+
+        .body-div {
+            width: 100vw;
+            background-image: url('images/white-wall.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .family-plan-parent-container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .family-plan-card-container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 1rem;
+            overflow-x: hidden;
+        }
+
+        .family-plan-card {
+            width: 88%;
+            position: relative;
+            padding: 1rem;
+            background-image: url('images/family-plan-background.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .family-plan-card-container {
+                padding: 2rem;
+            }
+
+            .family-plan-card {
+                width: 80%;
+            }
+        }
+
+        .ribbon-holder {
+            position: absolute;
+            right: -5px;
+            top: -5px;
+            z-index: 1;
+            width: 75px;
+            height: 75px;
+            text-align: right;
+            overflow: hidden;
+        }
+
+        .ribbon {
+            -ms-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            display: block;
+            box-shadow: 0 3px 10px -8px black;
+            position: absolute;
+            top: 16.3px;
+            right: -21.8px;
+            text-align: center;
+        }
+
+        .ribbon:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 100%;
+            z-index: -1;
+            border-left: 3px solid #666;
+            border-right: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            border-top: 3px solid #666;
+        }
+
+        .ribbon:after {
+            content: '';
+            position: absolute;
+            right: 0%;
+            top: 100%;
+            z-index: -1;
+            border-right: 3px solid #666;
+            border-left: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            border-top: 3px solid #666;
+        }
+
+        .ribbon > span {
+            display: block;
+            width: 100px;
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+            line-height: 20px;
+        }
+
+        .ribbon-outlined > span:before {
+            content: '';
+            border-left: 1px solid #ccc;
+            height: 30px;
+            display: block;
+            -ms-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            position: absolute;
+            top: -4px;
+            left: 11px;
+        }
+
+        .ribbon-outlined > span:after {
+            content: '';
+            border-left: 1px solid #ccc;
+            height: 30px;
+            display: block;
+            -ms-transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            position: absolute;
+            top: -4px;
+            left: 89px;
+        }
+
+        .ribbon-outlined > span {
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+
+        .family-plan-card h1 {
+            position: relative;
+            color: white;
+            font-size: 3rem;
+            padding: 1rem;
+        }
+
+        .family-plan-card .meal-sections {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            gap: 4rem;
+        }
+
+        .family-plan-card .meal-sections .breakfast-section,
+        .family-plan-card .meal-sections .lunch-section,
+        .family-plan-card .meal-sections .snacks-section,
+        .family-plan-card .meal-sections .dinner-section {
+            width: 90%;
+            min-height: 10rem;
+            box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Position text closer to the top boundary */
+        .family-plan-card .meal-sections .breakfast-section::before,
+        .family-plan-card .meal-sections .lunch-section::before,
+        .family-plan-card .meal-sections .snacks-section::before,
+        .family-plan-card .meal-sections .dinner-section::before {
+            content: attr(data-title);
+            font-size: 2.5rem;
+            color: white;
+            position: absolute;
+            top: -1.5rem; /* Adjust to move the text closer to the top */
+            left: 50%;
+            transform: translateX(-50%); /* Center the text horizontally */
+            z-index: 3;
+            background-color: rgba(31,32,37,255);
+            padding: 0.2rem;
+            font-family: 'Mea Culpa', 'Roboto', sans-serif;
+        }
+
+        /* Image positioning */
+        .breakfast-section img,
+        .lunch-section img,
+        .snacks-section img,
+        .dinner-section img {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            height: 5rem; /* Set height of image */
+            width: auto;
+        }
+
+        .breakfast-section img {
+            left: -1.6rem; /* Image on the left boundary of breakfast */
+        }
+
+        .lunch-section img {
+            height: 4rem;
+            right: -2rem; /* Image on the right boundary of lunch */
+        }
+
+        .snacks-section img {
+            height: 7rem;
+            left: -2rem; /* Image on the left boundary of snacks */
+        }
+
+        .dinner-section img {
+            right: -1.5rem; /* Image on the right boundary of dinner */
+        }
+
+        .breakfast-section p,
+        .lunch-section p,
+        .snacks-section p,
+        .dinner-section p {
+            position: relative;
+            color: #fff;
+            padding: 0.5rem;
+            font-size: 1.65rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .breakfast-section .text-area,
+        .lunch-section .text-area,
+        .snacks-section .text-area,
+        .dinner-section .text-area {
+            position: relative;
+            width: 50%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="body-div">
+        <div class="body-div">
+            <!-- Navigation section (10% of the body height) -->
+            <div class="nav-div">
+                <!-- register-div on the left -->
+                <div class="register-div">
+                    <button class="register-login">Register/Login</button><br>
+                </div>
+    
+                <!-- Navigation links section -->
+                <div class="nav-links">
+                    
+    
+                    <a href="index.html"><button>Home</button></a>
+                    
+                    <!-- Create dropdown button -->
+                    <div class="dropdown">
+                        <button class="dropbtn active">Create</button>
+                        <div class="dropdown-content">
+                            <a href="#">Family Meal Plan</a>
+                            <a href="#">School Lunch Meal Plan</a>
+                            <!--<a href="#">Work Meal Plan</a>-->
+                            <!--<a href="#">Special Occasion/Festival Meal Plan</a>-->
+                        </div>
+                    </div>
+    
+                    <button>Contact</button>
+                    
+                </div>
+    
+                <!-- Hamburger menu for smaller screens -->
+                <div class="hamburger-menu" onclick="toggleNav()">
+                    &#9776;
+                </div>
+            </div>
+    
+            <!-- Side Navbar (for smaller screens) -->
+            <div class="side-nav" id="sideNav">
+                <!-- Close button to close the sidebar -->
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    
+                <button onclick="closeNav()">Home</button>
+                <div class="dropdown">
+                    <button class="dropbtn">Create</button>
+                    <div class="dropdown-content">
+                        <!-- Inside the .dropdown-content -->
+                            <a href="#" onclick="handleDropdownSelection(this)">Family Meal Plan</a>
+                            <a href="#" onclick="handleDropdownSelection(this)">School Lunch Meal Plan</a>
+                            <!--<a href="#" onclick="handleDropdownSelection(this)">Work Meal Plan</a>-->
+                            <!--<a href="#" onclick="handleDropdownSelection(this)">Special Occasion/Festival Meal Plan</a>-->
+    
+                    </div>
+                </div>
+                <button class="contact-button" onclick="closeNav()">Contact</button>
+                
+            </div>
+
+        <div class="family-plan-parent-container">
+            <div class="family-plan-card-container">
+                <div class="family-plan-card">
+                    <div class="ribbon-holder">
+                        <div class="ribbon ribbon-outlined">
+                            <span>Family Plan</span>
+                        </div>
+                    </div>
+
+                    <h1>Family Meal Plan</h1>
+
+                    <div class="meal-sections">
+
+                        <div class="breakfast-section" data-title="Breakfast">
+                            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                            <div class="text-area">
+                                <p>Oats topped with raspberries and blueberries, served alongside a glass of orange juice.</p>
+                            </div>
+                            
+                        </div>
+
+                        <div class="lunch-section" data-title="Lunch">
+                            <img src="images/spaghetti.png" alt="Spaghetti">
+                            <div class="text-area">
+                                <p>Spaghetti Bolognese</p>
+                            </div>
+                        </div>
+
+                        <div class="snacks-section" data-title="Snacks">
+                            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                            <div class="text-area">
+                                <p>Granola Bars with some Yoghurt</p>
+                            </div>
+                        </div>
+
+                        <div class="dinner-section" data-title="Dinner">
+                            <img src="images/sandwich.png" alt="Sandwich">
+                            <div class="text-area">
+                                <p>A ham Sandwich</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

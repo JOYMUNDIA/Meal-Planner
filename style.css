@@ -1,0 +1,1498 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Mea+Culpa&display=swap');
+        /* General body styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            font-family: 'Cormorant', sans-serif;
+        }
+
+        .body-div {
+            width: 100vw;
+            background-image: url('images/white-wall.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Navigation section */
+        .nav-div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 10vh;
+            padding: 0.35rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .nav-links button, .register-login {
+            background-color: #111;
+            border: none;
+            padding: 1rem;
+            margin: 0 0.3125rem; /* 5px */
+            border-radius: 0.3125rem; /* 5px */
+            transform: translateY(-0.3125rem); /* -5px */
+            transition: transform 0.3s ease;
+            font-size: 1.3rem;
+            font-weight: 550;
+            color: white;
+            border: 0.6px solid #8d9d9e;
+            font-family: 'Cormorant', sans-serif;
+        }
+        
+        .nav-links button.active, .register-login.active, .nav-links button:hover, .register-login:hover {
+            background-image: url('images/white-wall.jpg');
+            background-size: cover;
+            color: #111;
+            border: 0.6px solid #111;
+        }
+
+        .nav-links button:hover, .register-login:hover {
+            transform: translateY(-0.625rem); /* -10px */
+        }
+
+        .register-login {
+            font-size: 1.2rem; /* 1.2 * 16px = 19.2px */
+        }
+
+        /* Dropdown styling */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: #111;
+            border: none;
+            padding: 1rem;
+            margin: 0 0.3125rem; /* 5px */
+            border-radius: 0.3125rem; /* 5px */
+            transform: translateY(-0.3125rem); /* -5px */
+            transition: transform 0.3s ease;
+            font-size: 1.2rem;
+            font-weight: 550;
+            color: white;
+        }
+
+        .dropbtn:hover {
+            transform: translateY(-0.625rem); /* -10px */
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 10rem; /* 160px */
+            z-index: 1;
+            border-radius: 0.3125rem; /* 5px */
+            box-shadow: 0px 0.5rem 1rem rgba(0, 0, 0, 0.2); /* 8px 16px */
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 0.75rem 1rem; /* 12px 16px */
+            text-decoration: none;
+            display: block;
+            font-size: 1.185rem;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Hamburger menu */
+        .hamburger-menu {
+            display: none;
+            font-size: 1.875rem; /* 30px */
+            cursor: pointer;
+            color: #111;
+            padding: 0.5rem;
+            padding-right: 0.8rem;
+            z-index: 25;
+            border-radius: 3px;
+            background-image: url('images/white-wall.jpg');
+            background-size: cover;
+        }
+
+        /* Side Navigation Bar (from right) */
+        .side-nav {
+            height: 100vh;
+            width: 0;
+            position: fixed;
+            z-index: 100;
+            top: 0;
+            right: 0; /* Positioned on the right side */
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 3.75rem; /* 60px */
+        }
+
+        /* Adjustments for the side-nav button positioning */
+        .side-nav button,
+        .side-nav .dropdown {
+            padding: 0.5rem 1rem; /* 8px 15px */
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 550;
+            color: white;
+            font-family: 'Cormorant', sans-serif;
+            display: block;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left; /* Align links to the left */
+            transition: background-color 0.3s ease;
+        }
+
+        .side-nav .dropdown-content {
+            display: none;
+            padding-left: 1.25rem; /* 20px */
+            margin-top: 1rem; /* Add a little space before the dropdown */
+        }
+
+        .side-nav .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .side-nav button:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .side-nav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 1.5625rem; /* 25px */
+            font-size: 3rem;
+            margin-left: 3.125rem; /* 50px */
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Adjust buttons' positions when dropdown is visible */
+        .side-nav button.contact-button, 
+        .side-nav button.register-login {
+            transition: margin-top 0.3s ease; /* Smooth transition for moving down */
+        }
+
+        .side-nav button.contact-button,
+        .side-nav button.register-login {
+            margin-top: 0; /* Default position */
+        }
+
+        /* For smaller screens */
+        @media screen and (max-width: 768px) { /* max-width: 48rem */
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger-menu {
+                display: block;
+                z-index: 25;
+            }
+
+            .side-nav {
+                width: 0;
+            }
+        }
+
+        /* Contents section */
+        .contents-div {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-section{
+            width: 95%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Entrance section */
+        .entrance-div {
+            display: flex;
+            width: 95%;
+            height: 100vh;
+            background-color: #111;
+        }
+
+        @media screen and (max-width: 817px) {
+            .hero-section{
+                width: 100%;
+            }
+
+            .entrance-div {
+                width: 100%;
+            }
+
+        }
+
+        .entrance-div .left-wall, .entrance-div .right-wall {
+            background-image: url('images/black-brick-wall-textured-backgr.jpg');
+            background-size: cover;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .entrance-div .left-wall{
+            width: 10%;
+        }
+
+        .entrance-div .right-wall{
+            width: 30%;
+        }
+
+        .actual-entrance {
+            width: 60%;
+        }
+
+        @media screen and (max-width: 955px) {
+            .entrance-div .left-wall{
+            width: 0%;
+            }
+
+            .entrance-div .right-wall{
+                width: 30%;
+            }
+
+            .actual-entrance {
+                width: 70%;
+            }
+        }
+
+        @media screen and (max-width: 514px) {
+            .entrance-div .left-wall{
+            width: 0%;
+            }
+
+            .entrance-div .right-wall{
+                width: 0%;
+            }
+
+            .actual-entrance {
+                width: 100%;
+            }
+
+            .entrance-div .right-wall .blackboard-menu .inner-layer-menu p{
+                display: none;
+            }
+        }
+
+        .entrance-div .right-wall .blackboard-menu {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            height: auto;
+            background-image: url('images/white-wall.jpg');
+            background-size: cover;
+            border-radius: 2px;
+        }
+
+        .entrance-div .right-wall .blackboard-menu .second-level-menu{
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            height: auto;
+            background-image: url('images/black-brick-wall-textured-backgr.jpg');
+            background-size: cover;
+            border-radius: 2px;
+        }
+
+        .entrance-div .right-wall .blackboard-menu .third-level-menu{
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            height: auto;
+            background-color: #ddd;
+            border-radius: 2px;
+        }
+
+        .entrance-div .right-wall .blackboard-menu .inner-layer-menu{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            height: auto;
+            background-color: #ffffff;
+            border-radius: 2px;
+            padding: 0.5rem;
+        }
+
+        .entrance-div .right-wall .blackboard-menu .inner-layer-menu p{
+            color: black;
+            font-size: 1.4vw;
+            font-weight: 450;
+            text-align: center;
+        }
+
+        .entrance-div .right-wall .blackboard-menu .inner-layer-menu .header-p{
+            color: black;
+            font-size: 2vw;
+            font-family: 'Mea Culpa', 'Roboto', sans-serif;
+            font-weight: 550;
+        }
+
+        .entrance-div .right-wall .blackboard-menu .inner-layer-menu .menu-header{
+            color: black;
+            font-size: 2.5vw;
+            font-family: 'Mea Culpa', 'Roboto', sans-serif;
+            font-weight: 650;
+        }
+
+        .entrance-div .left-wall {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .entrance-div .left-wall .antique-light{
+            width: 50%;
+            height: auto;
+            z-index: 3;
+        }
+
+
+        .actual-entrance {
+            height: 100%;
+            background-color: #111;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Banner section */
+        .banner-div {
+            width: 100%;
+            height: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+        }
+
+        .app-title-and-cutlery {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #111;
+            z-index: 5;
+        }
+
+        .plate-title {
+            width: 60%;
+            height: 100%;
+            position: relative;
+            text-align: center;
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+        }
+
+        .plate-title h1 {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            font-size: 4.5vw;
+            font-family: 'Mea Culpa', 'Roboto', sans-serif;
+        }
+
+        .plate-title img {
+            width: 80%;
+            height: auto;
+            position: absolute;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .entrance-image{
+            height: 100%;
+        }
+
+        .entrance-image img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        @media screen and (max-width: 768px) {
+            .plate-title h1 {
+                font-size: 5.5vw;
+            }
+
+            .entrance-div .right-wall .blackboard-menu .inner-layer-menu p{
+            font-size: 1.15rem;
+            }
+
+            .entrance-div .right-wall .blackboard-menu .inner-layer-menu .header-p{
+                font-size: 1.4rem;
+            }
+
+            .entrance-div .right-wall .blackboard-menu .inner-layer-menu .menu-header{
+                font-size: 1.85rem;
+            }
+        }
+
+        @media screen and (max-width: 738px) {
+            .actual-entrance {
+                position: relative;
+                top: 20%;
+                height: 80%;
+            }
+
+
+        }
+
+        @media screen and (max-width: 588px) {
+            .actual-entrance {
+                position: relative;
+                top: 30%;
+                height: 70%;
+            }
+        }
+
+        @media screen and (max-width: 514px) {
+            .actual-entrance {
+                position: relative;
+                top: 3%;
+                height: 97%;
+            }
+
+            .plate-title h1 {
+                font-size: 7.5vw;
+            }
+        }
+
+        @media screen and (max-width: 487px) {
+            .actual-entrance {
+                position: relative;
+                top: 20%;
+                height: 80%;
+            }
+        }
+
+        @media screen and (max-width: 407px) {
+            .actual-entrance {
+                position: relative;
+                top: 5%;
+                height: 95%;
+            }
+
+            .entrance-image img {
+                width: auto;
+                height: 98%;
+                object-fit: cover;
+            }
+        }
+
+        @media screen and (max-width: 376px) {
+            .actual-entrance {
+                position: relative;
+                top: 15%;
+                height: 85%;
+            }
+        }
+
+/* Sections Common code */
+.meal-plan-categories, 
+.meal-plan-reasons, 
+.service-options{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.75);
+    padding: 1rem;
+}
+
+.meal-plan-reasons .intro-text, 
+.meal-plan-categories .intro-text,  
+.service-options .intro-text{
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+
+.meal-plan-reasons .intro-text h1, 
+.meal-plan-categories .intro-text h1,
+.service-options .intro-text h1{
+    font-size: 3rem;
+    color: black;
+}
+
+.meal-plan-reasons .intro-text p,
+.service-options .intro-text p{
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: left;
+    margin-top: -1rem;
+    font-weight: 450;
+}
+
+.meal-plan-categories .categories-container,
+.meal-plan-reasons .reasons-grid,
+.service-options .service-options-grid{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4rem;
+    padding: 1rem;
+    width: 90%;
+}
+
+/* meal plan categories */
+.meal-plan-categories .categories-container{
+    align-items: center;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+.meal-plan-categories .categories-container .category-display{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 30rem;
+    height: auto;
+    min-height: 5rem; /* To Be Removed */
+    position: relative;
+    /*background-color: #000; /* To Be Removed */
+}
+
+.meal-plan-categories .categories-container .category-display .category-podium{
+    width: 90%;
+    margin-top: -10rem;
+}
+
+.meal-plan-categories .categories-container .category-display .coffee-overlay{
+    width: 28%;
+}
+
+.meal-plan-categories .categories-container .category-display .school-coffee{
+    position: absolute;
+    top: 11.98rem;
+    left: 1.9rem;
+    z-index: 4;
+}
+
+.meal-plan-categories .categories-container .category-display .family-coffee{
+    position: absolute;
+    top: 16.05rem;
+    left: 1.9rem;
+    z-index: 4;
+}
+
+.meal-plan-categories .categories-container .category-display .fruit-overlay{
+    width: 28%;
+}
+
+.meal-plan-categories .categories-container .category-display .school-fruit{
+    position: absolute;
+    top: 12.4rem;
+    right: 2.2rem;
+    z-index: 4;
+}
+
+.meal-plan-categories .categories-container .category-display .family-fruit{
+    position: absolute;
+    top: 16.4rem;
+    right: 2.2rem;
+    z-index: 4;
+}
+
+.meal-plan-categories .categories-container .category-display .family-mini-plan{
+    width: 95%;
+    padding: 1rem;
+    height:18rem;
+    /*background-color: pink; /* To Be Removed */
+    /*min-height: 4rem; /* To Be Removed */
+    position: relative;
+    left: 4rem;
+}
+
+.meal-plan-categories .categories-container .category-display .school-mini-plan{
+    position: relative;
+    width: 95%;
+    height: 14rem;
+    padding: 1rem;
+    /*background-color: pink; /* To Be Removed */
+    /*min-height: 4rem; /* To Be Removed */
+    left: 4rem;
+    
+}
+
+.meal-plan-categories .categories-container .family-option{
+    position: relative;
+}
+
+.meal-plan-categories .categories-container .school-option{
+    position: relative;
+}
+
+.meal-plan-categories .categories-container .category-display img{
+    width: 100%;
+    height: auto;
+}
+
+/* Miniature Css */
+/* Miniature Family Plan */
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div {
+    width: 80rem;
+    background-image: url('images/white-wall.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    transform: scale(0.25); /* Shrinks everything to 25% */
+    transform-origin: top left;
+    position: relative;
+    /*top: -10rem;
+    left: 2rem;*/
+    z-index: 2;
+    box-shadow: rgba(0, 0, 0, 0.534) 0px 3px 6px, rgba(0, 0, 0, 0.83) 0px 3px 6px;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .family-plan-parent-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .family-plan-card-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+    overflow-x: hidden;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .family-plan-card {
+    width: 95%;
+    position: relative;
+    padding: 1rem;
+    background-image: url('images/family-plan-background.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .ribbon-holder {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    z-index: 1;
+    width: 75px;
+    height: 75px;
+    text-align: right;
+    overflow: hidden;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .ribbon {
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    display: block;
+    box-shadow: 0 3px 10px -8px black;
+    position: absolute;
+    top: 16.3px;
+    right: -21.8px;
+    text-align: center;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .ribbon:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: -1;
+    border-left: 3px solid #666;
+    border-right: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #666;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .ribbon:after {
+    content: '';
+    position: absolute;
+    right: 0%;
+    top: 100%;
+    z-index: -1;
+    border-right: 3px solid #666;
+    border-left: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #666;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .ribbon > span {
+    display: block;
+    width: 100px;
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .ribbon-outlined > span:before {
+    content: '';
+    border-left: 1px solid #ccc;
+    height: 30px;
+    display: block;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    top: -4px;
+    left: 11px;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .ribbon-outlined > span:after {
+    content: '';
+    border-left: 1px solid #ccc;
+    height: 30px;
+    display: block;
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    position: absolute;
+    top: -4px;
+    left: 89px;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .ribbon-outlined > span {
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .family-plan-card h1 {
+    position: relative;
+    color: white;
+    font-size: 4rem;
+    padding: 1rem;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .family-plan-card .meal-sections {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    gap: 4rem;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .family-plan-card .meal-sections .breakfast-section,
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .family-plan-card .meal-sections .lunch-section,
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .family-plan-card .meal-sections .snacks-section,
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .family-plan-card .meal-sections .dinner-section {
+    width: 90%;
+    min-height: 10rem;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Position text closer to the top boundary */
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .family-plan-card .meal-sections .breakfast-section::before,
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .family-plan-card .meal-sections .lunch-section::before,
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .family-plan-card .meal-sections .snacks-section::before,
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .family-plan-card .meal-sections .dinner-section::before {
+    content: attr(data-title);
+    font-size: 3.5rem;
+    color: white;
+    position: absolute;
+    top: -1.5rem; /* Adjust to move the text closer to the top */
+    left: 50%;
+    transform: translateX(-50%); /* Center the text horizontally */
+    z-index: 3;
+    background-color: rgba(31,32,37,255);
+    padding: 0.2rem;
+    font-family: 'Mea Culpa', 'Roboto', sans-serif;
+}
+
+/* Image positioning */
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .breakfast-section img,
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .lunch-section img,
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .snacks-section img,
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .dinner-section img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    height: 5rem; /* Set height of image */
+    width: auto;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .breakfast-section img {
+    left: -1.6rem; /* Image on the left boundary of breakfast */
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .lunch-section img {
+    height: 4rem;
+    right: -2rem; /* Image on the right boundary of lunch */
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .snacks-section img {
+    height: 7rem;
+    left: -2rem; /* Image on the left boundary of snacks */
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .dinner-section img {
+    right: -1.5rem; /* Image on the right boundary of dinner */
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .breakfast-section p,
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .lunch-section p,
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .snacks-section p,
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .dinner-section p {
+    position: relative;
+    color: #fff;
+    padding: 0.5rem;
+    font-size: 1.85rem;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .breakfast-section .text-area,
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .lunch-section .text-area,
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .snacks-section .text-area,
+.meal-plan-categories .categories-container .family-option .miniature-family-plan-body-div .dinner-section .text-area {
+    position: relative;
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+/* Miniature School Plan */
+.meal-plan-categories .categories-container .school-option .miniature-school-plan-body-div {
+    width: 80rem;
+    background-image: url('images/white-wall.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.25); /* Shrinks everything to 25% */
+    transform-origin: top left;
+    position: relative;
+    /*top: 0;
+    left: 0;*/
+    z-index: 2;
+    box-shadow: rgba(0, 0, 0, 0.534) 0px 3px 6px, rgba(0, 0, 0, 0.83) 0px 3px 6px;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-parent-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+    overflow-x: hidden;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card {
+    width: 95%;
+    position: relative;
+    padding: 1rem;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    overflow: hidden;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card .image-container,
+.miniature-school-plan-body-div .school-lunch-plan-card .text-container {
+    position: relative;
+    width: 100%;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card .image-container {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(images/gray-abstract-wireframe-technolo.jpg);
+    background-size: cover;
+    position: relative;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card .image-container .header {
+    height: 15%;
+    font-family: 'Mea Culpa', 'Cormorant', sans-serif;
+    font-weight: 400;
+    font-size: 7rem;
+    padding: 1rem;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card .image-container img {
+    width: 15%;
+    aspect-ratio: 1/1;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card .image-container .circle-img {
+    position: absolute;
+    top: -45px;
+    left: -45px;
+    width: 12vw;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 3px solid grey;
+    object-fit: cover;
+    z-index: 2;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card .text-container {
+    height: 80%;
+    padding: 1rem;
+    width: 95%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card .text-container .layout-selection {
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card .text-container .layout-selection .selection-question {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    font-size: 1.5rem;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card .text-container .layout-selection .layout-options {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 2rem;
+    padding: 0.5rem;
+}
+
+.miniature-school-plan-body-div .meal-selection-layout-radio-btn label {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    min-width: 140px;
+    justify-content: space-between;
+    padding: 11px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 0 0 1px #d8dee4;
+    transition: all 0.2s ease;
+    font-size: 1.5rem;
+}
+
+.miniature-school-plan-body-div .meal-selection-layout-radio-btn label:not(:has(input:disabled)):hover {
+    background: #f5f6f8;
+}
+
+.miniature-school-plan-body-div .meal-selection-layout-radio-btn label:has(input:disabled) {
+    opacity: .8;
+    cursor: not-allowed;
+    background: #f5f6f8;
+}
+
+.miniature-school-plan-body-div .meal-selection-layout-radio-btn label:has(input:checked) {
+    box-shadow: 0 0 0 1.5px rgb(37 99 235), 0 0 0 1px #d8dee4;
+}
+
+.miniature-school-plan-body-div .meal-selection-layout-radio-btn label:has(input:focus) {
+    box-shadow: 0 0 0 1.5px rgb(37 99 235), 0 0 0 4px rgb(191 219 254), 0 0 0 1px #d8dee4;
+}
+
+.miniature-school-plan-body-div .meal-selection-layout-radio-btn label .inputAndLeftText {
+    display: flex;
+    gap: .75em;
+}
+
+.miniature-school-plan-body-div .meal-selection-layout-radio-btn label .inputAndLeftText div {
+    color: rgb(55 65 81);
+    line-height: 1.25rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.miniature-school-plan-body-div .meal-selection-layout-radio-btn label .title {
+    font-weight: 600;
+}
+
+.miniature-school-plan-body-div .meal-selection-layout-radio-btn label .desc {
+    color: rgb(94, 99, 109);
+    font-size: 1.1rem;
+}
+
+.miniature-school-plan-body-div .meal-selection-layout-radio-btn input {
+    color: rgb(37 99 235);
+}
+
+.miniature-school-plan-body-div .meal-selection-layout-radio-btn input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    display: inline-block;
+    vertical-align: middle;
+    background-origin: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+
+    border: 1px solid rgb(209 213 219);
+
+    box-shadow: 0 1px 2px 0 #0000000d;
+    border-radius: 9999px;
+    width: 1rem;
+    height: 1rem;
+
+    margin: 2px 0 0;
+}
+
+.miniature-school-plan-body-div .meal-selection-layout-radio-btn input:checked {
+    border-color: #0000;
+    background-color: currentColor;
+    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTYgMTYiIGZpbGw9IiNmZmYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGnpcmNsZSBjeD0iOCIgY3k9IjgiIHI9IjMiLz48L3N2Zz4=);
+}
+
+.miniature-school-plan-body-div .meal-selection-layout-radio-btn input:focus {
+    box-shadow: 0 0 0 3px rgb(191 219 254), 0 1px 2px 0 #0000000d;
+}
+
+.miniature-school-plan-body-div .meal-selection-layout-radio-btn input:disabled {
+    color: rgb(156 163 175);
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card .break-system {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    row-gap: 9rem;
+    width: 100%;
+    padding: 6rem 2rem;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card .break-system .recess,
+.miniature-school-plan-body-div .school-lunch-plan-card .break-system .lunch {
+    width: 30rem;
+    min-height: 10rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 3.125rem 6.25rem -1.25rem,
+        rgba(0, 0, 0, 0.3) 0px 1.875rem 3.75rem -1.875rem,
+        rgba(10, 37, 64, 0.35) 0px -0.125rem 0.375rem 0px inset;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 4rem;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card .break-system .recess .meal-image,
+.miniature-school-plan-body-div .school-lunch-plan-card .break-system .lunch .meal-image {
+    position: absolute;
+    top: -7rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(0deg, #ddd, #fff);
+    padding: 0.5rem;
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card .break-system .recess .meal-image .lunchbox-image,
+.miniature-school-plan-body-div .school-lunch-plan-card .break-system .lunch .meal-image .lunchbox-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.miniature-school-plan-body-div .school-lunch-plan-card .break-system .recess::before,
+        .miniature-school-plan-body-div .school-lunch-plan-card .break-system .lunch::before {
+            content: attr(data-title);
+            font-size: 3.5rem;
+            color: rgb(0, 0, 0);
+            position: absolute;
+            left: -11%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            width: 8rem;
+            background-color: rgba(255, 255, 255, 0.75);
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 3.125rem 6.25rem -1.25rem,
+                rgba(0, 0, 0, 0.3) 0px 1.875rem 3.75rem -1.875rem,
+                rgba(10, 37, 64, 0.35) 0px -0.125rem 0.375rem 0px inset;
+            padding: 0.8rem;
+            padding-left: 1.4rem;
+            padding-right: 0.6rem;
+            font-family: 'Mea Culpa', 'Roboto', sans-serif;
+        }
+
+        .miniature-school-plan-body-div .school-lunch-plan-card .break-system .recess .text-area,
+        .miniature-school-plan-body-div .school-lunch-plan-card .break-system .lunch .text-area {
+            position: relative;
+            left: 13%;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 4rem;
+        }
+
+        .miniature-school-plan-body-div .school-lunch-plan-card .break-system .recess .text-area p,
+        .miniature-school-plan-body-div .school-lunch-plan-card .break-system .lunch .text-area p {
+            position: relative;
+            color: #000000;
+            padding: 0.5rem;
+            padding-top: 1.5rem;
+            font-size: 1.65rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+    /* Create Meal Plan Button */
+    .create-plan-btn {
+        border: 0;
+        background-color: #f3f3f3;
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f3f3f3), color-stop(50%, #dddddd), color-stop(50%, #d2d2d2), color-stop(100%, #dfdfdf));
+        background-image: -webkit-linear-gradient(top, #f3f3f3 0%, #dddddd 50%, #d2d2d2 50%, #dfdfdf 100%);
+        background-image: -moz-linear-gradient(top, #f3f3f3 0%, #dddddd 50%, #d2d2d2 50%, #dfdfdf 100%);
+        background-image: -ms-linear-gradient(top, #f3f3f3 0%, #dddddd 50%, #d2d2d2 50%, #dfdfdf 100%);
+        background-image: -o-linear-gradient(top, #f3f3f3 0%, #dddddd 50%, #d2d2d2 50%, #dfdfdf 100%);
+        background-image: linear-gradient(top, #f3f3f3 0%, #dddddd 50%, #d2d2d2 50%, #dfdfdf 100%);
+        border-bottom: 1px solid #b4b4b4;
+        border-right: 1px solid #dfdfdf;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 1px 0 0 white, 0 1px 0 0 #d5d5d5, 0 -1px 2px 1px #efefef;
+        -moz-box-shadow: inset 0 1px 0 0 white, 0 1px 0 0 #d5d5d5, 0 -1px 2px 1px #efefef;
+        box-shadow: inset 0 1px 0 0 white, 0 1px 0 0 #d5d5d5, 0 -1px 2px 1px #efefef;
+        color: #4b4b4b;
+        font: bold 1.8rem 'Cormorant', sans-serif;
+        margin: 0;
+        margin-top: 0.5rem;
+        padding: 1rem 0.7rem;
+        text-shadow: 0 1px 1px #fff;
+        width: 15rem;
+    }
+    .create-plan-btn:hover {
+        background-color: #e5e5e5;
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e5e5e5), color-stop(50%, #d1d1d1), color-stop(50%, #c4c4c4), color-stop(100%, #b8b8b8));
+        background-image: -webkit-linear-gradient(top, #e5e5e5 0%, #d1d1d1 50%, #c4c4c4 50%, #b8b8b8 100%);
+        background-image: -moz-linear-gradient(top, #e5e5e5 0%, #d1d1d1 50%, #c4c4c4 50%, #b8b8b8 100%);
+        background-image: -ms-linear-gradient(top, #e5e5e5 0%, #d1d1d1 50%, #c4c4c4 50%, #b8b8b8 100%);
+        background-image: -o-linear-gradient(top, #e5e5e5 0%, #d1d1d1 50%, #c4c4c4 50%, #b8b8b8 100%);
+        background-image: linear-gradient(top, #e5e5e5 0%, #d1d1d1 50%, #c4c4c4 50%, #b8b8b8 100%);
+        -webkit-box-shadow: inset 0 1px 0 0 #f2f2f2, 0 1px 0 0 #c9c9c9, 0 -1px 2px 1px #e3e3e3;
+        -moz-box-shadow: inset 0 1px 0 0 #f2f2f2, 0 1px 0 0 #c9c9c9, 0 -1px 2px 1px #e3e3e3;
+        box-shadow: inset 0 1px 0 0 #f2f2f2, 0 1px 0 0 #c9c9c9, 0 -1px 2px 1px #e3e3e3;
+        cursor: pointer;
+    }
+    .create-plan-btn:active {
+        -webkit-box-shadow: inset 0 0 30px 0 #999999, 0 1px 0 0 rgba(255, 255, 255, .1);
+        -moz-box-shadow: inset 0 0 30px 0 #999999, 0 1px 0 0 rgba(255, 255, 255, .1);
+        box-shadow: inset 0 0 30px 0 #999999, 0 1px 0 0 rgba(255, 255, 255, .1);
+    }
+
+/* Reasons to Plan meals */
+
+.meal-plan-reasons .reasons-grid .reason-card{
+    position: relative;
+    width: 20rem;
+    height: 22.5rem;
+    background-color: #f1f1f1;
+    border-top-right-radius: 4.5rem;
+    border-bottom-left-radius: 4.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, 
+                rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, 
+                rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.meal-plan-reasons .reasons-grid .reason-card .reason-heading{
+    height: 15%;
+    padding: 0.5rem;
+}
+
+.meal-plan-reasons .reasons-grid .reason-card .reason{
+    height: 85%;
+    padding: 0.5rem;
+}
+
+.meal-plan-reasons .reasons-grid .reason-card h2{
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.meal-plan-reasons .reasons-grid .reason-card p{
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* Circle styling */
+.circle {
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.circle.top-left {
+    top: -1rem;
+    left: -1rem;
+    background-image: url('images/grey-wall.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.circle.bottom-right {
+    bottom: -1rem;
+    right: -1rem;
+    background-image: url('images/black-brick-wall-textured-backgr.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    font-size: 2rem;
+    font-family: 'Mea Culpa', 'Roboto', sans-serif;
+    font-weight: 650;
+}
+
+/* For circle at the top-left */
+.circle.top-left img {
+    width: 85%;
+    height: 85%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Service options: No Account vs Account */
+
+
+/* Footer Section */
+footer {
+    background-image: url('images/black-brick-wall-textured-backgr.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 20px 20px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+footer .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer p {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+footer .footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer .footer-links a {
+    margin: 10px 0;
+}
+
+/* Button Styling */
+footer .button {
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 16px;
+    border: none;
+    padding: 2px;
+    background: radial-gradient(circle 80px at 80% -10%, #ffffff, #181b1b);
+    position: relative;
+    transition: background 0.3s, transform 0.3s;
+}
+
+footer .button:hover {
+    transform: scale(0.98);
+}
+
+footer .button::after {
+    content: "";
+    position: absolute;
+    width: 65%;
+    height: 60%;
+    border-radius: 120px;
+    top: 0;
+    right: 0;
+    box-shadow: 0 0 20px #ffffff38;
+    z-index: -1;
+    transition: box-shadow 0.3s;
+}
+
+footer .button:hover::after {
+    box-shadow: 0 0 10px #ffffff18;
+}
+
+footer .blob1 {
+    position: absolute;
+    width: 70px;
+    height: 100%;
+    border-radius: 16px;
+    bottom: 0;
+    left: 0;
+    background: radial-gradient(circle 60px at 0% 100%, #3fe9ff, #0000ff80, transparent);
+    box-shadow: -10px 10px 30px #0051ff2d;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+footer .button:hover .blob1 {
+    box-shadow: -5px 5px 20px #000;
+}
+
+footer .inner {
+    padding: 14px 25px;
+    border-radius: 14px;
+    color: #fff;
+    z-index: 3;
+    position: relative;
+    background: radial-gradient(circle 80px at 80% -50%, #777777, #0f1111);
+    transition: background 0.3s;
+    display: flex;
+    align-items: center; /* Aligns the icon and text */
+}
+
+footer .button:hover .inner {
+    background: radial-gradient(circle 80px at 80% -50%, #333333, #0f0f0f);
+}
+
+footer .inner i {
+    font-size: 1rem; /* Adjust icon size */
+}
+
+footer .inner::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 14px;
+    background: radial-gradient(circle 60px at 0% 100%, #00e1ff1a, #0000ff11, transparent);
+    position: absolute;
+    transition: opacity 0.3s;
+}
+
+footer .button:hover .inner::before {
+    opacity: 0;
+}
+
+/* Mobile responsiveness for footer */
+@media (max-width: 768px) {
+    footer {
+        padding: 30px 20px;
+    }
+
+    footer .footer-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    footer p {
+        font-size: 0.9rem;
+    }
+}

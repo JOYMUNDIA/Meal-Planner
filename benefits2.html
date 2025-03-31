@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pie Chart Divided Circle</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .base-circle {
+            width: 40vw; /* Circle size is 50% of the viewport width */
+            height: 40vw; /* Height is same as width to maintain a circle */
+            border-radius: 50%; /* Make it circular */
+            background: conic-gradient(
+                #ffadad 0deg 60deg, 
+                #ffd6a5 60deg 120deg,
+                #fdffb6 120deg 180deg,
+                #caffbf 180deg 240deg,
+                #9bf6ff 240deg 300deg,
+                #a0c4ff 300deg 360deg
+            ); /* Divide the circle into 6 equal parts */
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="base-circle"></div>
+    </div>
+</body>
+</html>
