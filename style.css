@@ -121,6 +121,18 @@
             border-radius: 3px;
             background-image: url('images/white-wall.jpg');
             background-size: cover;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+                        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+                        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hamburger-menu:hover{
+            color: blue;
+            transform: translateY(-0.5rem); /* Lift by 8px */
+            box-shadow: rgba(50, 50, 93, 0.4) 0px 6.25rem 12.5rem -2.5rem,
+                        rgba(0, 0, 0, 0.4) 0px 3.75rem 7.5rem -3.75rem,
+                        rgba(10, 37, 64, 0.4) 0px -0.25rem 0.625rem 0px inset;
         }
 
         /* Side Navigation Bar (from right) */
@@ -135,6 +147,11 @@
             overflow-x: hidden;
             transition: 0.5s;
             padding-top: 3.75rem; /* 60px */
+            text-decoration: none;
+        }
+
+        .side-nav a{
+            text-decoration: none;
         }
 
         /* Adjustments for the side-nav button positioning */

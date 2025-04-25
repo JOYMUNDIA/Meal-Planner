@@ -23,6 +23,27 @@
             overflow-x: hidden;
         }
 
+        .nav-links {
+                display: none;
+            }
+
+        .hamburger-menu {
+                display: block;
+                z-index: 25;
+                position: relative;
+                left: 94vw;
+        }
+
+        @media screen and (max-width: 768px) {
+            .hamburger-menu {
+                left: 90vw;
+            }
+        }
+
+        .side-nav {
+                width: 0;
+        }
+
         .school-lunch-plan-parent-container {
             width: 100%;
             min-height: 100vh;
@@ -122,7 +143,7 @@
 
         /* Default state for all sections */
         .school-lunch-plan-card .text-container .meal-sections,
-        .school-lunch-plan-card .text-container .break-system,
+        /*.school-lunch-plan-card .text-container .break-system,*/
         .school-lunch-plan-card .text-container .meal-categories {
         display: none;  /* Initially hidden */
         opacity: 0;  /* Make them invisible */
@@ -470,14 +491,23 @@
         }
 
         /* Break System Css */
-        .school-lunch-plan-card .break-system.flex {
+        /*.school-lunch-plan-card .break-system.flex {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
             gap: 4rem;
             row-gap: 9rem;
-        }
+        }*/
+
+        .school-lunch-plan-card .break-system {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            row-gap: 9rem;
+        }/* To be removed when the options layout is in use */
 
         .school-lunch-plan-card .break-system {
             position: relative;
@@ -637,22 +667,21 @@
             <!-- Navigation section (10% of the body height) -->
             <div class="nav-div">
                 <!-- register-div on the left -->
-                <div class="register-div">
+                <!--<div class="register-div">
                     <button class="register-login">Register/Login</button><br>
-                </div>
+                </div>-->
     
                 <!-- Navigation links section -->
                 <div class="nav-links">
-                    
-    
-                    <a href="index.html"><button>Home</button></a>
+
+                    <a href="index.html" target="_blank"><button>Home</button></a>
                     
                     <!-- Create dropdown button -->
                     <div class="dropdown">
                         <button class="dropbtn active">Create</button>
                         <div class="dropdown-content">
-                            <a href="familyplan.html">Family Meal Plan</a>
-                            <a href="schoollunch.html">School Lunch Meal Plan</a>
+                            <a href="familyplan.html" target="_blank">Family Meal Plan</a>
+                            <a href="schoollunch.html" target="_blank">School Lunch Meal Plan</a>
                             <!--<a href="#">Work Meal Plan</a>-->
                             <!--<a href="#">Special Occasion/Festival Meal Plan</a>-->
                         </div>
@@ -673,7 +702,9 @@
                 <!-- Close button to close the sidebar -->
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
     
-                <a href="index.html">
+                <button onclick="closeNav()">Register/Login</button><br>
+
+                <a href="index.html" target="_blank">
                     <button onclick="closeNav()">Home</button>
                 </a>
                 
@@ -681,8 +712,8 @@
                     <button class="dropbtn">Create</button>
                     <div class="dropdown-content">
                         <!-- Inside the .dropdown-content -->
-                            <a href="familyplan.html" onclick="handleDropdownSelection(this)">Family Meal Plan</a>
-                            <a href="schoollunch.html" onclick="handleDropdownSelection(this)">School Lunch Meal Plan</a>
+                            <a href="familyplan.html" target="_blank" onclick="handleDropdownSelection(this)">Family Meal Plan</a>
+                            <a href="schoollunch.html" target="_blank" onclick="handleDropdownSelection(this)">School Lunch Meal Plan</a>
                             <!--<a href="#" onclick="handleDropdownSelection(this)">Work Meal Plan</a>-->
                             <!--<a href="#" onclick="handleDropdownSelection(this)">Special Occasion/Festival Meal Plan</a>-->
     
@@ -705,7 +736,7 @@
 
                     <div class="text-container">
 
-                        <div class="layout-selection">
+                        <!--<div class="layout-selection">
 
                             <div class="selection-question">
                                 <p><i>Please Select a Meal Plan Layout...</i></p>
@@ -749,10 +780,10 @@
                                 </div>
                             </div>
                             
-                        </div>
+                        </div>-->
 
                         <!--Menu By General Meal Layout-->
-                        <div class="meal-sections">
+                        <!--<div class="meal-sections">
 
                             <div class="appetizer" data-title="Appetizer / Entrée">
                                 <img src="images/appetizer.png" alt="Ham & Cheese Skewers">
@@ -807,7 +838,7 @@
                                 </div>
                             </div>
     
-                        </div>
+                        </div>-->
                         <!--End of Menu By General Meal Layout-->
 
                         <!--Menu By School Break System-->
@@ -846,7 +877,7 @@
                         <!--End of Menu By School Break System-->
 
                         <!--Menu By Meal Categories-->
-                        <div class="meal-categories">
+                        <!--<div class="meal-categories">
 
                             <div class="card">
                                 <div class="category-heading">
@@ -928,7 +959,7 @@
                             </div>
 
                         </div>
-                    </div>
+                    </div>-->
                     <!--End of Menu By Meal Categories-->
 
 
@@ -937,7 +968,7 @@
         </div>
     </div>
 
-    <script>
+    <!--<script>
         document.addEventListener('DOMContentLoaded', function () {
 
         // Get all the radio buttons
@@ -986,7 +1017,10 @@
                 updateLayout();
         });
 
-    </script>
+    </script>-->
+</div>
+</div>
     <script src="script.js"></script>
+    
 </body>
 </html>

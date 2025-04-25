@@ -1,3 +1,4 @@
+//Nav Javascript
 document.addEventListener('DOMContentLoaded', () => {
     const createButton = document.querySelector('.side-nav .dropbtn');
     const dropdownContent = document.querySelector('.side-nav .dropdown-content');
@@ -164,3 +165,354 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+//Switch between Daily and Weekly Meal Plan
+document.addEventListener('DOMContentLoaded', function () {
+
+        // Get all the radio buttons
+            const dailyMealPlan = document.getElementById('dailyMealPlan');
+            const weeklyMealPlan = document.getElementById('weeklyMealPlan');
+
+        // Get the sections
+            const familyPlanCard = document.querySelector('.family-plan-card-container');
+            const familyWeeklyPlanCard = document.querySelector('.family-weekly-plan-card-container');
+
+        // Function to set the correct display styles based on selected layout
+            function updateLayout() {
+                // Reset all sections to be invisible
+                    familyPlanCard.classList.remove('flex');
+                    familyWeeklyPlanCard.classList.remove('flex');
+
+                // Hide all sections initially by removing the visibility classes
+                    familyPlanCard.style.visibility = 'hidden';
+                    familyWeeklyPlanCard.style.visibility = 'hidden';
+
+                // Add transitions to the selected section
+                    if (dailyMealPlan.checked) {
+                        familyPlanCard.classList.add('flex');
+                        familyPlanCard.style.visibility = 'visible';  // Make it visible
+                    }
+                    else if (weeklyMealPlan.checked) {
+                        familyWeeklyPlanCard.classList.add('flex');
+                        familyWeeklyPlanCard.style.visibility = 'visible';  // Make it visible
+                    }
+            }
+
+            // Add event listeners for the radio buttons
+                dailyMealPlan.addEventListener('change', updateLayout);
+                weeklyMealPlan.addEventListener('change', updateLayout);
+
+            // Initialize the layout on page load
+                updateLayout();
+        });
+
+//Weekly Meal Plan Javascript
+// Get the necessary elements
+const iconContainer = document.querySelector('.icon-container');
+const calendarContainer = document.getElementById('calendar-container');
+const startDateInput = document.getElementById('start-date');
+const closeCalendarContainer = document.getElementById('close-calendar-container');
+
+let calendarVisible = false;
+
+// Toggle the calendar visibility on icon click (this will still work for mobile/touch devices)
+iconContainer.addEventListener('click', function () {
+    calendarVisible = !calendarVisible;
+
+    if (calendarVisible) {
+        calendarContainer.style.display = 'block';
+    } else {
+        calendarContainer.style.display = 'none';
+    }
+});
+
+// Show the calendar when hovering over the icon container
+iconContainer.addEventListener('mouseover', function () {
+    if (!calendarVisible) {
+        calendarContainer.style.display = 'block'; // Show the calendar on hover
+    }
+});
+
+// Hide the calendar when the mouse leaves the icon container
+iconContainer.addEventListener('mouseout', function () {
+    if (!calendarVisible) {
+        calendarContainer.style.display = 'none'; // Hide the calendar when hover ends
+    }
+});
+
+//Close Calendar using close button
+closeCalendarContainer.addEventListener('click', function () {
+    calendarVisible = !calendarVisible;
+
+    if (calendarVisible) {
+        calendarContainer.style.display = 'none';
+    } else {
+        calendarContainer.style.display = 'none';
+    }
+});
+
+
+// Update the start and end date when a start date is selected
+function updateStartDate() {
+    const startDate = new Date(startDateInput.value);
+
+    if (startDate) {
+        // Format the start date and calculate the end date (6 days after)
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedStartDate = startDate.toLocaleDateString('en-GB', options);
+        const endDate = new Date(startDate);
+        endDate.setDate(startDate.getDate() + 6);
+        const formattedEndDate = endDate.toLocaleDateString('en-GB', options);
+
+        // Update the start and end date text
+        document.getElementById('start-end-date-text').textContent = `${formattedStartDate} - ${formattedEndDate}`;
+
+        // Update table and dropdown
+        populateDays(startDate);
+        populateDropdownDays(startDate);
+    }
+
+}
+
+
+function populateDays(startDate) {
+    // Calculate each day and populate the corresponding cells
+    const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const days = [startDate];  // Start with the selected start date
+
+    // Generate the next 6 days based on the selected start date
+    for (let i = 1; i <= 6; i++) {
+        let nextDay = new Date(startDate);
+        nextDay.setDate(startDate.getDate() + i);
+        days.push(nextDay);
+    }
+
+    // Loop through the days and update the meal plan table
+    for (let i = 0; i < days.length; i++) {
+        const day = days[i];
+        const dayName = dayNames[day.getDay()];
+        const dayDate = day.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
+
+        // Update the day name and date for each day
+        document.querySelector(`#day-${i + 1} .day-name`).textContent = dayName;
+        document.querySelector(`#day-${i + 1} .day-month`).textContent = dayDate;
+    }
+}
+
+// New: Populate dropdown with the 7 days starting from startDate
+function populateDropdownDays(startDate) {
+    const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const dropdown = document.getElementById('day-selector');
+    dropdown.innerHTML = ''; // Clear existing options
+
+    for (let i = 0; i < 7; i++) {
+        const day = new Date(startDate);
+        day.setDate(startDate.getDate() + i);
+
+        const dayName = dayNames[day.getDay()];
+        const dayDate = day.toLocaleDateString('en-GB', { day: '2-digit', month: 'long' });
+
+        const option = document.createElement('option');
+        option.value = `day-${i + 1}`;
+        option.textContent = `${dayName} ${dayDate}`;
+        dropdown.appendChild(option);
+    }
+}
+
+// Set the default start date to the day after today when the page loads
+window.addEventListener('DOMContentLoaded', function () {
+    const startEndText = document.getElementById('start-end-date-text');
+
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+
+    const endDate = new Date(tomorrow);
+    endDate.setDate(tomorrow.getDate() + 6);
+
+    const options = { day: '2-digit', month: 'long', year: 'numeric' };
+    const formattedStart = tomorrow.toLocaleDateString('en-GB', options); // e.g., 21 April 2025
+    const formattedEnd = endDate.toLocaleDateString('en-GB', options);     // e.g., 27 April 2025
+
+    startEndText.textContent = `${formattedStart} - ${formattedEnd}`;
+
+    // Call functions on load
+    populateDays(tomorrow);
+    populateDropdownDays(tomorrow);
+});
+
+
+// Show Only the meal sections that are applicable to the selected day in the drop-down
+
+function toggleMealsByDay() {
+    // Get the selected value from the dropdown
+    const selectedDay = document.getElementById("day-selector").value;
+    console.log('Selected Day:', selectedDay); // Debugging line to show which day is selected
+
+    // Get all sections for the meals
+    const allSections = document.querySelectorAll('.meal-type');
+    console.log('All Meal Sections:', allSections); // Debugging line to show all sections
+
+    // Format the selectedDay to match the section IDs format (e.g., day-one, day-two, etc.)
+    let formattedSelectedDay = selectedDay; 
+
+    // Convert 'day-2' to 'day-two', 'day-3' to 'day-three', etc.
+    if (formattedSelectedDay === "day-1") {
+        formattedSelectedDay = "day-one";
+    } else if (formattedSelectedDay === "day-2") {
+        formattedSelectedDay = "day-two";
+    } else if (formattedSelectedDay === "day-3") {
+        formattedSelectedDay = "day-three";
+    } else if (formattedSelectedDay === "day-4") {
+        formattedSelectedDay = "day-four";
+    } else if (formattedSelectedDay === "day-5") {
+        formattedSelectedDay = "day-five";
+    } else if (formattedSelectedDay === "day-6") {
+        formattedSelectedDay = "day-six";
+    } else if (formattedSelectedDay === "day-7") {
+        formattedSelectedDay = "day-seven";
+    }
+
+    console.log('Formatted Selected Day:', formattedSelectedDay); // Debugging line to show the formatted day
+
+    // Loop through each section
+    allSections.forEach(section => {
+        console.log('Checking section:', section.id); // Debugging line to show which section is being checked
+        
+        // Get the correct day part from the section ID (e.g., "day-one", "day-two")
+        const sectionDay = section.id.split('-')[0] + '-' + section.id.split('-')[1]; // Get "day-one", "day-two", etc.
+        console.log('Section day:', sectionDay); // Debugging line to show the section's day
+
+        // Check if the section belongs to the selected day
+        if (sectionDay === formattedSelectedDay) {
+            console.log('Displaying section:', section.id); // Debugging line to show which section is being displayed
+            section.style.display = 'flex'; // Show the selected day's section
+        } else {
+            console.log('Hiding section:', section.id); // Debugging line to show which section is being hidden
+            section.style.display = 'none'; // Hide all other sections
+        }
+    });
+}
+
+// Call toggleMealsByDay to initialize the page
+window.onload = function() {
+    toggleMealsByDay();
+};
+
+
+//Enable edit in Day view of Family Meal Plan
+
+document.querySelectorAll('.meal-type').forEach(section => {
+    let timeoutId = null;
+
+    section.addEventListener('dblclick', () => {
+        const paragraph = section.querySelector('p');
+
+        // Enable editing
+        paragraph.contentEditable = true;
+        paragraph.focus();
+
+        // Move cursor to the end using modern API
+        const range = document.createRange();
+        range.selectNodeContents(paragraph);
+        range.collapse(false); // Collapse to the end
+
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        // Clear existing timeout if it exists
+        if (timeoutId) clearTimeout(timeoutId);
+
+        // Set timeout to disable editing after 30 seconds
+        timeoutId = setTimeout(() => {
+            paragraph.contentEditable = false;
+        }, 30000);
+    });
+});
+
+
+//Edit weekly Timetable with Modal
+document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("weekly-timetable-modal");
+    const modalHeader = document.querySelector(".modal-header");
+    const modalDateContainer = document.querySelector(".weekly-timetable-modal .date-container");
+    const modalMealCell = document.querySelector(".modal-meal");
+    const modalEnterBtn = document.querySelector(".modal-enter-btn");
+    const modalClearBtn = document.querySelector(".modal-clear-btn");
+    const closeModalBtn = document.querySelector(".close-modal-button");
+    const weeklyTimetableContent = document.getElementById("weekly-timetable-content");
+
+    let activeCell = null;
+
+    // Extract date container from clicked row
+    function getDateContainerFor(cell) {
+        const row = cell.closest("tr");
+        const dateContainer = row.querySelector(".date-container");
+        return dateContainer ? dateContainer.cloneNode(true) : document.createElement("div");
+    }
+
+    // Extract meal type from class (e.g. "day-three-breakfast" -> "Breakfast")
+    function getMealTypeFromClass(cell) {
+        const classList = Array.from(cell.classList);
+        const mealClass = classList.find(cls => cls.startsWith("day-") && cls.includes("-"));
+        if (!mealClass) return "Meal";
+        return mealClass.split("-").pop().replace(/^\w/, c => c.toUpperCase()); // capitalize
+    }
+
+    // Only target .meals inside the main timetable, not inside the modal
+    weeklyTimetableContent.querySelectorAll(".meals").forEach(cell => {
+        cell.addEventListener("dblclick", () => {
+            activeCell = cell;
+
+            // Show modal
+            modal.style.display = "block";
+            weeklyTimetableContent.classList.add("blurred");
+
+            // Set modal header and meal
+            const mealType = getMealTypeFromClass(cell);
+            modalHeader.textContent = mealType;
+
+            // Copy date from table
+            const dateDiv = getDateContainerFor(cell);
+            modalDateContainer.innerHTML = ""; // Clear existing
+            modalDateContainer.appendChild(dateDiv);
+
+            // Load current meal text
+            modalMealCell.textContent = cell.textContent;
+            modalMealCell.contentEditable = true;
+            modalMealCell.focus();
+        });
+    });
+
+    // ENTER BUTTON — Save text back
+    modalEnterBtn.addEventListener("click", () => {
+        if (activeCell) {
+            activeCell.textContent = modalMealCell.textContent.trim();
+        }
+        closeModal();
+    });
+
+    // CLEAR BUTTON — Clear modal text
+    modalClearBtn.addEventListener("click", () => {
+        modalMealCell.textContent = "";
+        modalMealCell.focus();
+    });
+
+    // CLOSE BUTTON — Cancel
+    closeModalBtn.addEventListener("click", () => {
+        closeModal();
+    });
+
+    function closeModal() {
+        modal.style.display = "none";
+        weeklyTimetableContent.classList.remove("blurred");
+        activeCell = null;
+        modalMealCell.contentEditable = false;
+    }
+});
+
+
+
+
+

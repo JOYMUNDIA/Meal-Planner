@@ -732,8 +732,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /*box-shadow: rgba(0, 0, 0, 0.12) 1px 2px 3px, rgba(0, 0, 0, 0.24) 1px 2px 3px;*/
-            background-color: rgba(255, 255, 255, 0.3);
+            box-shadow: rgba(0, 0, 0, 0.12) 1px 2px 3px, rgba(0, 0, 0, 0.24) 1px 2px 3px;
         }
 
         @media screen and (max-width: 768px) {
@@ -748,94 +747,65 @@
 
         .family-weekly-plan-card table{
             width: 95%;
-            background-color: rgba(255, 255, 255, 0.55);
+            background-color: rgba(255, 255, 255, 0.45);
             box-shadow: rgba(9, 30, 66, 0.432) 0px 1px 1px, rgba(9, 30, 66, 0.247) 0px 0px 1px 1px;
-            border-spacing: 1.2rem 1rem;
         }
 
         .family-weekly-plan-card table , td, th {
             /*border: 1px solid #595959;*/
-            /*border-collapse: collapse;*/
-            font-size: 120%;
+            border-collapse: collapse;
+            font-size: 1.5rem;
         }
 
         .family-weekly-plan-card td, th {
-            padding: 1%;
+            padding: 1rem;
             width: auto;
             height: auto;
-            /*border: 1px solid #595959;*/
-            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-        }
-
-        @media screen and (max-width: 662px) {
-
-            .family-weekly-plan-card table , td, th {
-                font-size: 100%;
-            }
-        }
-
-        @media screen and (max-width: 476px) {
-
-            .family-weekly-plan-card table , td, th {
-                font-size: 95%;
-            }
-        }
-
-        @media screen and (max-width: 439px) {
-
-            .family-weekly-plan-card table , td, th {
-                font-size: 90%;
-            }
-        }
-
-        .family-weekly-plan-card table .row-spacer,
-        .family-weekly-plan-card table .header-body-row-spacer{
-            border: none;
-            box-shadow: none;
-        }
-
-        .family-weekly-plan-card table .row-spacer{
-            padding: 0.5rem;
-        }
-
-        .family-weekly-plan-card table .header-body-row-spacer{
-            padding: 0.2rem;
-        }
-
-        .family-weekly-plan-card table th {
-            /*background: #f0e6cc;*/
-            background-image: url('images/family-plan-background.jpg');
-            background-size: cover;
-            color: #ffffff;
-        }
-
-        .family-weekly-plan-card table .style-preserver-cell{
-            background-image: none;
-            box-shadow: none;
-        }
-
-        .family-weekly-plan-card table .date-cell{
-            background-image: linear-gradient(163.3deg, #f5f5f5 11.54%, #d8d8d8c9 90.45%);
+            border: 1px solid #595959;
         }
 
         .family-weekly-plan-card table .plan-header{
-            margin-top: 0.2rem;
-            color: black;
-            font-size: 2.5vw;
-            font-family: 'Mea Culpa', 'Roboto', sans-serif;
-            font-weight: 550;
+            margin-top: 2rem;
         }
 
         .family-weekly-plan-card table .user-edit-guide{
-            margin-top: 0.9rem;
-            font-size: 1.15rem;
+            margin-top: 2rem;
+            font-size: 1.25rem;
             color: rgba(48, 48, 48, 0.959);
         }
 
         @media screen and (max-width: 768px) {
-            .family-weekly-plan-card table .plan-header{
-                font-size: 5vw;
+            .family-weekly-plan-card table , td, th {
+                font-size: 1.3rem;
             }
+        }
+
+        @media screen and (max-width: 580px) {
+            .family-weekly-plan-card table , td, th {
+                font-size: 1.2rem;
+            }
+
+            .family-weekly-plan-card td, th {
+                padding: 0.5rem;
+            }
+        }
+
+        @media screen and (max-width: 522px) {
+            .family-weekly-plan-card-container {
+                padding: 0.5rem;
+            }
+
+            .family-weekly-plan-card table{
+                width: 85%;
+            }
+
+            .family-weekly-plan-card table , td, th {
+                font-size: 4vw;
+            }
+        }
+
+        .family-weekly-plan-card th {
+            background: #f0e6cc;
         }
 
         .family-weekly-plan-card .actual-start-end-date{
@@ -859,17 +829,10 @@
             position: relative;
         }
 
-        @media screen and (max-width: 768px) {
-            .family-weekly-plan-card .deeds-meta-header{
-                flex-direction: column;
-            }
-        }
-
         .family-weekly-plan-card .deeds-meta-header .start-end-date{
             width: 90%;
             padding: 0.5rem;
             position: relative;
-            font-size: 140%;
         }
 
         .family-weekly-plan-card .deeds-meta-header .calendar-image{
@@ -1011,198 +974,6 @@
             width: 18.5rem;
         }
 
-        #weekly-timetable-content.blurred {
-            filter: blur(4px);
-            pointer-events: none;
-        }
-
-        /* Modal Pop Up Buttons */
-        
-        .weekly-timetable-modal table, .weekly-timetable-modal{
-            position: relative;
-        }
-
-        .weekly-timetable-modal table .modal-header, .modal-meal, .date-cell, .modal-popUp-btns{
-            padding: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .weekly-timetable-modal table .date-cell .date-container{
-            padding: 0.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding-right: 1.5rem;
-            padding-left: 0;
-        }
-
-        .weekly-timetable-modal table .modal-popUp-btns{
-            padding: 0.01rem;
-            padding-top: 2rem;
-            box-shadow: none;
-        }
-
-        .weekly-timetable-modal .clear-enter-btns{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .modal-clear-btn {
-            align-items: center;
-            appearance: none;
-            background-color: #FCFCFD;
-            border-radius: 4px;
-            border-width: 0;
-            box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
-            box-sizing: border-box;
-            color: #36395A;
-            cursor: pointer;
-            font-family: 'Cormorant', sans-serif;
-            display: inline-flex;
-            height: 48px;
-            justify-content: center;
-            line-height: 1;
-            list-style: none;
-            overflow: hidden;
-            padding-left: 2rem;
-            padding-right: 2rem;
-            position: relative;
-            text-align: left;
-            text-decoration: none;
-            transition: box-shadow .15s,transform .15s;
-            -webkit-user-select: none;
-            user-select: none;
-            touch-action: manipulation;
-            white-space: nowrap;
-            will-change: box-shadow,transform;
-            font-size: 1.5rem;
-        }
-
-        .modal-clear-btn:focus {
-            box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-        }
-
-        .modal-clear-btn:hover {
-            box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-            transform: translateY(-2px);
-        }
-
-        .modal-clear-btn:active {
-            box-shadow: #D6D6E7 0 3px 7px inset;
-            transform: translateY(2px);
-        }
-
-        .modal-enter-btn {
-            align-items: center;
-            appearance: none;
-            background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
-            border: 0;
-            border-radius: 6px;
-            box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
-            box-sizing: border-box;
-            color: #fff;
-            cursor: pointer;
-            display: inline-flex;
-            font-family: 'Cormorant', sans-serif;
-            height: 48px;
-            justify-content: center;
-            line-height: 1;
-            list-style: none;
-            overflow: hidden;
-            padding-left: 2rem;
-            padding-right: 2rem;
-            position: relative;
-            text-align: left;
-            text-decoration: none;
-            transition: box-shadow .15s,transform .15s;
-            -webkit-user-select: none;
-            user-select: none;
-            touch-action: manipulation;
-            white-space: nowrap;
-            will-change: box-shadow,transform;
-            font-size: 1.6rem;
-        }
-
-        .modal-enter-btn:focus {
-            box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
-        }
-
-        .modal-enter-btn:hover {
-            box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
-            transform: translateY(-2px);
-        }
-
-        .modal-enter-btn:active {
-            box-shadow: #3c4fe0 0 3px 7px inset;
-            transform: translateY(2px);
-        }
-
-
-        /* Centered modal styling */
-        .weekly-timetable-modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-            background: white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.4);
-            padding: 20px;
-            /*display: flex;*/
-            display: none;
-        }
-
-        /* Optional overlay style (for dim effect) */
-        .modal-overlay {
-            content: "";
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.3);
-            z-index: 9998;
-        }
-
-        /* Modal Close Button */
-
-        .weekly-timetable-modal .close-modal-button{
-            position: absolute;
-            right: -4%;
-            top: -10%;
-            z-index: 10;
-            background-color: #fff;
-            border-radius: 4em;
-            height: 4em;
-            width: 4em;
-            -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            -moz-box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
-
-        .weekly-timetable-modal .close-modal-button:before{
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            /*font-family: fontAwesome;*/
-            /*content: "\f00d";*/
-            font-family:'Open Sans', sans-serif;
-            content: "X";
-            color: #000;
-            font-size: 2.7em;
-            transform: translate(-50%, -50%);
-        }
-
-        .weekly-timetable-modal .close-modal-button:hover:before{
-            color: #ba3242;
-            -webkit-transition: background 350ms cubic-bezier(0.42, 0, 0.58, 1) 10ms, all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
-            -moz-transition: background 350ms cubic-bezier(0.42, 0, 0.58, 1) 10ms, all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
-            -o-transition: background 350ms cubic-bezier(0.42, 0, 0.58, 1) 10ms, all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
-            transition: background 350ms cubic-bezier(0.42, 0, 0.58, 1) 10ms, all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
-            -webkit-transform: translate(-55%, -48%) rotate(-0.25turn);
-            transform: translate(-55%, -48%) rotate(-0.25turn); /*Had to bump it b/c the dimensions are not square*/
-        }
-
     </style>
 </head>
 <body>
@@ -1316,6 +1087,7 @@
                             <div class="text-area">
                                 <p class="day-one-breakfast">Oats topped with raspberries and blueberries, served alongside a glass of orange juice.</p>
                             </div>
+                            
                         </div>
 
                         <div class="lunch-section meal-type" id="day-one-lunch-section" data-title="Lunch">
@@ -1579,7 +1351,7 @@
 
             <div id="familyWeeklyPlanCard" class="family-weekly-plan-card-container">
                 <div class="family-weekly-plan-card">
-                    <table id="weekly-timetable-content">
+                    <table>
                         <tbody>
                             <tr>
                                 <td rowspan="2">
@@ -1600,22 +1372,15 @@
                                     </div>
                                 </td>
                             </tr>
-
                             <tr>
                                 <th>Breakfast</th>
                                 <th>Lunch</th>
                                 <th>Snacks</th>
                                 <th>Dinner</th>
                             </tr>
-
-                            <!-- Add rows for each day -->
-                            <tr>
-                                <td colspan="5" class="header-body-row-spacer"></td>
-                            </tr>
-
                             <!-- Add rows for each day -->
                             <tr id="day-1">
-                                <td class="date-cell">
+                                <td>
                                     <div class="date-container">
                                         <div class="day-name day-one-name">Tuesday</div>
                                         <div class="day-month day-one-date">01 April</div>
@@ -1626,13 +1391,8 @@
                                 <td class="meals day-one-snacks">Granola Bars</td>
                                 <td class="meals day-one-dinner">Ham Sandwich</td>
                             </tr>
-
-                            <tr>
-                                <td colspan="5" class="row-spacer"></td>
-                            </tr>
-
                             <tr id="day-2">
-                                <td class="date-cell">
+                                <td>
                                     <div class="date-container">
                                         <div class="day-name day-two-name">Wednesday</div>
                                         <div class="day-month day-two-date">02 April</div>
@@ -1643,13 +1403,8 @@
                                 <td class="meals day-two-snacks">Apple slices with peanut butter</td>
                                 <td class="meals day-two-dinner">Baked salmon with quinoa and steamed broccoli</td>
                             </tr>
-
-                            <tr>
-                                <td colspan="5" class="row-spacer"></td>
-                            </tr>
-
                             <tr id="day-3">
-                                <td class="date-cell">
+                                <td>
                                     <div class="date-container">
                                         <div class="day-name day-three-name">
                                             Thursday
@@ -1664,13 +1419,8 @@
                                 <td class="meals day-three-snacks">A handful of mixed nuts</td>
                                 <td class="meals day-three-dinner">Turkey stir-fry with brown rice and mixed vegetables</td>
                             </tr>
-
-                            <tr>
-                                <td colspan="5" class="row-spacer"></td>
-                            </tr>
-
                             <tr id="day-4">
-                                <td class="date-cell">
+                                <td>
                                     <div class="date-container">
                                         <div class="day-name day-four-name">
                                             Friday
@@ -1685,13 +1435,8 @@
                                 <td class="meals day-four-snacks">Carrot sticks with hummus</td>
                                 <td class="meals day-four-dinner">Grilled tilapia with sweet potato mash and green beans</td>
                             </tr>
-
-                            <tr>
-                                <td colspan="5" class="row-spacer"></td>
-                            </tr>
-
                             <tr id="day-5">
-                                <td class="date-cell">
+                                <td>
                                     <div class="date-container">
                                         <div class="day-name day-five-name">
                                             Saturday
@@ -1706,13 +1451,8 @@
                                 <td class="meals day-five-snacks">Cottage cheese with pineapple</td>
                                 <td class="meals day-five-dinner">Chicken curry with basmati rice and steamed peas</td>
                             </tr>
-
-                            <tr>
-                                <td colspan="5" class="row-spacer"></td>
-                            </tr>
-
                             <tr id="day-6">
-                                <td class="date-cell">
+                                <td>
                                     <div class="date-container">
                                         <div class="day-name day-six-name">
                                             Sunday
@@ -1727,13 +1467,8 @@
                                 <td class="meals day-six-snacks">Orange slices or a small fruit salad</td>
                                 <td class="meals day-six-dinner">Veggie lasagna with a side garden salad</td>
                             </tr>
-
-                            <tr>
-                                <td colspan="5" class="row-spacer"></td>
-                            </tr>
-
                             <tr id="day-7">
-                                <td class="date-cell">
+                                <td>
                                     <div class="date-container">
                                         <div class="day-name day-seven-name">
                                             Monday
@@ -1748,11 +1483,6 @@
                                 <td class="meals day-seven-snacks">Greek yogurt and a handful of trail mix</td>
                                 <td class="meals day-seven-dinner">Baked chicken thighs with roasted potatoes and asparagus</td>
                             </tr>
-
-                            <tr>
-                                <td colspan="5" class="row-spacer"></td>
-                            </tr>
-
                         </tbody>
                     </table>
 
@@ -1767,36 +1497,6 @@
                             </div>
                         </div>
                         <input type="date" id="start-date" onchange="updateStartDate()">
-                    </div>
-
-                    <!--Modal Pop Up-->
-                    <div class="weekly-timetable-modal" id="weekly-timetable-modal">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th class="style-preserver-cell"></th>
-                                    <th class="modal-header">Breakfast</th>
-                                    <tr>
-                                        <td class="date-cell">
-                                            <div class="date-container">
-                                                <div class="day-name day-one-name">Tuesday</div>
-                                                <div class="day-month day-one-date">01 April</div>
-                                            </div>
-                                        </td>
-                                        <td class="modal-meal meals day-one-breakfast">Oats topped with raspberries and blueberries</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="modal-popUp-btns" colspan="2">
-                                            <div class="clear-enter-btns">
-                                                <button class="modal-clear-btn" role="button">Clear</button>
-                                                <button class="modal-enter-btn" role="button">Enter</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <a class="close-modal-button"></a> 
                     </div>
 
                 </div>
