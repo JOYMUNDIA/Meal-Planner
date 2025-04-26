@@ -73,11 +73,12 @@
         #sidebar {
         position: fixed;
         top: 0;
-        left: -250px;
+        left: -300px;
         width: 250px;
         height: 100%;
         background-color: #e0e5ec;
         box-shadow: 10px 10px 20px #bebebe, -10px -10px 20px #ffffff;
+        transition: left 0.5s ease-in-out;
         padding: 1rem;
         transition: left 0.3s ease;
         z-index: 1000;
@@ -111,166 +112,24 @@
         }
         }
 
-        /* FAMILY MEAL PLAN TABLE CSS */
-        .family-weekly-plan-card table {
-        width: 95%;
-        background-color: rgba(255, 255, 255, 0.55);
-        box-shadow: rgba(9, 30, 66, 0.432) 0px 1px 1px, rgba(9, 30, 66, 0.247) 0px 0px 1px 1px;
-        border-spacing: 1.2rem 1rem;
+        #backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 900;
         }
 
-        .family-weekly-plan-card table, td, th {
-        font-size: 120%;
+        #backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
         }
-
-        .family-weekly-plan-card td, th {
-        padding: 1%;
-        width: auto;
-        height: auto;
-        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-        }
-
-        @media screen and (max-width: 662px) {
-        .family-weekly-plan-card table, td, th {
-            font-size: 100%;
-        }
-        }
-
-        @media screen and (max-width: 476px) {
-        .family-weekly-plan-card table, td, th {
-            font-size: 95%;
-        }
-        }
-
-        @media screen and (max-width: 439px) {
-        .family-weekly-plan-card table, td, th {
-            font-size: 90%;
-        }
-        }
-
-        .family-weekly-plan-card table .row-spacer,
-        .family-weekly-plan-card table .header-body-row-spacer {
-        border: none;
-        box-shadow: none;
-        }
-
-        .family-weekly-plan-card table .row-spacer {
-        padding: 0.5rem;
-        }
-
-        .family-weekly-plan-card table .header-body-row-spacer {
-        padding: 0.2rem;
-        }
-
-        .family-weekly-plan-card table th {
-        background-image: url('images/family-plan-background.jpg');
-        background-size: cover;
-        color: #ffffff;
-        }
-
-        .family-weekly-plan-card table .style-preserver-cell {
-        background-image: none;
-        box-shadow: none;
-        }
-
-        .family-weekly-plan-card table .date-cell {
-        background-image: linear-gradient(163.3deg, #f5f5f5 11.54%, #d8d8d8c9 90.45%);
-        }
-
-        .family-weekly-plan-card table .plan-header {
-        margin-top: 0.2rem;
-        color: black;
-        font-size: 2.5vw;
-        font-family: 'Mea Culpa', 'Roboto', sans-serif;
-        font-weight: 550;
-        }
-
-        .family-weekly-plan-card table .user-edit-guide {
-        margin-top: 0.9rem;
-        font-size: 1.15rem;
-        color: rgba(48, 48, 48, 0.959);
-        }
-
-        @media screen and (max-width: 768px) {
-        .family-weekly-plan-card table .plan-header {
-            font-size: 5vw;
-        }
-        }
-
-        .family-weekly-plan-card .actual-start-end-date {
-        text-align: center;
-        }
-
-        .family-weekly-plan-card .date-container,
-        .family-weekly-plan-card .deeds-meta-header,
-        .family-weekly-plan-card .deeds-meta-header .start-end-date,
-        .family-weekly-plan-card .deeds-meta-header .calendar-image,
-        .family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        }
-
-        .family-weekly-plan-card .date-container,
-        .family-weekly-plan-card .deeds-meta-header {
-        gap: 2%;
-        width: 100%;
-        position: relative;
-        }
-
-        @media screen and (max-width: 768px) {
-        .family-weekly-plan-card .deeds-meta-header {
-            flex-direction: column;
-        }
-        }
-
-        .family-weekly-plan-card .deeds-meta-header .start-end-date {
-        width: 90%;
-        padding: 0.5rem;
-        font-size: 140%;
-        }
-
-        .family-weekly-plan-card .deeds-meta-header .calendar-image {
-        width: 6rem;
-        padding: 0.5rem;
-        }
-
-        .family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container {
-        width: 90%;
-        padding: 0.5rem;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-                    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-                    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-        cursor: pointer;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container:hover {
-        transform: translateY(-0.5rem);
-        box-shadow: rgba(50, 50, 93, 0.4) 0px 6.25rem 12.5rem -2.5rem,
-                    rgba(0, 0, 0, 0.4) 0px 3.75rem 7.5rem -3.75rem,
-                    rgba(10, 37, 64, 0.4) 0px -0.25rem 0.625rem 0px inset;
-        }
-
-        .family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container img {
-        width: 50%;
-        }
-
-        .family-weekly-plan-card .date-container {
-        flex-direction: column;
-        text-align: left;
-        }
-
-        .family-weekly-plan-card .date-container .day-month {
-        font-size: 1.15rem;
-        color: #303030b7;
-        }
-
-        @media screen and (max-width: 522px) {
-        .family-weekly-plan-card .date-container .day-month {
-            font-size: 3.5vw;
-        }
-        }
+        
     </style>
     </head>
     <body>
@@ -280,6 +139,9 @@
         <button class="close-btn" onclick="toggleSidebar()">✕</button>
         <p>Navigation goes here...</p>
     </div>
+
+    <div id="backdrop" onclick="toggleSidebar()"></div>
+
 
     <!-- Header -->
     <header class="clay">
@@ -311,9 +173,13 @@
 
     <script>
         function toggleSidebar() {
-        document.getElementById("sidebar").classList.toggle("active");
+            const sidebar = document.getElementById("sidebar");
+            const backdrop = document.getElementById("backdrop");
+            sidebar.classList.toggle("active");
+            backdrop.classList.toggle("active");
         }
     </script>
+    
     <script src="script.js"></script>
     </body>
     </html>
