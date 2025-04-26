@@ -59,6 +59,7 @@
             justify-content: center;
             align-items: center;
             padding: 1.5rem 1rem;
+            z-index: 11;
         }
 
         .family-plan-parent-container .layout-header .radio-inputs {
@@ -78,9 +79,14 @@
         }
 
         .family-plan-parent-container .layout-header .radio-inputs .radio {
+            pointer-events: auto;
+        }
+
+        .family-plan-parent-container .layout-header .radio-inputs .radio {
             flex: 1 1 auto;
             text-align: center;
             position: relative;
+            z-index: 12;
         }
 
         .family-plan-parent-container .layout-header .radio-inputs .radio input {
@@ -96,8 +102,9 @@
             border: none;
             padding: 0.7rem 0;
             color: #2d3748;
+            font-size: 1.35rem;
             font-weight: 500;
-            font-family: inherit;
+            font-family: 'Cormorant', sans-serif;
             background: linear-gradient(145deg, #ffffff, #e6e6e6);
             box-shadow:
                 3px 3px 6px rgba(0, 0, 0, 0.1),
@@ -1271,11 +1278,11 @@
 
             <div class="layout-header">
                 <div class="radio-inputs">
-                    <label class="radio">
+                    <label class="radio" for="dailyMealPlan">
                         <input id="dailyMealPlan" checked="" name="radio" type="radio" />
                         <span class="name">Day Meal Plan</span>
                     </label>
-                    <label class="radio">
+                    <label class="radio" for="weeklyMealPlan">
                         <input id="weeklyMealPlan" name="radio" type="radio" />
                         <span class="name">Week Meal Plan</span>
                     </label>
