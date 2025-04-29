@@ -1524,7 +1524,8 @@ footer .button:hover .inner::before {
     align-items: center;
 }
 
-.family-plan-parent-container .layout-header{
+.family-plan-parent-container .layout-header,
+.school-lunch-plan-parent-container .layout-header{
     width: 90%;
     display: flex;
     justify-content: center;
@@ -1533,7 +1534,8 @@ footer .button:hover .inner::before {
     z-index: 11;
 }
 
-.family-plan-parent-container .layout-header .radio-inputs {
+.family-plan-parent-container .layout-header .radio-inputs,
+.school-lunch-plan-parent-container .layout-header .radio-inputs {
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -1549,22 +1551,26 @@ footer .button:hover .inner::before {
     gap: 0.5rem;
 }
 
-.family-plan-parent-container .layout-header .radio-inputs .radio {
+.family-plan-parent-container .layout-header .radio-inputs .radio,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio {
     pointer-events: auto;
 }
 
-.family-plan-parent-container .layout-header .radio-inputs .radio {
+.family-plan-parent-container .layout-header .radio-inputs .radio,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio {
     flex: 1 1 auto;
     text-align: center;
     position: relative;
     z-index: 12;
 }
 
-.family-plan-parent-container .layout-header .radio-inputs .radio input {
+.family-plan-parent-container .layout-header .radio-inputs .radio input,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio input {
     display: none;
 }
 
-.family-plan-parent-container .layout-header .radio-inputs .radio .name {
+.family-plan-parent-container .layout-header .radio-inputs .radio .name,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio .name {
     display: flex;
     cursor: pointer;
     align-items: center;
@@ -1584,7 +1590,8 @@ footer .button:hover .inner::before {
     overflow: hidden;
 }
 
-.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name {
+.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name{
     /*background: linear-gradient(145deg, #3b82f6, #2563eb);*/
     background-image: url('images/family-plan-background.jpg');
     color: white;
@@ -1598,7 +1605,8 @@ footer .button:hover .inner::before {
 }
 
 /* Hover effect */
-.family-plan-parent-container .layout-header .radio-inputs .radio:hover .name {
+.family-plan-parent-container .layout-header .radio-inputs .radio:hover .name,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio:hover .name {
     background: linear-gradient(145deg, #f0f0f0, #ffffff);
     transform: translateY(-1px);
     box-shadow:
@@ -1606,18 +1614,22 @@ footer .button:hover .inner::before {
         -4px -4px 8px rgba(255, 255, 255, 0.8);
 }
 
-.family-plan-parent-container .layout-header .radio-inputs .radio:hover input:checked + .name {
+.family-plan-parent-container .layout-header .radio-inputs .radio:hover input:checked + .name,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio:hover input:checked + .name {
     transform: translateY(1px);
 }
 
 /* Animation */
-.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name {
+.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name {
     animation: select 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Particles */
 .family-plan-parent-container .layout-header .radio-inputs .radio .name::before,
-.family-plan-parent-container .layout-header .radio-inputs .radio .name::after {
+.family-plan-parent-container .layout-header .radio-inputs .radio .name::after,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio .name::before,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio .name::after{
     content: "";
     position: absolute;
     width: 6px;
@@ -1628,11 +1640,14 @@ footer .button:hover .inner::before {
 }
 
 .family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::before,
-.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::after {
+.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::after,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::before,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::after {
     animation: particles 0.8s ease-out forwards;
 }
 
-.family-plan-parent-container .layout-header .radio-inputs .radio .name::before {
+.family-plan-parent-container .layout-header .radio-inputs .radio .name::before,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio .name::before {
     background: #60a5fa;
     box-shadow: 0 0 6px #60a5fa;
     top: -10px;
@@ -1640,7 +1655,8 @@ footer .button:hover .inner::before {
     transform: translateX(-50%);
 }
 
-.family-plan-parent-container .layout-header .radio-inputs .radio .name::after {
+.family-plan-parent-container .layout-header .radio-inputs .radio .name::after,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio .name::after {
     background: #93c5fd;
     box-shadow: 0 0 8px #93c5fd;
     bottom: -10px;
@@ -1649,7 +1665,8 @@ footer .button:hover .inner::before {
 }
 
 /* Sparkles */
-.family-plan-parent-container .layout-header .radio-inputs .radio .name::after {
+.family-plan-parent-container .layout-header .radio-inputs .radio .name::after,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio .name::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -1663,17 +1680,20 @@ footer .button:hover .inner::before {
     transition: opacity 0.3s;
 }
 
-.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::after {
+.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::after,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::after {
     opacity: 1;
     animation: sparkle-bg 1s ease-out forwards;
 }
 
 /* Multiple particles */
-.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name {
+.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name {
     overflow: visible;
 }
 
-.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::before {
+.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::before,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::before {
     box-shadow:
         0 0 6px #60a5fa,
         10px -10px 0 #60a5fa,
@@ -1681,7 +1701,8 @@ footer .button:hover .inner::before {
     animation: multi-particles-top 0.8s ease-out forwards;
 }
 
-.family-plan-parent-container .layout-header .radio-inputs .family-plan-parent-container .layout-header .radio input:checked + .name::after {
+.family-plan-parent-container .layout-header .radio input:checked + .name::after,
+.school-lunch-plan-parent-container .layout-header .radio input:checked + .name::after {
     box-shadow:
         0 0 8px #93c5fd,
         10px 10px 0 #93c5fd,
@@ -1752,7 +1773,8 @@ footer .button:hover .inner::before {
 }
 
 /* Ripple effect */
-.family-plan-parent-container .layout-header .radio-inputs .radio .name::before {
+.family-plan-parent-container .layout-header .radio-inputs .radio .name::before,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio .name::before{
     content: "";
     position: absolute;
     inset: 0;
@@ -1766,7 +1788,8 @@ footer .button:hover .inner::before {
     transition: opacity 0.3s;
 }
 
-.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::before {
+.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::before,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::before {
     animation: ripple 0.8s ease-out;
 }
 
@@ -1785,11 +1808,13 @@ footer .button:hover .inner::before {
 }
 
 /* Glowing border */
-.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name {
+.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name {
     position: relative;
 }
 
-.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::after {
+.family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::after,
+.school-lunch-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::after {
     content: "";
     position: absolute;
     inset: -2px;
@@ -1821,7 +1846,7 @@ footer .button:hover .inner::before {
 
 /* Default state for all sections */
 .family-plan-card-container,
-.family-weekly-plan-card-container {
+.family-weekly-plan-card-container{
     display: none;  /* Initially hidden */
     opacity: 0;  /* Make them invisible */
     visibility: hidden; /* Ensure they are hidden from interaction */
@@ -1830,12 +1855,15 @@ footer .button:hover .inner::before {
 
 /* Specific layout styles */
 .family-plan-card-container.flex,
-.family-weekly-plan-card-container.flex {
+.family-weekly-plan-card-container.flex,
+.school-lunch-plan-card-container.flex,
+.school-lunch-weekly-plan-card-container.flex {
     opacity: 1;  /* Fully visible */
     visibility: visible;  /* Ensure they are interactable */
 }
 
-.family-plan-card-container.flex {
+.family-plan-card-container.flex,
+.school-lunch-plan-card-container.flex {
     display: flex;
 }
 
@@ -2088,6 +2116,13 @@ footer .button:hover .inner::before {
     padding: 1rem;
 }
 
+.family-plan-card .day-view-user-guide{
+    color: white;
+    font-size: 1.25rem;
+    margin-top: -1rem;
+    padding-bottom: 1rem;
+}
+
 .family-plan-card .meal-sections {
     position: relative;
     width: 100%;
@@ -2188,11 +2223,13 @@ footer .button:hover .inner::before {
 }
 
 /* Weekly Plan Css */
-.family-weekly-plan-card-container.flex{
+.family-weekly-plan-card-container.flex,
+.school-lunch-weekly-plan-card-container.flex{
     display: flex;
 }
 
-.family-weekly-plan-card-container{
+.family-weekly-plan-card-container,
+.school-lunch-weekly-plan-card-container{
     width: 98%;
     position: relative;
     padding: 1rem;
@@ -2202,7 +2239,8 @@ footer .button:hover .inner::before {
     align-items: center;
 }
 
-.family-weekly-plan-card {
+.family-weekly-plan-card,
+.school-lunch-weekly-plan-card {
     width: 98%;
     position: relative;
     padding: 1rem;
@@ -2215,29 +2253,34 @@ footer .button:hover .inner::before {
 }
 
 @media screen and (max-width: 768px) {
-    .family-weekly-plan-card-container {
+    .family-weekly-plan-card-container,
+    .school-lunch-weekly-plan-card-container {
         padding: 2rem;
     }
 
-    .family-weekly-plan-card {
+    .family-weekly-plan-card,
+    .school-lunch-weekly-plan-card {
         width: 90%;
     }
 }
 
-.family-weekly-plan-card table{
+.family-weekly-plan-card table,
+.school-lunch-weekly-plan-card table{
     width: 95%;
     background-color: rgba(255, 255, 255, 0.55);
     box-shadow: rgba(9, 30, 66, 0.432) 0px 1px 1px, rgba(9, 30, 66, 0.247) 0px 0px 1px 1px;
     border-spacing: 1.2rem 1rem;
 }
 
-.family-weekly-plan-card table , td, th {
+.family-weekly-plan-card table , td, th,
+.school-lunch-weekly-plan-card table , td, th {
     /*border: 1px solid #595959;*/
     /*border-collapse: collapse;*/
     font-size: 120%;
 }
 
-.family-weekly-plan-card td, th {
+.family-weekly-plan-card td, th,
+.school-lunch-weekly-plan-card td, th {
     padding: 1%;
     width: auto;
     height: auto;
@@ -2267,36 +2310,44 @@ footer .button:hover .inner::before {
 }
 
 .family-weekly-plan-card table .row-spacer,
-.family-weekly-plan-card table .header-body-row-spacer{
+.family-weekly-plan-card table .header-body-row-spacer,
+.school-lunch-weekly-plan-card table .row-spacer,
+.school-lunch-weekly-plan-card table .header-body-row-spacer{
     border: none;
     box-shadow: none;
 }
 
-.family-weekly-plan-card table .row-spacer{
+.family-weekly-plan-card table .row-spacer,
+.school-lunch-weekly-plan-card table .row-spacer{
     padding: 0.5rem;
 }
 
-.family-weekly-plan-card table .header-body-row-spacer{
+.family-weekly-plan-card table .header-body-row-spacer,
+.school-lunch-weekly-plan-card table .header-body-row-spacer{
     padding: 0.2rem;
 }
 
-.family-weekly-plan-card table th {
+.family-weekly-plan-card table th,
+.school-lunch-weekly-plan-card table th {
     /*background: #f0e6cc;*/
     background-image: url('images/family-plan-background.jpg');
     background-size: cover;
     color: #ffffff;
 }
 
-.family-weekly-plan-card table .style-preserver-cell{
+.family-weekly-plan-card table .style-preserver-cell,
+.school-lunch-weekly-plan-card table .style-preserver-cell{
     background-image: none;
     box-shadow: none;
 }
 
-.family-weekly-plan-card table .date-cell{
+.family-weekly-plan-card table .date-cell,
+.school-lunch-weekly-plan-card table .date-cell{
     background-image: linear-gradient(163.3deg, #f5f5f5 11.54%, #d8d8d8c9 90.45%);
 }
 
-.family-weekly-plan-card table .plan-header{
+.family-weekly-plan-card table .plan-header,
+.school-lunch-weekly-plan-card table .plan-header{
     margin-top: 0.2rem;
     color: black;
     font-size: 2.5vw;
@@ -2304,19 +2355,22 @@ footer .button:hover .inner::before {
     font-weight: 550;
 }
 
-.family-weekly-plan-card table .user-edit-guide{
+.family-weekly-plan-card table .user-edit-guide,
+.school-lunch-weekly-plan-card table .user-edit-guide{
     margin-top: 0.9rem;
     font-size: 1.15rem;
     color: rgba(48, 48, 48, 0.959);
 }
 
 @media screen and (max-width: 768px) {
-    .family-weekly-plan-card table .plan-header{
+    .family-weekly-plan-card table .plan-header,
+    .school-lunch-weekly-plan-card table .plan-header{
         font-size: 5vw;
     }
 }
 
-.family-weekly-plan-card .actual-start-end-date{
+.family-weekly-plan-card .actual-start-end-date,
+.school-lunch-weekly-plan-card .actual-start-end-date{
     text-align: center;
 }
 
@@ -2324,39 +2378,50 @@ footer .button:hover .inner::before {
 .family-weekly-plan-card .deeds-meta-header,
 .family-weekly-plan-card .deeds-meta-header .start-end-date,
 .family-weekly-plan-card .deeds-meta-header .calendar-image,
-.family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container{
+.family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container,
+.school-lunch-weekly-plan-card .date-container,
+.school-lunch-weekly-plan-card .deeds-meta-header,
+.school-lunch-weekly-plan-card .deeds-meta-header .start-end-date,
+.school-lunch-weekly-plan-card .deeds-meta-header .calendar-image,
+.school-lunch-weekly-plan-card .deeds-meta-header .calendar-image .icon-container{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .family-weekly-plan-card .date-container,
-.family-weekly-plan-card .deeds-meta-header{
+.family-weekly-plan-card .deeds-meta-header,
+.school-lunch-weekly-plan-card .date-container,
+.school-lunch-weekly-plan-card .deeds-meta-header{
     gap: 2%;
     width: 100%;
     position: relative;
 }
 
 @media screen and (max-width: 768px) {
-    .family-weekly-plan-card .deeds-meta-header{
+    .family-weekly-plan-card .deeds-meta-header,
+    .school-lunch-weekly-plan-card .deeds-meta-header{
         flex-direction: column;
     }
 }
 
-.family-weekly-plan-card .deeds-meta-header .start-end-date{
+.family-weekly-plan-card .deeds-meta-header .start-end-date,
+.school-lunch-weekly-plan-card .deeds-meta-header .start-end-date{
     width: 90%;
     padding: 0.5rem;
     position: relative;
     font-size: 140%;
 }
 
-.family-weekly-plan-card .deeds-meta-header .calendar-image{
+.family-weekly-plan-card .deeds-meta-header .calendar-image,
+.school-lunch-weekly-plan-card .deeds-meta-header .calendar-image{
     position: relative;
     width: 6rem;
     padding: 0.5rem;
 }
 
-.family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container{
+.family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container,
+.school-lunch-weekly-plan-card .deeds-meta-header .calendar-image .icon-container{
     width: 90%;
     padding: 0.5rem;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
@@ -2366,29 +2431,34 @@ footer .button:hover .inner::before {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container:hover{
+.family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container:hover,
+.school-lunch-weekly-plan-card .deeds-meta-header .calendar-image .icon-container:hover{
     transform: translateY(-0.5rem); /* Lift by 8px */
     box-shadow: rgba(50, 50, 93, 0.4) 0px 6.25rem 12.5rem -2.5rem,
                 rgba(0, 0, 0, 0.4) 0px 3.75rem 7.5rem -3.75rem,
                 rgba(10, 37, 64, 0.4) 0px -0.25rem 0.625rem 0px inset;
 }
 
-.family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container img{
+.family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container img,
+.school-lunch-weekly-plan-card .deeds-meta-header .calendar-image .icon-container img{
     width: 50%;
 }
 
-.family-weekly-plan-card .date-container{
+.family-weekly-plan-card .date-container,
+.school-lunch-weekly-plan-card .date-container{
     flex-direction: column;
     text-align: left;
 }
 
-.family-weekly-plan-card .date-container .day-month{
+.family-weekly-plan-card .date-container .day-month,
+.school-lunch-weekly-plan-card .date-container .day-month{
     font-size: 1.15rem;
     color: #303030b7;
 }
 
 @media screen and (max-width: 522px) {
-    .family-weekly-plan-card .date-container .day-month{
+    .family-weekly-plan-card .date-container .day-month,
+    .school-lunch-weekly-plan-card .date-container .day-month{
         font-size: 3.5vw;
     }
 }
@@ -2679,4 +2749,778 @@ footer .button:hover .inner::before {
     transition: background 350ms cubic-bezier(0.42, 0, 0.58, 1) 10ms, all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
     -webkit-transform: translate(-55%, -48%) rotate(-0.25turn);
     transform: translate(-55%, -48%) rotate(-0.25turn); /*Had to bump it b/c the dimensions are not square*/
+}
+
+/* School Meal Plan Css */
+.school-lunch-plan-parent-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.school-lunch-plan-card-container {
+    width: 100%;
+    min-height: 100vh;
+    /*display: flex;*/
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+    overflow-x: hidden;
+}
+
+.school-lunch-plan-card {
+    width: 88%;
+    position: relative;
+    padding: 1rem;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+    .school-lunch-plan-card-container {
+        padding: 2rem;
+    }
+
+    .school-lunch-plan-card {
+        width: 80%;
+    }
+}
+
+.school-lunch-plan-card .image-container,
+.school-lunch-plan-card .text-container{
+    position: relative;
+    width: 100%;
+}
+
+.school-lunch-plan-card .image-container{
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(images/gray-abstract-wireframe-technolo.jpg);
+    background-size: cover;
+    position: relative; /* For absolute positioning of Bento Lunchbox and School Bag */
+}
+
+.school-lunch-plan-card .image-container .header{
+    height: 15%;
+    font-family: 'Mea Culpa', 'Cormorant', sans-serif;
+    font-weight: 400;
+    font-size: 4rem;
+    padding: 1rem;
+}
+
+.school-lunch-plan-card .image-container .header .Day-view-user-guide{
+    font-family:'Cormorant', sans-serif;
+    font-weight: 300;
+    font-size: 1.4rem;
+}
+
+.school-lunch-plan-card .image-container img{
+    width: 15%;
+    aspect-ratio: 1/1;
+}
+
+/* Bento Lunchbox positioned at the top-left corner and made larger */
+.school-lunch-plan-card .image-container .circle-img{
+    position: absolute;
+    top: -45px; /* Moves Bento Lunchbox slightly off the top */
+    left: -45px; /* Moves Bento Lunchbox slightly off the left */
+    width: 20vw;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 3px solid grey;
+    object-fit: cover;
+    z-index: 2; /* Ensures it's above the background image */
+}
+
+/* Main Body Css */
+
+.school-lunch-plan-card .text-container{
+    height: 80%;
+    padding: 1rem;
+    width: 90%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.school-lunch-plan-card .text-container .day-selector-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    position: relative;
+    left: 5%;
+}
+
+/* Default state for all sections */
+.school-lunch-plan-card .text-container .meal-sections,
+/*.school-lunch-plan-card .text-container .break-system,*/
+.school-lunch-plan-card .text-container .meal-categories {
+display: none;  /* Initially hidden */
+opacity: 0;  /* Make them invisible */
+visibility: hidden; /* Ensure they are hidden from interaction */
+transition: opacity 0.5s ease, visibility 0.5s ease; /* Smooth fade transition */
+}
+
+/* Specific layout styles */
+.school-lunch-plan-card .text-container .meal-sections.flex,
+.school-lunch-plan-card .text-container .break-system.flex,
+.school-lunch-plan-card .text-container .meal-categories.grid {
+    opacity: 1;  /* Fully visible */
+    visibility: visible;  /* Ensure they are interactable */
+}
+
+.school-lunch-plan-card .text-container .layout-selection{
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.school-lunch-plan-card .text-container .layout-selection .selection-question{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 1.3rem;
+}
+
+.school-lunch-plan-card .text-container .layout-selection .layout-options{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 0.5rem;
+}
+
+/* Layout Selection Radio Button */
+                
+.meal-selection-layout-radio-btn label {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    min-width: 140px;
+    justify-content: space-between;
+    padding: 11px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 0 0 1px #d8dee4;
+    transition: all 0.2s ease;
+    font-size: 1.2rem;
+}
+                    
+.meal-selection-layout-radio-btn label:not(:has(input:disabled)):hover {
+    background: #f5f6f8;
+}
+                    
+.meal-selection-layout-radio-btn label:has(input:disabled) {
+    opacity: .8;
+    cursor: not-allowed;
+    background: #f5f6f8;
+}
+                    
+.meal-selection-layout-radio-btn label:has(input:checked) {
+    box-shadow: 0 0 0 1.5px rgb(37 99 235), 0 0 0 1px #d8dee4;
+}
+                    
+.meal-selection-layout-radio-btn label:has(input:focus) {
+    box-shadow: 0 0 0 1.5px rgb(37 99 235), 0 0 0 4px rgb(191 219 254), 0 0 0 1px #d8dee4;
+}
+                    
+.meal-selection-layout-radio-btn label .inputAndLeftText {
+    display: flex;
+    gap: .75em;
+}
+                    
+.meal-selection-layout-radio-btn label .inputAndLeftText div {
+    color: rgb(55 65 81);
+    line-height: 1.25rem;
+    display: flex;
+    flex-direction: column;
+}
+                    
+.meal-selection-layout-radio-btn label .title {
+    font-weight: 600;
+}
+                    
+.meal-selection-layout-radio-btn label .desc {
+    color: rgb(94, 99, 109);
+    font-size: 1.1rem;
+}
+                    
+.meal-selection-layout-radio-btn input {
+    color: rgb(37 99 235);
+}
+                    
+.meal-selection-layout-radio-btn input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    display: inline-block;
+    vertical-align: middle;
+    background-origin: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+                    
+    border: 1px solid rgb(209 213 219);
+                    
+    box-shadow: 0 1px 2px 0 #0000000d;
+    border-radius: 9999px;
+    width: 1rem;
+    height: 1rem;
+                    
+    margin: 2px 0 0;
+}
+                    
+.meal-selection-layout-radio-btn input:checked {
+    border-color: #0000;
+    background-color: currentColor;
+    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTYgMTYiIGZpbGw9IiNmZmYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iOCIgY3k9IjgiIHI9IjMiLz48L3N2Zz4=);
+}
+                    
+.meal-selection-layout-radio-btn input:focus {
+    box-shadow: 0 0 0 3px rgb(191 219 254), 0 1px 2px 0 #0000000d;
+}
+                    
+.meal-selection-layout-radio-btn input:disabled{
+    color: rgb(156 163 175);
+}
+
+/* General Menu Layout Css */
+
+.school-lunch-plan-card .meal-sections.flex {
+    display: flex;
+}
+
+.school-lunch-plan-card .meal-sections {
+    position: relative;
+    width: 100%;
+    padding: 3rem 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+}
+
+.school-lunch-plan-card .meal-sections .appetizer,
+.school-lunch-plan-card .meal-sections .main-course,
+.school-lunch-plan-card .meal-sections .laitage,
+.school-lunch-plan-card .meal-sections .dessert,
+.school-lunch-plan-card .meal-sections .snacks {
+    width: 90%;
+    min-height: 10rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 3.125rem 6.25rem -1.25rem,
+                rgba(0, 0, 0, 0.3) 0px 1.875rem 3.75rem -1.875rem,
+                rgba(10, 37, 64, 0.35) 0px -0.125rem 0.375rem 0px inset;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Position text closer to the top boundary */
+.school-lunch-plan-card .meal-sections .appetizer::before,
+.school-lunch-plan-card .meal-sections .main-course::before,
+.school-lunch-plan-card .meal-sections .laitage::before,
+.school-lunch-plan-card .meal-sections .dessert::before,
+.school-lunch-plan-card .meal-sections .snacks::before {
+    content: attr(data-title);
+    font-size: 2.5rem;
+    color: rgb(0, 0, 0);
+    position: absolute;
+    top: -1.8rem; /* Adjust to move the text closer to the top */
+    left: 50%;
+    transform: translateX(-50%); /* Center the text horizontally */
+    z-index: 3;
+    background-color: rgba(255, 255, 255, 0.75);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 3.125rem 6.25rem -1.25rem,
+                rgba(0, 0, 0, 0.3) 0px 1.875rem 3.75rem -1.875rem,
+                rgba(10, 37, 64, 0.35) 0px -0.125rem 0.375rem 0px inset;
+    padding: 0.8rem;
+    font-family: 'Mea Culpa', 'Roboto', sans-serif;
+}
+
+/* Image positioning */
+.school-lunch-plan-card .meal-sections .appetizer img,
+.school-lunch-plan-card .meal-sections .main-course img,
+.school-lunch-plan-card .meal-sections .laitage img,
+.school-lunch-plan-card .meal-sections .dessert img,
+.school-lunch-plan-card .meal-sections .snacks img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: auto;
+}
+
+.school-lunch-plan-card .meal-sections .appetizer img {
+    height: 8rem; /* Set height of image */
+    left: -3.5rem; /* Image on the left boundary of breakfast */
+}
+@media screen and (max-width: 748px) {
+    .school-lunch-plan-card .meal-sections .appetizer img {
+        height: 7rem;
+    }
+}
+
+@media screen and (max-width: 537px) {
+    .school-lunch-plan-card .meal-sections .appetizer img {
+        height: 7rem;
+    }
+}
+
+@media screen and (max-width: 510px) {
+    .school-lunch-plan-card .meal-sections .appetizer img {
+        height: 6rem;
+    }
+}
+
+.school-lunch-plan-card .meal-sections .main-course img {
+    height: 12rem;
+    right: -2rem; /* Image on the right boundary of lunch */
+}
+
+@media screen and (max-width: 768px) {
+    .school-lunch-plan-card .meal-sections .main-course img {
+        height: 10rem;
+    }
+}
+
+@media screen and (max-width: 619px) {
+    .school-lunch-plan-card .meal-sections .main-course img {
+        height: 9rem;
+    }
+}
+
+.school-lunch-plan-card .meal-sections .laitage img {
+    height: 9rem;
+    left: -2rem; /* Image on the left boundary of snacks */
+}
+
+.school-lunch-plan-card .meal-sections .dessert img {
+    height: 6rem; /* Set height of image */
+    right: -2.5rem; /* Image on the right boundary of dinner */
+}
+@media screen and (max-width: 748px) {
+    .school-lunch-plan-card .meal-sections .dessert img {
+        height: 5rem;
+    }
+}
+
+@media screen and (max-width: 541px) {
+    .school-lunch-plan-card .meal-sections .laitage img {
+        height: 8rem;
+    }
+
+    .school-lunch-plan-card .meal-sections .dessert img {
+        height: 4rem;
+    }
+
+    .school-lunch-plan-card .meal-sections .snacks img {
+        height: 9rem;
+    }
+}
+
+.school-lunch-plan-card .meal-sections .snacks img {
+    height: 10rem;
+    left: -3rem;
+}
+
+@media screen and (max-width: 555px) {
+    .school-lunch-plan-card .meal-sections .snacks img {
+        height: 9rem;
+        left: -4rem;
+    }
+}
+
+.school-lunch-plan-card .meal-sections .appetizer p,
+.school-lunch-plan-card .meal-sections .main-course p,
+.school-lunch-plan-card .meal-sections .laitage p,
+.school-lunch-plan-card .meal-sections .dessert p,
+.school-lunch-plan-card .meal-sections .snacks p {
+    position: relative;
+    color: #000000;
+    padding: 0.5rem;
+    padding-top: 1rem;
+    font-size: 1.65rem;
+    line-height: 1.7;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .school-lunch-plan-card .meal-sections .appetizer p {
+        padding-top: 5rem;
+    }
+}
+
+@media screen and (max-width: 736px) {
+    .school-lunch-plan-card .meal-sections .laitage p {
+        padding-top: 5rem;
+    }
+}
+
+@media screen and (max-width: 418px) {
+    .school-lunch-plan-card .meal-sections .laitage p {
+        padding-top: 10rem;
+    }
+}
+
+@media screen and (max-width: 619px) {
+    .school-lunch-plan-card .meal-sections .main-course p {
+        padding-top: 5rem;
+    }
+}
+
+@media screen and (max-width: 574px) {
+    .school-lunch-plan-card .meal-sections .snacks p {
+        padding-top: 5rem;
+    }
+}
+
+.school-lunch-plan-card .meal-sections .appetizer .text-area,
+.school-lunch-plan-card .meal-sections .main-course .text-area,
+.school-lunch-plan-card .meal-sections .laitage .text-area,
+.school-lunch-plan-card .meal-sections .dessert .text-area,
+.school-lunch-plan-card .meal-sections .snacks .text-area  {
+    position: relative;
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+/* Break System Css */
+/*.school-lunch-plan-card .break-system.flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    row-gap: 9rem;
+}*/
+
+.school-lunch-plan-card .break-system {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    row-gap: 9rem;
+}/* To be removed when the options layout is in use */
+
+.school-lunch-plan-card .break-system {
+    position: relative;
+    width: 100%;
+    padding: 6rem 2rem;
+}
+
+.school-lunch-plan-card .break-system .recess,
+.school-lunch-plan-card .break-system .lunch {
+    width: 30rem;
+    min-height: 10rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 3.125rem 6.25rem -1.25rem,
+                rgba(0, 0, 0, 0.3) 0px 1.875rem 3.75rem -1.875rem,
+                rgba(10, 37, 64, 0.35) 0px -0.125rem 0.375rem 0px inset;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 4rem;
+}
+
+@media screen and (max-width: 1292px) {
+    .school-lunch-plan-card .break-system .recess{
+        margin-top: 2rem;
+    }
+}
+
+.school-lunch-plan-card .break-system .recess .meal-image,
+.school-lunch-plan-card .break-system .lunch .meal-image{
+    position: absolute;
+    top: -7rem; /* Adjust to move the text closer to the top */
+    left: 50%;
+    transform: translateX(-50%); /* Center the text horizontally */
+    z-index: 3;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(0deg, #ddd, #fff);
+    padding: 0.5rem;
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+}
+
+.school-lunch-plan-card .break-system .recess .meal-image .lunchbox-image,
+.school-lunch-plan-card .break-system .lunch .meal-image .lunchbox-image{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.school-lunch-plan-card .break-system .recess::before,
+.school-lunch-plan-card .break-system .lunch::before {
+    content: attr(data-title);
+    font-size: 2.5rem;
+    color: rgb(0, 0, 0);
+    position: absolute;
+    left: -11%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    width: 8rem;
+    background-color: rgba(255, 255, 255, 0.75);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 3.125rem 6.25rem -1.25rem,
+                rgba(0, 0, 0, 0.3) 0px 1.875rem 3.75rem -1.875rem,
+                rgba(10, 37, 64, 0.35) 0px -0.125rem 0.375rem 0px inset;
+    padding: 0.8rem;
+    padding-left: 1.4rem;
+    padding-right: 0.6rem;
+    font-family: 'Mea Culpa', 'Roboto', sans-serif;
+}
+
+.school-lunch-plan-card .break-system .recess .text-area,
+.school-lunch-plan-card .break-system .lunch .text-area  {
+    position: relative;
+    left: 8%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 4rem;
+}
+
+@media screen and (max-width: 480px) {
+    .school-lunch-plan-card .break-system .recess .text-area,
+    .school-lunch-plan-card .break-system .lunch .text-area  {
+        left: 17%;
+    }
+}
+
+.school-lunch-plan-card .break-system .recess .text-area p,
+.school-lunch-plan-card .break-system .lunch .text-area p {
+    position: relative;
+    color: #000000;
+    padding: 0.5rem;
+    padding-top: 1.5rem;
+    font-size: 1.65rem;
+    line-height: 1.7;
+    text-align: left;
+    padding-left: 2rem;
+}
+
+/* Meal Categories Css */
+.school-lunch-plan-card .meal-categories.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
+    gap: 3rem;
+}
+
+.school-lunch-plan-card .meal-categories {
+    position: relative;
+    width: 100%;
+    margin-bottom: 2.5rem; /* 40px / 16 = 2.5rem */
+}
+
+.school-lunch-plan-card .meal-categories .card {
+    background-color: #fff;
+    border-radius: 0.5rem; /* 8px / 16 = 0.5rem */
+    overflow: hidden;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 3.125rem 6.25rem -1.25rem,
+                rgba(0, 0, 0, 0.3) 0px 1.875rem 3.75rem -1.875rem,
+                rgba(10, 37, 64, 0.35) 0px -0.125rem 0.375rem 0px inset;
+    padding: 1.25rem; /* 20px / 16 = 1.25rem */
+    min-width: 12rem;
+    min-height: 5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.school-lunch-plan-card .meal-categories .card:hover {
+    transform: translateY(-0.5rem); /* Lift card by 8px */
+    box-shadow: rgba(50, 50, 93, 0.4) 0px 6.25rem 12.5rem -2.5rem,
+                rgba(0, 0, 0, 0.4) 0px 3.75rem 7.5rem -3.75rem,
+                rgba(10, 37, 64, 0.4) 0px -0.25rem 0.625rem 0px inset;
+}
+
+.school-lunch-plan-card .meal-categories .card h1{
+    text-align: center;
+    width: 90%;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.school-lunch-plan-card .meal-categories .card li{
+    text-align: left;
+    font-size: 1.6rem;
+    color: black;
+    font-weight: 450;
+    padding: 0.3rem;
+}
+
+.school-lunch-weekly-plan-card table .style-preserver-cell{
+    color: black;
+    font-size: 1.4rem;
+    font-weight: 300;
+    text-align: left;
+}
+
+/* Saved Meal Plan Css */
+.plan-nav-btn {
+    all: unset;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    position: relative;
+    border-radius: 100em;
+    background-color: rgba(0, 0, 0, 0.75);
+    box-shadow:
+        -0.15em -0.15em 0.15em -0.075em rgba(5, 5, 5, 0.25),
+        0.0375em 0.0375em 0.0675em 0 rgba(5, 5, 5, 0.1);
+}
+
+.plan-nav-btn::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    width: calc(100% + 0.3em);
+    height: calc(100% + 0.3em);
+    top: -0.15em;
+    left: -0.15em;
+    border-radius: inherit;
+    background: linear-gradient(
+        -135deg,
+        rgba(5, 5, 5, 0.5),
+        transparent 20%,
+        transparent 100%
+    );
+    filter: blur(0.0125em);
+    opacity: 0.25;
+    mix-blend-mode: multiply;
+}
+
+.plan-nav-btn .plan-nav-btn-outer {
+    position: relative;
+    z-index: 1;
+    border-radius: inherit;
+    transition: box-shadow 300ms ease;
+    will-change: box-shadow;
+    box-shadow:
+        0 0.05em 0.05em -0.01em rgba(5, 5, 5, 1),
+        0 0.01em 0.01em -0.01em rgba(5, 5, 5, 0.5),
+        0.15em 0.3em 0.1em -0.01em rgba(5, 5, 5, 0.25);
+}
+
+.plan-nav-btn:hover .plan-nav-btn-outer {
+    box-shadow:
+        0 0 0 0 rgba(5, 5, 5, 1),
+        0 0 0 0 rgba(5, 5, 5, 0.5),
+        0 0 0 0 rgba(5, 5, 5, 0.25);
+}
+
+.plan-nav-btn-inner {
+    --inset: 0.035em;
+    position: relative;
+    z-index: 1;
+    border-radius: inherit;
+    padding: 1em 1.5em;
+    background-image: linear-gradient(
+        135deg,
+        rgba(230, 230, 230, 1),
+        rgba(180, 180, 180, 1)
+    );
+    transition:
+        box-shadow 300ms ease,
+        clip-path 250ms ease,
+        background-image 250ms ease,
+        transform 250ms ease;
+    will-change: box-shadow, clip-path, background-image, transform;
+    overflow: clip;
+    clip-path: inset(0 0 0 0 round 100em);
+    box-shadow:
+          /* 1 */
+        0 0 0 0 inset rgba(5, 5, 5, 0.1),
+        /* 2 */ -0.05em -0.05em 0.05em 0 inset rgba(5, 5, 5, 0.25),
+        /* 3 */ 0 0 0 0 inset rgba(5, 5, 5, 0.1),
+        /* 4 */ 0 0 0.05em 0.2em inset rgba(255, 255, 255, 0.25),
+        /* 5 */ 0.025em 0.05em 0.1em 0 inset rgba(255, 255, 255, 1),
+        /* 6 */ 0.12em 0.12em 0.12em inset rgba(255, 255, 255, 0.25),
+        /* 7 */ -0.075em -0.25em 0.25em 0.1em inset rgba(5, 5, 5, 0.25);
+}
+
+.plan-nav-btn:hover .plan-nav-btn-inner {
+    clip-path: inset(
+        clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px)
+        clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) round 100em
+    );
+    box-shadow:
+          /* 1 */
+        0.1em 0.15em 0.05em 0 inset rgba(5, 5, 5, 0.75),
+        /* 2 */ -0.025em -0.03em 0.05em 0.025em inset rgba(5, 5, 5, 0.5),
+        /* 3 */ 0.25em 0.25em 0.2em 0 inset rgba(5, 5, 5, 0.5),
+        /* 4 */ 0 0 0.05em 0.5em inset rgba(255, 255, 255, 0.15),
+        /* 5 */ 0 0 0 0 inset rgba(255, 255, 255, 1),
+        /* 6 */ 0.12em 0.12em 0.12em inset rgba(255, 255, 255, 0.25),
+        /* 7 */ -0.075em -0.12em 0.2em 0.1em inset rgba(5, 5, 5, 0.25);
+}
+
+.plan-nav-btn .plan-nav-btn-inner span {
+    position: relative;
+    z-index: 4;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: -0.05em;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0);
+    background-image: linear-gradient(
+        135deg,
+        rgba(25, 25, 25, 1),
+        rgba(75, 75, 75, 1)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    transition: transform 250ms ease;
+    display: block;
+    will-change: transform;
+    text-shadow: rgba(0, 0, 0, 0.1) 0 0 0.1em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.plan-nav-btn:hover .plan-nav-btn-inner span {
+    transform: scale(0.975);
+}
+
+.plan-nav-btn:active .plan-nav-btn-inner {
+    transform: scale(0.975);
 }

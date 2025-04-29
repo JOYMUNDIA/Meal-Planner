@@ -206,6 +206,41 @@ document.addEventListener('DOMContentLoaded', function () {
                 updateLayout();
         });
 
+// Toggle Day and Week View for school Meal Plan
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Get all the radio buttons
+            const schoolDailyMealPlan = document.getElementById('schoolDailyMealPlan');
+            const schoolWeeklyMealPlan = document.getElementById('schoolWeeklyMealPlan');
+        
+            // Get the sections
+            const schoolLunchPlanCard = document.querySelector('.school-lunch-plan-card-container');
+            const schoolLunchWeeklyPlanCard = document.querySelector('.school-lunch-weekly-plan-card-container');
+        
+            // Function to set the correct display styles based on selected layout
+            function updateLayout() {
+                // Reset all sections to be hidden
+                schoolLunchPlanCard.style.display = 'none';
+                schoolLunchWeeklyPlanCard.style.display = 'none';
+        
+                // Show the correct section based on the selected radio button
+                if (schoolDailyMealPlan.checked) {
+                    schoolLunchPlanCard.style.display = 'flex';  // Make the Daily Meal Plan visible
+                } else if (schoolWeeklyMealPlan.checked) {
+                    schoolLunchWeeklyPlanCard.style.display = 'flex';  // Make the Weekly Meal Plan visible
+                }
+            }
+        
+            // Add event listeners for the radio buttons
+            schoolDailyMealPlan.addEventListener('change', updateLayout);
+            schoolWeeklyMealPlan.addEventListener('change', updateLayout);
+        
+            // Initialize the layout on page load
+            updateLayout();
+        });
+        
+
+
 //Weekly Meal Plan Javascript
 // Get the necessary elements
 const iconContainer = document.querySelector('.icon-container');
@@ -353,6 +388,10 @@ function toggleMealsByDay() {
     const allSections = document.querySelectorAll('.meal-type');
     console.log('All Meal Sections:', allSections); // Debugging line to show all sections
 
+    // Get all sections for the meals
+    const schoolMealSections = document.querySelectorAll('.school-meal');
+    console.log('School Meal Sections:', schoolMealSections); // Debugging line to show all sections
+
     // Format the selectedDay to match the section IDs format (e.g., day-one, day-two, etc.)
     let formattedSelectedDay = selectedDay; 
 
@@ -375,8 +414,26 @@ function toggleMealsByDay() {
 
     console.log('Formatted Selected Day:', formattedSelectedDay); // Debugging line to show the formatted day
 
-    // Loop through each section
+    // Loop through each section (Family Meal Plan)
     allSections.forEach(section => {
+        console.log('Checking section:', section.id); // Debugging line to show which section is being checked
+        
+        // Get the correct day part from the section ID (e.g., "day-one", "day-two")
+        const sectionDay = section.id.split('-')[0] + '-' + section.id.split('-')[1]; // Get "day-one", "day-two", etc.
+        console.log('Section day:', sectionDay); // Debugging line to show the section's day
+
+        // Check if the section belongs to the selected day
+        if (sectionDay === formattedSelectedDay) {
+            console.log('Displaying section:', section.id); // Debugging line to show which section is being displayed
+            section.style.display = 'flex'; // Show the selected day's section
+        } else {
+            console.log('Hiding section:', section.id); // Debugging line to show which section is being hidden
+            section.style.display = 'none'; // Hide all other sections
+        }
+    });
+
+    // Loop through each section (School Meal Plan)
+    schoolMealSections.forEach(section => {
         console.log('Checking section:', section.id); // Debugging line to show which section is being checked
         
         // Get the correct day part from the section ID (e.g., "day-one", "day-two")
@@ -401,8 +458,37 @@ window.onload = function() {
 
 
 //Enable edit in Day view of Family Meal Plan
-
 document.querySelectorAll('.meal-type').forEach(section => {
+    let timeoutId = null;
+
+    section.addEventListener('dblclick', () => {
+        const paragraph = section.querySelector('p');
+
+        // Enable editing
+        paragraph.contentEditable = true;
+        paragraph.focus();
+
+        // Move cursor to the end using modern API
+        const range = document.createRange();
+        range.selectNodeContents(paragraph);
+        range.collapse(false); // Collapse to the end
+
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        // Clear existing timeout if it exists
+        if (timeoutId) clearTimeout(timeoutId);
+
+        // Set timeout to disable editing after 30 seconds
+        timeoutId = setTimeout(() => {
+            paragraph.contentEditable = false;
+        }, 30000);
+    });
+});
+
+//Enable edit in Day view of School Meal Plan
+document.querySelectorAll('.school-meal').forEach(section => {
     let timeoutId = null;
 
     section.addEventListener('dblclick', () => {
@@ -460,8 +546,33 @@ document.addEventListener("DOMContentLoaded", function () {
         return mealClass.split("-").pop().replace(/^\w/, c => c.toUpperCase()); // capitalize
     }
 
-    // Only target .meals inside the main timetable, not inside the modal
+    // Only target .meals inside the main timetable, not inside the modal (Family Meal Plan)
     weeklyTimetableContent.querySelectorAll(".meals").forEach(cell => {
+        cell.addEventListener("dblclick", () => {
+            activeCell = cell;
+
+            // Show modal
+            modal.style.display = "block";
+            weeklyTimetableContent.classList.add("blurred");
+
+            // Set modal header and meal
+            const mealType = getMealTypeFromClass(cell);
+            modalHeader.textContent = mealType;
+
+            // Copy date from table
+            const dateDiv = getDateContainerFor(cell);
+            modalDateContainer.innerHTML = ""; // Clear existing
+            modalDateContainer.appendChild(dateDiv);
+
+            // Load current meal text
+            modalMealCell.textContent = cell.textContent;
+            modalMealCell.contentEditable = true;
+            modalMealCell.focus();
+        });
+    });
+
+    // Only target .school meals inside the main timetable, not inside the modal (School Meal Plan)
+    weeklyTimetableContent.querySelectorAll(".school-meals").forEach(cell => {
         cell.addEventListener("dblclick", () => {
             activeCell = cell;
 
@@ -512,6 +623,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+
+
+// Saved Plans Javascript
+
+// Saved Plans Sidebar Navigation
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const backdrop = document.getElementById("backdrop");
+    sidebar.classList.toggle("active");
+    backdrop.classList.toggle("active");
+}
 
 
 
