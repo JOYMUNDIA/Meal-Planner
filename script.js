@@ -519,7 +519,7 @@ document.querySelectorAll('.school-meal').forEach(section => {
 
 
 //Edit weekly Timetable with Modal
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById("weekly-timetable-modal");
     const modalHeader = document.querySelector(".modal-header");
     const modalDateContainer = document.querySelector(".weekly-timetable-modal .date-container");
@@ -620,6 +620,131 @@ document.addEventListener("DOMContentLoaded", function () {
         weeklyTimetableContent.classList.remove("blurred");
         activeCell = null;
         modalMealCell.contentEditable = false;
+    }
+});*/
+
+document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("weekly-timetable-modal");
+    const modalHeader = document.querySelector(".modal-header");
+    const modalDateContainer = document.querySelector(".weekly-timetable-modal .date-container");
+    const modalMealCell = document.querySelector(".modal-meal");
+    const modalEnterBtn = document.querySelector(".modal-enter-btn");
+    const modalClearBtn = document.querySelector(".modal-clear-btn");
+    const closeModalBtn = document.querySelector(".close-modal-button");
+    const weeklyTimetableContent = document.getElementById("weekly-timetable-content");
+
+    let activeCell = null;
+
+    function getDateContainerFor(cell) {
+        const row = cell.closest("tr");
+        const dateContainer = row.querySelector(".date-container");
+        return dateContainer ? dateContainer.cloneNode(true) : document.createElement("div");
+    }
+
+    function getMealTypeFromClass(cell) {
+        const classList = Array.from(cell.classList);
+        const mealClass = classList.find(cls => cls.startsWith("day-") && cls.includes("-"));
+        if (!mealClass) return "Meal";
+        return mealClass.split("-").pop().replace(/^\w/, c => c.toUpperCase());
+    }
+
+    // Only target .meals inside the main timetable, not inside the modal (Family Meal Plan)
+    weeklyTimetableContent.querySelectorAll(".meals").forEach(cell => {
+        cell.addEventListener("dblclick", () => {
+            activeCell = cell;
+
+            // Show modal
+            modal.style.display = "block";
+            weeklyTimetableContent.classList.add("blurred");
+
+            // Set modal header and meal
+            const mealType = getMealTypeFromClass(cell);
+            modalHeader.textContent = mealType;
+
+            // Copy date from table
+            const dateDiv = getDateContainerFor(cell);
+            modalDateContainer.innerHTML = ""; // Clear existing
+            modalDateContainer.appendChild(dateDiv);
+
+            // Load current meal text
+            modalMealCell.textContent = cell.textContent;
+            modalMealCell.contentEditable = true;
+            modalMealCell.focus();
+        });
+    });
+
+    // Only target .school meals inside the main timetable, not inside the modal (School Meal Plan)
+    weeklyTimetableContent.querySelectorAll(".school-meals").forEach(cell => {
+        cell.addEventListener("dblclick", () => {
+            activeCell = cell;
+
+            // Show modal
+            modal.style.display = "block";
+            weeklyTimetableContent.classList.add("blurred");
+
+            // Set modal header and meal
+            const mealType = getMealTypeFromClass(cell);
+            modalHeader.textContent = mealType;
+
+            // Copy date from table
+            const dateDiv = getDateContainerFor(cell);
+            modalDateContainer.innerHTML = ""; // Clear existing
+            modalDateContainer.appendChild(dateDiv);
+
+            // Load current meal text
+            modalMealCell.innerHTML = cell.innerHTML;
+            modalMealCell.contentEditable = true;
+            modalMealCell.focus();
+
+            // Add input event to convert full stops to line breaks
+            modalMealCell.addEventListener("input", handleFullstopToLineBreak);
+        });
+    });
+
+    function handleFullstopToLineBreak() {
+        const html = modalMealCell.innerHTML;
+
+        // Replace periods not already followed by <br> with .<br>
+        const updatedHtml = html.replace(/\. ?(?!<br>)/g, ".<br>");
+
+        if (html !== updatedHtml) {
+            modalMealCell.innerHTML = updatedHtml;
+            placeCursorAtEnd(modalMealCell);
+        }
+    }
+
+    function placeCursorAtEnd(el) {
+        const range = document.createRange();
+        const sel = window.getSelection();
+        range.selectNodeContents(el);
+        range.collapse(false);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        el.focus();
+    }
+
+    modalEnterBtn.addEventListener("click", () => {
+        if (activeCell) {
+            activeCell.innerHTML = modalMealCell.innerHTML.trim();
+        }
+        closeModal();
+    });
+
+    modalClearBtn.addEventListener("click", () => {
+        modalMealCell.innerHTML = "";
+        modalMealCell.focus();
+    });
+
+    closeModalBtn.addEventListener("click", () => {
+        closeModal();
+    });
+
+    function closeModal() {
+        modal.style.display = "none";
+        weeklyTimetableContent.classList.remove("blurred");
+        activeCell = null;
+        modalMealCell.contentEditable = false;
+        modalMealCell.removeEventListener("input", handleFullstopToLineBreak);
     }
 });
 
