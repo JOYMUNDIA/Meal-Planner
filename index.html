@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meal Planner</title>
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -130,8 +131,9 @@
                         
                         <div class="family-mini-plan">
                             <div class="miniature-family-plan-body-div">
+
                                 <div class="family-plan-parent-container">
-                                    <div class="family-plan-card-container">
+                                    <div class="mini-family-plan-card-container">
                                         <div class="family-plan-card">
                                             <div class="ribbon-holder">
                                                 <div class="ribbon ribbon-outlined">
@@ -139,7 +141,21 @@
                                                 </div>
                                             </div>
                         
-                                            <h1>Family Meal Plan</h1>
+                                            <div class="family-heading-and-day-selector">
+                                                <div class="day-selector">
+                                                        <select class="day-selector-dropdown" id="day-selector" onchange="toggleMealsByDay()">
+                                                            <option value="day-one">Monday 21 April</option>
+                                                            <option value="day-two">Tuesday 22 April</option>
+                                                            <option value="day-three">Wednesday 23 April</option>
+                                                            <option value="day-four">Thursday 24 April</option>
+                                                            <option value="day-five">Friday 25 April</option>
+                                                            <option value="day-six">Saturday 26 April</option>
+                                                            <option value="day-seven">Sunday 27 April</option>
+                                                        </select>
+                                                </div>
+                                                
+                                                <h1>Family Meal Plan</h1>
+                                            </div>
                         
                                             <div class="meal-sections">
                         
