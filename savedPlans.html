@@ -145,15 +145,20 @@
     #sidebar {
         position: fixed;
         top: 0;
-        left: -300px;
-        width: 250px;
+        left: -400px;
+        width: 300px;
         height: 100%;
-        background-color: #e2e2e2;
+        background-color: #e4e4e4;
         box-shadow: 10px 10px 20px #bebebe, -10px -10px 20px #ffffff;
         transition: left 0.5s ease-in-out;
         padding: 1rem;
         transition: left 0.3s ease;
         z-index: 1000;
+        background-image: url('images/white-wall.jpg');
+        background-size: cover;
+        /*display: flex;
+        flex-direction: column;
+        justify-content: center;*/
     }
 
     #sidebar.active {
@@ -161,11 +166,66 @@
     }
 
     #sidebar .close-btn {
-        background: none;
         border: none;
         font-size: 1.2rem;
         cursor: pointer;
-        float: right;
+        z-index: 10;
+        background-color: #fff;
+        border-radius: 4em;
+        height: 2.2em;
+        width: 2.2em;
+        -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        position: absolute;
+        right: 1.5%;
+    }
+
+    #sidebar .close-btn:hover {
+        color: #ba3242;
+        -webkit-transition: background 350ms cubic-bezier(0.42, 0, 0.58, 1) 10ms, all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+        -moz-transition: background 350ms cubic-bezier(0.42, 0, 0.58, 1) 10ms, all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+        -o-transition: background 350ms cubic-bezier(0.42, 0, 0.58, 1) 10ms, all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+        transition: background 350ms cubic-bezier(0.42, 0, 0.58, 1) 10ms, all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+    }
+
+    .radio-inputs {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        border-radius: 0.5rem;
+        background-color: rgba(0, 0, 0, 0.06);
+        box-sizing: border-box;
+        box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+        padding: 0.5rem;
+        width: 90%;
+        font-size: 1.2rem;
+    }
+
+    .radio-inputs .radio {
+        flex: 1 1 auto;
+        text-align: center;
+    }
+
+    .radio-inputs .radio input {
+        display: none;
+    }
+
+    .radio-inputs .radio .name {
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.5rem;
+        border: none;
+        padding: .5rem 0;
+        color: rgba(51, 65, 85, 1);
+        transition: all .15s ease-in-out;
+    }
+
+    .radio-inputs .radio input:checked + .name {
+        background-color: #fff;
+        font-weight: 600;
     }
 
     /* Card responsiveness */
@@ -208,8 +268,40 @@
 
 <!-- Sidebar Navigation -->
 <div id="sidebar">
-    <button class="close-btn" onclick="toggleSidebar()">✕</button>
-    <p>Navigation goes here...</p>
+    <button class="close-btn" onclick="toggleSidebar()"><b>✕</b></button>
+
+    <!--Plan Navigation -Meal Plan Radio selections-->
+    <div class="radio-inputs">
+        <label class="radio">
+            <input type="radio" name="radio" checked="">
+            <span class="name">Family Meal Plan</span>
+        </label>
+        <label class="radio">
+            <input type="radio" name="radio">
+            <span class="name">School Meal Plan</span>
+        </label>
+    </div>
+
+    <p class="plan-nav-user-guide">Select a date to view plan...</p>
+
+    <!--Calendar-->
+    <div class="plan-nav-calendar">
+        <div class="header">
+            <button onclick="changeMonth(-1)">&#8592;</button>
+            <div class="month-year" id="monthYear"></div>
+            <button onclick="changeMonth(1)">&#8594;</button>
+        </div>
+        <div class="weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>
+        <div class="days" id="calendarDays"></div>
+    </div>
 </div>
 
 <div id="backdrop" onclick="toggleSidebar()"></div>
@@ -238,7 +330,7 @@
     <a href="index.html" target="_blank">
         <button onclick="closeNav()">Home</button>
     </a>
-
+    
     <a href="savedPlans.html" target="_blank">
         <button onclick="closeNav()">Saved Plans</button>
     </a>
@@ -282,71 +374,71 @@
 
         <!--Day One-->
         <div class="clay card breakfast-section meal-type" id= "day-one-breakfast-section" data-title="Breakfast">
-                <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
-                <div class="text-area">
-                    <p class="day-one-breakfast">Oats topped with raspberries and blueberries, served alongside a glass of orange juice.</p>
-                </div>
+            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+            <div class="text-area">
+                <p class="day-one-breakfast">Oats topped with raspberries and blueberries, served alongside a glass of orange juice.</p>
+            </div>
         </div>
 
         <div class="clay card lunch-section meal-type" id="day-one-lunch-section" data-title="Lunch">
-                        <img src="images/spaghetti.png" alt="Spaghetti">
-                        <div class="text-area">
-                            <p class="day-one-lunch">Spaghetti Bolognese</p>
-                        </div>
-                    </div>
+            <img src="images/spaghetti.png" alt="Spaghetti">
+                <div class="text-area">
+                    <p class="day-one-lunch">Spaghetti Bolognese</p>
+                </div>
+        </div>
 
-                    <div class="clay card snacks-section meal-type" id="day-one-snacks-section" data-title="Snacks">
-                        <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
-                        <div class="text-area">
-                            <p class="day-one-snacks">Granola Bars with some Yoghurt</p>
-                        </div>
-                    </div>
+        <div class="clay card snacks-section meal-type" id="day-one-snacks-section" data-title="Snacks">
+            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                <div class="text-area">
+                    <p class="day-one-snacks">Granola Bars with some Yoghurt</p>
+                </div>
+        </div>
 
-                    <div class="clay card dinner-section meal-type" id="day-one-dinner-section" data-title="Dinner">
-                        <img src="images/sandwich.png" alt="Sandwich">
-                        <div class="text-area">
-                            <p class="day-one-dinner">A ham Sandwich</p>
-                        </div>
-                    </div>
-                    <!--End: Day One Meals-->
+        <div class="clay card dinner-section meal-type" id="day-one-dinner-section" data-title="Dinner">
+            <img src="images/sandwich.png" alt="Sandwich">
+                <div class="text-area">
+                    <p class="day-one-dinner">A ham Sandwich</p>
+                </div>
+        </div>
+        <!--End: Day One Meals-->
 
-                    <!--Day Two Meals-->
-                    <div class="clay card breakfast-section meal-type" id="day-two-breakfast-section" data-title="Breakfast">
-                        <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
-                        <div class="text-area">
-                            <p class="day-two-breakfast">
-                                Greek yogurt with honey, chia seeds, and sliced almonds
-                            </p>
-                        </div>
-                    </div>
+        <!--Day Two Meals-->
+        <div class="clay card breakfast-section meal-type" id="day-two-breakfast-section" data-title="Breakfast">
+            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                <div class="text-area">
+                    <p class="day-two-breakfast">
+                        Greek yogurt with honey, chia seeds, and sliced almonds
+                    </p>
+                </div>
+        </div>
 
-                    <div class="clay card lunch-section meal-type" id="day-two-lunch-section" data-title="Lunch">
-                        <img src="images/spaghetti.png" alt="Spaghetti">
-                        <div class="text-area">
-                            <p class="day-two-lunch">
-                                Grilled chicken wrap with lettuce, tomato, and hummus
-                            </p>
-                        </div>
-                    </div>
+        <div class="clay card lunch-section meal-type" id="day-two-lunch-section" data-title="Lunch">
+            <img src="images/spaghetti.png" alt="Spaghetti">
+                <div class="text-area">
+                    <p class="day-two-lunch">
+                        Grilled chicken wrap with lettuce, tomato, and hummus
+                    </p>
+                </div>
+        </div>
 
-                    <div class="clay card snacks-section meal-type" id="day-two-snacks-section" data-title="Snacks">
-                        <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
-                        <div class="text-area">
-                            <p class="day-two-snacks">
-                                Apple slices with peanut butter
-                            </p>
-                        </div>
-                    </div>
+        <div class="clay card snacks-section meal-type" id="day-two-snacks-section" data-title="Snacks">
+            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                <div class="text-area">
+                    <p class="day-two-snacks">
+                        Apple slices with peanut butter
+                    </p>
+                </div>
+        </div>
 
-                    <div class="clay card dinner-section meal-type" id="day-two-dinner-section" data-title="Dinner">
-                        <img src="images/sandwich.png" alt="Sandwich">
-                        <div class="text-area">
-                            <p class="day-two-dinner">
-                                Baked salmon with quinoa and steamed broccoli
-                            </p>
-                        </div>
-                    </div>
-                    <!--End: Day Two Meals-->
+        <div class="clay card dinner-section meal-type" id="day-two-dinner-section" data-title="Dinner">
+            <img src="images/sandwich.png" alt="Sandwich">
+                <div class="text-area">
+                    <p class="day-two-dinner">
+                        Baked salmon with quinoa and steamed broccoli
+                    </p>
+                </div>
+        </div>
+        <!--End: Day Two Meals-->
 
                     <!--Day Three Meals-->
                     <div class="clay card breakfast-section meal-type" id="day-three-breakfast-section" data-title="Breakfast">
@@ -815,6 +907,49 @@
             }
         });
     });
+
+    //Calendar Javascript
+    const monthYearEl = document.getElementById('monthYear');
+    const calendarDaysEl = document.getElementById('calendarDays');
+    const now = new Date();
+    let currentMonth = now.getMonth();
+    let currentYear = now.getFullYear();
+
+    function renderCalendar(month, year) {
+    const firstDay = new Date(year, month, 1).getDay();
+    const totalDays = new Date(year, month + 1, 0).getDate();
+    const monthName = new Date(year, month).toLocaleString('default', { month: 'long' });
+    monthYearEl.textContent = `${monthName} ${year}`;
+    calendarDaysEl.innerHTML = '';
+
+    // Empty slots for the first week
+    for (let i = 0; i < firstDay; i++) {
+        const empty = document.createElement('div');
+        empty.classList.add('empty');
+        calendarDaysEl.appendChild(empty);
+    }
+
+    // Populate days
+    for (let day = 1; day <= totalDays; day++) {
+        const dayBtn = document.createElement('button');
+        dayBtn.textContent = day;
+        calendarDaysEl.appendChild(dayBtn);
+    }
+    }
+
+    function changeMonth(delta) {
+    currentMonth += delta;
+    if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    } else if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+    renderCalendar(currentMonth, currentYear);
+    }
+
+    renderCalendar(currentMonth, currentYear);
 </script>
 
 <script src="script.js"></script>
