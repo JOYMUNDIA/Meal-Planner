@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,20 +10,20 @@
 </head>
 
 <body>
-    <div class="body-div">
+    <div class="body-div" id="mainContent">
         <!-- Navigation section (10% of the body height) -->
         <div class="nav-div">
             <!-- register-div on the left -->
             <div class="register-div">
-                <button class="register-login">Register/Login</button><br>
+                <button class="register-login" onclick="openModal()">Register/Login</button><br>
             </div>
 
             <!-- Navigation links section -->
             <div class="nav-links">
-                
+
 
                 <button class="active">Home</button>
-                
+
                 <!-- Create dropdown button -->
                 <div class="dropdown">
                     <button class="dropbtn">Create</button>
@@ -35,7 +36,7 @@
                 </div>
 
                 <a href="savedPlans.html"><button>Saved Plans</button></a>
-                
+
             </div>
 
             <!-- Hamburger menu for smaller screens -->
@@ -55,14 +56,14 @@
                 <button class="dropbtn">Create</button>
                 <div class="dropdown-content">
                     <!-- Inside the .dropdown-content -->
-                        <a href="familyplan.html" target="_blank" onclick="handleDropdownSelection(this)">Family Meal Plan</a>
-                        <a href="schoollunch.html" target="_blank" onclick="handleDropdownSelection(this)">School Lunch Meal Plan</a>
-                        <!--<a href="#" onclick="handleDropdownSelection(this)">Work Meal Plan</a>-->
-                        <!--<a href="#" onclick="handleDropdownSelection(this)">Special Occasion/Festival Meal Plan</a>-->
+                    <a href="familyplan.html" target="_blank" onclick="handleDropdownSelection(this)">Family Meal Plan</a>
+                    <a href="schoollunch.html" target="_blank" onclick="handleDropdownSelection(this)">School Lunch Meal Plan</a>
+                    <!--<a href="#" onclick="handleDropdownSelection(this)">Work Meal Plan</a>-->
+                    <!--<a href="#" onclick="handleDropdownSelection(this)">Special Occasion/Festival Meal Plan</a>-->
 
                 </div>
             </div>
-            
+
         </div>
 
         <!-- Contents section (90% of the body height) -->
@@ -77,7 +78,7 @@
                     <div class="left-wall">
                         <img src="images/wall-light.png" alt="Antique Light" class="antique-light">
                     </div>
-                    
+
                     <!--Banner and Entrance-->
                     <div class="actual-entrance">
                         <!-- Banner section -->
@@ -101,14 +102,11 @@
                                 <div class="third-level-menu">
                                     <div class="inner-layer-menu">
                                         <p><span class="menu-header">Menu</span><br><br>
-                                        <span class="header-p">Breakfast</span><br>
-                                        Orange Juice with Pancakes<br><br>
+                                            <span class="header-p">Breakfast</span><br> Orange Juice with Pancakes<br><br>
 
-                                        <span class="header-p">Lunch</span><br>
-                                        Curry Rice with Chicken and Spinach<br><br>
+                                            <span class="header-p">Lunch</span><br> Curry Rice with Chicken and Spinach<br><br>
 
-                                        <span class="header-p">Dinner</span><br>
-                                        Greek Salad</p>
+                                            <span class="header-p">Dinner</span><br> Greek Salad</p>
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +126,7 @@
                 <div class="categories-container">
                     <!--Family Meal Plan-->
                     <div class="category-display family-option">
-                        
+
                         <div class="family-mini-plan">
                             <div class="miniature-family-plan-body-div">
 
@@ -140,10 +138,10 @@
                                                     <span>Family Plan</span>
                                                 </div>
                                             </div>
-                        
+
                                             <div class="family-heading-and-day-selector">
                                                 <div class="day-selector">
-                                                        <select class="day-selector-dropdown" id="day-selector" onchange="toggleMealsByDay()">
+                                                    <select class="day-selector-dropdown" id="day-selector" onchange="toggleMealsByDay()">
                                                             <option value="day-one">Monday 21 April</option>
                                                             <option value="day-two">Tuesday 22 April</option>
                                                             <option value="day-three">Wednesday 23 April</option>
@@ -153,43 +151,43 @@
                                                             <option value="day-seven">Sunday 27 April</option>
                                                         </select>
                                                 </div>
-                                                
+
                                                 <h1>Family Meal Plan</h1>
                                             </div>
-                        
+
                                             <div class="meal-sections">
-                        
+
                                                 <div class="breakfast-section" data-title="Breakfast">
                                                     <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
                                                     <div class="text-area">
                                                         <p>Oats topped with raspberries and blueberries, served alongside a glass of orange juice.</p>
                                                     </div>
-                                                    
+
                                                 </div>
-                        
+
                                                 <div class="lunch-section" data-title="Lunch">
                                                     <img src="images/spaghetti.png" alt="Spaghetti">
                                                     <div class="text-area">
                                                         <p>Spaghetti Bolognese</p>
                                                     </div>
                                                 </div>
-                        
+
                                                 <div class="snacks-section" data-title="Snacks">
                                                     <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
                                                     <div class="text-area">
                                                         <p>Granola Bars with some Yoghurt</p>
                                                     </div>
                                                 </div>
-                        
+
                                                 <div class="dinner-section" data-title="Dinner">
                                                     <img src="images/sandwich.png" alt="Sandwich">
                                                     <div class="text-area">
                                                         <p>A ham Sandwich</p>
                                                     </div>
                                                 </div>
-                        
+
                                             </div>
-                        
+
                                         </div>
                                     </div>
                                 </div>
@@ -212,7 +210,7 @@
 
                     <!--School Meal Plan-->
                     <div class="category-display school-option">
-                        
+
                         <div class="school-mini-plan">
                             <div class="miniature-school-plan-body-div">
                                 <div class="school-lunch-plan-parent-container">
@@ -286,10 +284,8 @@
                     </div>
                     <div class="reason">
                         <p>
-                            Creating a meal plan can seem like a waste of time,
-                            or hinder the flow of creativity unleashed when creating meals
-                            on the fly but a meal plan does the opposite.<br>
-                            Here are some of the reasons why you should consider creating a meal plan:
+                            Creating a meal plan can seem like a waste of time, or hinder the flow of creativity unleashed when creating meals on the fly but a meal plan does the opposite.<br> Here are some of the reasons why you should consider creating
+                            a meal plan:
                         </p>
                     </div>
                 </div>
@@ -309,8 +305,7 @@
                         </div>
                         <div class="reason">
                             <p>
-                                Set up meal preps ahead of time for even a week's worth of meals.
-                                If Monday's breakfast is oats, then why not make Monday's breakfast overnight oats?
+                                Set up meal preps ahead of time for even a week's worth of meals. If Monday's breakfast is oats, then why not make Monday's breakfast overnight oats?
                             </p>
                         </div>
                     </div>
@@ -329,9 +324,7 @@
                         </div>
                         <div class="reason">
                             <p>
-                                Budget-friendly eating doesn't mean sacrificing variety;
-                                try peanut butter porridge and organize themed dinner nights for excitement.
-                                Enjoy a variety of meals from Mexican, Chinese, and Mediterranean.
+                                Budget-friendly eating doesn't mean sacrificing variety; try peanut butter porridge and organize themed dinner nights for excitement. Enjoy a variety of meals from Mexican, Chinese, and Mediterranean.
                             </p>
                         </div>
                     </div>
@@ -350,9 +343,7 @@
                         </div>
                         <div class="reason">
                             <p>
-                                Eating a juicy burger with fries sounds epic.
-                                But switching to healthier alternatives may increase your life span
-                                and keep you in an abundance of health wealth.
+                                Eating a juicy burger with fries sounds epic. But switching to healthier alternatives may increase your life span and keep you in an abundance of health wealth.
                             </p>
                         </div>
                     </div>
@@ -371,10 +362,8 @@
                         </div>
                         <div class="reason">
                             <p>
-                                Cooking on the fly sometimes robs you of the opportunity
-                                to prepare a meal with an Ingredient that is trapped in the
-                                back of your fridge and sitting on its last legs. With a meal plan,
-                                you can seamlessly incorporate Ingredients that are headed for the bin.
+                                Cooking on the fly sometimes robs you of the opportunity to prepare a meal with an Ingredient that is trapped in the back of your fridge and sitting on its last legs. With a meal plan, you can seamlessly incorporate Ingredients that are headed for the
+                                bin.
                             </p>
                         </div>
                     </div>
@@ -393,9 +382,7 @@
                         </div>
                         <div class="reason">
                             <p>
-                                Less food waste equals more money saved.<br>
-                                Pro-tip: Researching meal ideas ahead of time can
-                                help you cook meals that do not break the bank.
+                                Less food waste equals more money saved.<br> Pro-tip: Researching meal ideas ahead of time can help you cook meals that do not break the bank.
                             </p>
                         </div>
                     </div>
@@ -414,9 +401,7 @@
                         </div>
                         <div class="reason">
                             <p>
-                                Sometimes we eat not because we are hungry but
-                                because we are trying to fill an empty space.
-                                Having a meal plan can help us stay motivated to break this habit.
+                                Sometimes we eat not because we are hungry but because we are trying to fill an empty space. Having a meal plan can help us stay motivated to break this habit.
                             </p>
                         </div>
                     </div>
@@ -434,6 +419,21 @@
             </div>-->
             <!--End of Service options: No Account vs Account Section-->
 
+        </div>
+    </div>
+
+    <!-- Register/Login MODAL OVERLAY -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-text">
+                <h2>Register/Login Not Available</h2>
+                <p>
+                    Hi there! 👋 Just a quick note — the Register and Login features aren't active on this page right now. This is a simple version of the website, so you can look around and explore freely, but signing in or creating an account isn’t possible here.
+                    <br><br> Thanks for your understanding, and we’re glad you're visiting! 😊
+                </p>
+            </div>
+            <div class="modal-image"></div>
         </div>
     </div>
 
@@ -468,5 +468,21 @@
         </div>
     </footer>
     <script src="script.js"></script>
+    <script>
+        // Notify Users of Disabled Register/Login
+        const modalOverlay = document.getElementById('modalOverlay');
+        const mainContent = document.getElementById('mainContent');
+
+        function openModal() {
+            modalOverlay.classList.add('active');
+            mainContent.classList.add('blurred');
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            mainContent.classList.remove('blurred');
+        }
+    </script>
 </body>
+
 </html>

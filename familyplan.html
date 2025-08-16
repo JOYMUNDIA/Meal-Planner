@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Family Meal Plan</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        body, html {
+        body,
+        html {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow-x: hidden;
             font-family: 'Cormorant', sans-serif;
         }
-
+        
         .body-div {
             width: 100vw;
             background-image: url('images/white-wall.jpg');
@@ -22,96 +24,94 @@
             flex-direction: column;
             overflow-x: hidden;
         }
-
+        
         .nav-links {
-                display: none;
-            }
-
-        .hamburger-menu {
-                display: block;
-                z-index: 25;
-                position: relative;
-                left: 94vw;
+            display: none;
         }
-
+        
+        .hamburger-menu {
+            display: block;
+            z-index: 25;
+            position: relative;
+            left: 94vw;
+        }
+        
         @media screen and (max-width: 768px) {
             .hamburger-menu {
                 left: 90vw;
             }
         }
-
-        .side-nav {
-                width: 0;
-        }
-
         
-
+        .side-nav {
+            width: 0;
+        }
     </style>
 </head>
+
 <body>
     <div class="body-div">
-            <!-- Navigation section (10% of the body height) -->
-            <div class="nav-div">
-                <!-- register-div on the left -->
-                <!--<div class="register-div">
+        <!-- Navigation section (10% of the body height) -->
+        <div class="nav-div">
+            <!-- register-div on the left -->
+            <!--<div class="register-div">
                     <button class="register-login">Register/Login</button><br>
                 </div>-->
-    
-                <!-- Navigation links section -->
-                <div class="nav-links">
-                    
-    
-                    <a href="index.html" target="_blank"><button>Home</button></a>
-                    
-                    <!-- Create dropdown button -->
-                    <div class="dropdown">
-                        <button class="dropbtn active">Create</button>
-                        <div class="dropdown-content">
-                            <a href="familyplan.html" target="_blank">Family Meal Plan</a>
-                            <a href="schoollunch.html" target="_blank">School Lunch Meal Plan</a>
-                            <!--<a href="#">Work Meal Plan</a>-->
-                            <!--<a href="#">Special Occasion/Festival Meal Plan</a>-->
-                        </div>
-                    </div>
-    
-                    <button>Contact</button>
-                    
-                </div>
-    
-                <!-- Hamburger menu for smaller screens -->
-                <div class="hamburger-menu" onclick="toggleNav()">
-                    &#9776;
-                </div>
-            </div>
-    
-            <!-- Side Navbar (for smaller screens) -->
-            <div class="side-nav" id="sideNav">
-                <!-- Close button to close the sidebar -->
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    
-                <button onclick="closeNav()">Register/Login</button><br>
 
-                <a href="index.html" target="_blank">
-                    <button onclick="closeNav()">Home</button>
-                </a>
+            <!-- Navigation links section -->
+            <div class="nav-links">
 
-                <a href="savedPlans.html" target="_blank">
-                    <button onclick="closeNav()">Saved Plans</button>
-                </a>
-                
+
+                <a href="index.html" target="_blank"><button>Home</button></a>
+
+                <!-- Create dropdown button -->
                 <div class="dropdown">
-                    <button class="dropbtn">Create</button>
+                    <button class="dropbtn active">Create</button>
                     <div class="dropdown-content">
-                        <!-- Inside the .dropdown-content -->
-                            <a href="familyplan.html" target="_blank" onclick="handleDropdownSelection(this)">Family Meal Plan</a>
-                            <a href="schoollunch.html" target="_blank" onclick="handleDropdownSelection(this)">School Lunch Meal Plan</a>
-                            <!--<a href="#" onclick="handleDropdownSelection(this)">Work Meal Plan</a>-->
-                            <!--<a href="#" onclick="handleDropdownSelection(this)">Special Occasion/Festival Meal Plan</a>-->
-    
+                        <a href="familyplan.html" target="_blank">Family Meal Plan</a>
+                        <a href="schoollunch.html" target="_blank">School Lunch Meal Plan</a>
+                        <!--<a href="#">Work Meal Plan</a>-->
+                        <!--<a href="#">Special Occasion/Festival Meal Plan</a>-->
                     </div>
                 </div>
-                
+
+                <button>Contact</button>
+
             </div>
+
+            <!-- Hamburger menu for smaller screens -->
+            <div class="hamburger-menu" onclick="toggleNav()">
+                &#9776;
+            </div>
+        </div>
+
+        <!-- Side Navbar (for smaller screens) -->
+        <div class="side-nav" id="sideNav">
+            <!-- Close button to close the sidebar -->
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+
+            <!--<button onclick="closeNav()">Register/Login</button><br>-->
+
+            <a href="index.html" target="_blank">
+                <button onclick="closeNav()">Home</button>
+            </a>
+
+            <a href="savedPlans.html" target="_blank">
+                <button onclick="closeNav()">Saved Plans</button>
+            </a>
+
+            <div class="dropdown">
+                <button class="dropbtn">Create</button>
+                <div class="dropdown-content">
+                    <!-- Inside the .dropdown-content -->
+                    <a href="familyplan.html" target="_blank" onclick="handleDropdownSelection(this)">Family Meal Plan</a>
+                    <a href="schoollunch.html" target="_blank" onclick="handleDropdownSelection(this)">School Lunch Meal Plan</a>
+                    <!--<a href="#" onclick="handleDropdownSelection(this)">Work Meal Plan</a>-->
+                    <!--<a href="#" onclick="handleDropdownSelection(this)">Special Occasion/Festival Meal Plan</a>-->
+
+                </div>
+            </div>
+
+        </div>
 
         <div class="family-plan-parent-container">
 
@@ -139,7 +139,7 @@
 
                     <div class="family-heading-and-day-selector">
                         <div class="day-selector">
-                                <select class="day-selector-dropdown" id="day-selector" onchange="toggleMealsByDay()">
+                            <select class="day-selector-dropdown" id="day-selector" onchange="toggleMealsByDay()">
                                     <option value="day-one">Monday 21 April</option>
                                     <option value="day-two">Tuesday 22 April</option>
                                     <option value="day-three">Wednesday 23 April</option>
@@ -149,7 +149,7 @@
                                     <option value="day-seven">Sunday 27 April</option>
                                 </select>
                         </div>
-                        
+
                         <h1>Family Meal Plan</h1>
                     </div>
 
@@ -158,7 +158,7 @@
                     <div class="meal-sections">
 
                         <!--Day One Meals-->
-                        <div class="breakfast-section meal-type" id= "day-one-breakfast-section" data-title="Breakfast">
+                        <div class="breakfast-section meal-type" id="day-one-breakfast-section" data-title="Breakfast">
                             <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
                             <div class="text-area">
                                 <p class="day-one-breakfast">Oats topped with raspberries and blueberries, served alongside a glass of orange juice.</p>
@@ -271,7 +271,7 @@
                                     Smoothie (banana, spinach, protein powder, almond milk, and flaxseed)
                                 </p>
                             </div>
-                            
+
                         </div>
 
                         <div class="lunch-section meal-type" id="day-four-lunch-section" data-title="Lunch">
@@ -310,7 +310,7 @@
                                     Pancakes made with oats and banana, topped with fresh strawberries
                                 </p>
                             </div>
-                            
+
                         </div>
 
                         <div class="lunch-section meal-type" id="day-five-lunch-section" data-title="Lunch">
@@ -349,7 +349,7 @@
                                     Scrambled eggs with spinach and whole grain toast
                                 </p>
                             </div>
-                            
+
                         </div>
 
                         <div class="lunch-section meal-type" id="day-six-lunch-section" data-title="Lunch">
@@ -388,7 +388,7 @@
                                     Overnight oats with almond butter and sliced banana
                                 </p>
                             </div>
-                            
+
                         </div>
 
                         <div class="lunch-section meal-type" id="day-seven-lunch-section" data-title="Lunch">
@@ -652,4 +652,5 @@
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>

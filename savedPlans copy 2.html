@@ -1,0 +1,698 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Meal Planner - School Saved Plans</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-image: url('images/white-wall.jpg');
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .clay {
+            background: #e2e2e2;
+            border-radius: 20px;
+            box-shadow: 10px 10px 20px #bebebe, -10px -10px 20px #ffffff;
+            padding: 1rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            margin: 1rem;
+        }
+
+        .header-title {
+            font-family: 'Mea Culpa', cursive;
+            font-size: 2.5rem;
+            text-align: center;
+            flex: 1;
+        }
+
+        .hamburger {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: black;
+            font-size: 1.875rem; /* 30px */
+            cursor: pointer;
+            padding: 0.5rem;
+            padding-right: 0.8rem;
+            z-index: 25;
+            border-radius: 3px;
+            background-image: url('images/white-wall.jpg');
+            background-size: cover;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+                        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+                        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hamburger:hover{
+            color: blue;
+            transform: translateY(-0.5rem); /* Lift by 8px */
+            box-shadow: rgba(50, 50, 93, 0.4) 0px 6.25rem 12.5rem -2.5rem,
+                        rgba(0, 0, 0, 0.4) 0px 3.75rem 7.5rem -3.75rem,
+                        rgba(10, 37, 64, 0.4) 0px -0.25rem 0.625rem 0px inset;
+        }
+
+        #sideNav{
+                width: 0;
+        }
+
+        .school-main {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 0 1rem 2rem 1rem;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            row-gap: 3rem;
+            width: 100%;
+            padding: 0.7rem;
+            padding-top: 4rem;
+        }
+
+        .card {
+            width: 17rem;
+            position: relative;
+            min-height: 10rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            background-image: url('images/family-plan-background.jpg');
+            background-size: cover;
+        }
+
+        .card p{
+            font-size: 1.3rem;
+        }
+
+        .card .text-area {
+            position: relative;
+            width: 80%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .card::before {
+            content: attr(data-title);
+            font-size: 1.95rem;
+            color: white;
+            position: absolute;
+            top: -1.5rem; /* Adjust to move the text closer to the top */
+            left: 20%;
+            transform: translateX(-20%); /* Center the text horizontally */
+            z-index: 3;
+            background-color: rgba(31,32,37,255);
+            padding: 0.2rem;
+            font-weight: 300;
+            font-family: 'Mea Culpa', 'Roboto', sans-serif;
+        }
+
+        .card img {
+            position: absolute;
+            top: -1.8rem;
+            left: 90%;
+            transform: translateX(-90%);
+            z-index: 2;
+            height: 3.5rem; /* Set height of image */
+            width: auto;
+        }
+
+        .lunch-section img {
+            height: 3rem;
+        }
+
+        .snacks-section img {
+            height: 4.5rem;
+            top: -3rem;
+        }
+
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: -400px;
+            width: 300px;
+            height: 100%;
+            background-color: #e4e4e4;
+            box-shadow: 10px 10px 20px #bebebe, -10px -10px 20px #ffffff;
+            transition: left 0.5s ease-in-out;
+            padding: 1rem;
+            transition: left 0.3s ease;
+            z-index: 1000;
+            background-image: url('images/white-wall.jpg');
+            background-size: cover;
+            /*display: flex;
+            flex-direction: column;
+            justify-content: center;*/
+        }
+
+        #sidebar.active {
+            left: 0;
+        }
+
+        #sidebar .close-btn {
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            background-color: #fff;
+            border-radius: 4em;
+            height: 2.2em;
+            width: 2.2em;
+            -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            position: absolute;
+            right: 1.5%;
+        }
+
+        #sidebar .close-btn:hover {
+            color: #ba3242;
+            -webkit-transition: background 350ms cubic-bezier(0.42, 0, 0.58, 1) 10ms, all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+            -moz-transition: background 350ms cubic-bezier(0.42, 0, 0.58, 1) 10ms, all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+            -o-transition: background 350ms cubic-bezier(0.42, 0, 0.58, 1) 10ms, all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+            transition: background 350ms cubic-bezier(0.42, 0, 0.58, 1) 10ms, all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+        }
+
+        .radio-inputs {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            border-radius: 0.5rem;
+            background-color: rgba(0, 0, 0, 0.06);
+            box-sizing: border-box;
+            box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+            padding: 0.5rem;
+            width: 90%;
+            font-size: 1.2rem;
+        }
+
+        .radio-inputs .radio {
+            flex: 1 1 auto;
+            text-align: center;
+        }
+
+        .radio-inputs .radio input {
+            display: none;
+        }
+
+        .radio-inputs .radio .name {
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            border: none;
+            padding: .5rem 0;
+            color: rgba(51, 65, 85, 1);
+            transition: all .15s ease-in-out;
+        }
+
+        .radio-inputs .radio input:checked + .name {
+            background-color: #fff;
+            font-weight: 600;
+        }
+
+        /* Card responsiveness */
+        @media (max-width: 768px) {
+            .card {
+                width: 45%;
+            }
+            .header-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .card {
+                width: 100%;
+            }
+        }
+
+        #backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 900;
+        }
+
+        #backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+    </style>
+    </head>
+    <body>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar">
+        <button class="close-btn" onclick="toggleSidebar()"><b>✕</b></button>
+
+        <!--Plan Navigation -Meal Plan Radio selections-->
+        <div class="radio-inputs">
+            <label class="radio">
+                <input type="radio" name="radio" checked="">
+                <span class="name">Family Meal Plan</span>
+            </label>
+            <label class="radio">
+                <input type="radio" name="radio">
+                <span class="name">School Meal Plan</span>
+            </label>
+        </div>
+
+        <p class="plan-nav-user-guide">Select a date to view plan...</p>
+
+        <!--Calendar-->
+        <div class="plan-nav-calendar">
+            <div class="header">
+                <button onclick="changeMonth(-1)">&#8592;</button>
+                <div class="month-year" id="monthYear"></div>
+                <button onclick="changeMonth(1)">&#8594;</button>
+            </div>
+            <div class="weekdays">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div class="days" id="calendarDays"></div>
+        </div>
+    </div>
+
+    <div id="backdrop" onclick="toggleSidebar()"></div>
+
+
+    <!-- Header -->
+    <header class="clay">
+        <button class="plan-nav-btn" onclick="toggleSidebar()">
+            <div class="plan-nav-btn-outer">
+                <div class="plan-nav-btn-inner">
+                    <span><b>☰</b> &emsp; Plan Navigation</span>
+                </div>
+            </div>
+        </button>
+        <div class="header-title">Meal Planner</div>
+        <div class="hamburger">☰</div>
+    </header>
+
+    <!-- Side Navbar (for smaller screens) -->
+    <div class="side-nav" id="sideNav">
+        <!-- Close button to close the sidebar -->
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+
+        <button onclick="closeNav()">Register/Login</button><br>
+
+        <a href="index.html" target="_blank">
+            <button onclick="closeNav()">Home</button>
+        </a>
+        
+        <a href="savedPlans.html" target="_blank">
+            <button onclick="closeNav()">Saved Plans</button>
+        </a>
+        
+        <div class="dropdown">
+            <button class="dropbtn">Create</button>
+            <div class="dropdown-content">
+                <!-- Inside the .dropdown-content -->
+                    <a href="familyplan.html" target="_blank" onclick="handleDropdownSelection(this)">Family Meal Plan</a>
+                    <a href="schoollunch.html" target="_blank" onclick="handleDropdownSelection(this)">School Lunch Meal Plan</a>
+                    <!--<a href="#" onclick="handleDropdownSelection(this)">Work Meal Plan</a>-->
+                    <!--<a href="#" onclick="handleDropdownSelection(this)">Special Occasion/Festival Meal Plan</a>-->
+
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Main Content -->
+
+    <!--School Meal Plan Content-->
+    <div class="school-main">
+        <!-- Card Container -->
+        <div class="clay">
+            <div class="school-heading-and-day-selector">
+                <div class="day-selector">
+                        <select class="day-selector-dropdown" id="day-selector" onchange="toggleMealsByDay()">
+                            <option value="day-one">Monday 21 April</option>
+                            <option value="day-two">Tuesday 22 April</option>
+                            <option value="day-three">Wednesday 23 April</option>
+                            <option value="day-four">Thursday 24 April</option>
+                            <option value="day-five">Friday 25 April</option>
+                            <option value="day-six">Saturday 26 April</option>
+                            <option value="day-seven">Sunday 27 April</option>
+                        </select>
+                </div>
+                
+                <h1>School Meal Plan</h1>
+            </div>
+
+        <div class="card-container">
+            <!--Menu By School Break System-->
+            <div class="break-system">
+
+                <!--Day One Meals-->
+                <div class="clay card recess school-meal" data-title="Recess Meal Break" id="day-one-recess-section">
+                    <div class="meal-image">
+                        <img class = "lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                    </div>
+                    <div class="text-area">
+                        <p>
+                            Ham and cheese skewers.<br>
+                            Carrot sticks with a side of tomato ketchup dip.<br>
+                            Deviled egg.<br>
+                            Almond seeds.<br>
+                            Granola Bars.<br>
+                            Fruit salad.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="clay card lunch school-meal" data-title="Main Lunch Break" id="day-one-lunch-section">
+                    <div class="meal-image">
+                        <img class = "lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                    </div>
+                    <div class="text-area">
+                        <p>
+                            <b>Main:</b> <span class="edittable-meal">Spicy curry rice with smoked sausages</span><br>
+                            <b>Sides:</b> <span class="edittable-meal">Ham and cheese wrap</span><br>
+                            <b>Drink:</b> <span class="edittable-meal">Mango juice</span><br>
+                            <b>Dessert:</b> <span class="edittable-meal">Yogurt with fruit</span><br>
+                            <b>Snack:</b> <span class="edittable-meal">Muffin</span>
+                        </p>
+                    </div>
+                </div>
+                <!--End of Day One Meals-->
+
+                <!--Day Two Meals-->
+                <div class="clay card recess school-meal" data-title="Recess Meal Break" id="day-two-recess-section">
+                    <div class="meal-image">
+                        <img class = "lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                    </div>
+                    <div class="text-area">
+                        <p>
+                            Ham and cheese pinwheels<br>
+                            Cherry tomatoes and cucumber<br>
+                            Yogurt with granola<br>
+                            Banana chips<br>
+                            Mixed nuts
+                        </p>
+                    </div>
+                </div>
+
+                <div class="clay card lunch school-meal" data-title="Main Lunch Break" id="day-two-lunch-section">
+                    <div class="meal-image">
+                        <img class = "lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                    </div>
+                    <div class="text-area">
+                        <p>
+                            <b>Main:</b> <span class="edittable-meal">Grilled chicken and quinoa salad with mixed greens</span><br>
+                            <b>Sides:</b> <span class="edittable-meal">Sweet potato wedges</span><br>
+                            <b>Drink:</b> <span class="edittable-meal">Apple Juice</span><br>
+                            <b>Dessert:</b> <span class="edittable-meal">Pineapple chunks</span><br>
+                            <b>Snack:</b> <span class="edittable-meal">Whole wheat roll</span>
+                        </p>
+                    </div>
+                </div>
+                <!--End of Day Two Meals-->
+
+                <!--Day Three Meals-->
+                <div class="clay card recess school-meal" data-title="Recess Meal Break" id="day-three-recess-section">
+                    <div class="meal-image">
+                        <img class = "lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                    </div>
+                    <div class="text-area">
+                        <p>
+                            Rice cakes with almond butter and banana slices<br>
+                            Baby carrots<br>
+                            Boiled eggs<br>
+                            A handful of mixed nuts<br>
+                            Fruit smoothie (spinach, banana, berries)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="clay card lunch school-meal" data-title="Main Lunch Break" id="day-three-lunch-section">
+                    <div class="meal-image">
+                        <img class = "lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                    </div>
+                    <div class="text-area">
+                        <p>
+                            <b>Main:</b> <span class="edittable-meal">Veggie and cheese quesadilla</span><br>
+                            <b>Sides:</b> <span class="edittable-meal">Avocado salsa</span><br>
+                            <b>Drink:</b> <span class="edittable-meal">Peach Juice</span><br>
+                            <b>Dessert:</b> <span class="edittable-meal">Peach slices</span><br>
+                            <b>Snack:</b> <span class="edittable-meal">Chocolate pudding</span>
+                        </p>
+                    </div>
+                </div>
+                <!--End of Day Three Meals-->
+
+                <!--Day Four Meals-->
+                <div class="clay card recess school-meal" data-title="Recess Meal Break" id="day-four-recess-section">
+                    <div class="meal-image">
+                        <img class = "lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                    </div>
+                    <div class="text-area">
+                        <p>
+                            Veggie sticks with hummus<br>
+                            String cheese<br>
+                            Roasted chickpeas<br>
+                            Dried fruit mix (raisins, apricots)<br>
+                            Cantaloupe cubes
+                        </p>
+                    </div>
+                </div>
+
+                <div class="clay card lunch school-meal" data-title="Main Lunch Break" id="day-four-lunch-section">
+                    <div class="meal-image">
+                        <img class = "lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                    </div>
+                    <div class="text-area">
+                        <p>
+                            <b>Main:</b> <span class="edittable-meal">Turkey and avocado wrap with lettuce</span><br>
+                            <b>Sides:</b> <span class="edittable-meal">Roasted vegetable mix (zucchini, bell pepper, carrots)</span><br>
+                            <b>Drink:</b> <span class="edittable-meal">Fresh orange Juice</span><br>
+                            <b>Dessert:</b> <span class="edittable-meal">Plain yogurt with granola</span><br>
+                            <b>Snack:</b> <span class="edittable-meal">Orange Slices</span>
+                        </p>
+                    </div>
+                </div>
+                <!--End of Day Four Meals-->
+
+                <!--Day Five Meals-->
+                <div class="clay card recess school-meal" data-title="Recess Meal Break" id="day-five-recess-section">
+                    <div class="meal-image">
+                        <img class = "lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                    </div>
+                    <div class="text-area">
+                        <p>
+                            Mini pita pockets with hummus and cucumber<br>
+                            Sliced strawberries and blueberries<br>
+                            Rice crackers<br>
+                            Mixed seeds (pumpkin, sunflower)<br>
+                            Trail mix (unsweetened)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="clay card lunch school-meal" data-title="Main Lunch Break" id="day-five-lunch-section">
+                    <div class="meal-image">
+                        <img class = "lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                    </div>
+                    <div class="text-area">
+                        <p>
+                            <b>Main:</b> <span class="edittable-meal">Grilled salmon with brown rice</span><br>
+                            <b>Sides:</b> <span class="edittable-meal">Steamed broccoli</span><br>
+                            <b>Drink:</b> <span class="edittable-meal">Pineapple Juice</span><br>
+                            <b>Dessert:</b> <span class="edittable-meal">Fresh pineapple slices</span><br>
+                            <b>Snack:</b> <span class="edittable-meal">Fresh pineapple slices</span>
+                        </p>
+                    </div>
+                </div>
+                <!--End of Day Five Meals-->
+
+                <!--Day Six Meals-->
+                <div class="clay card recess school-meal" data-title="Recess Meal Break" id="day-six-recess-section">
+                    <div class="meal-image">
+                        <img class = "lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                    </div>
+                    <div class="text-area">
+                        <p>
+                            Whole grain crackers with cheese and grapes<br>
+                            Mini celery sticks with peanut butter<br>
+                            Unsweetened dried fruit
+                        </p>
+                    </div>
+                </div>
+
+                <div class="clay card lunch school-meal" data-title="Main Lunch Break" id="day-six-lunch-section">
+                    <div class="meal-image">
+                        <img class = "lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                    </div>
+                    <div class="text-area">
+                        <p>
+                            <b>Main:</b> <span class="edittable-meal">Chicken noodle soup with whole grain crackers</span><br>
+                            <b>Sides:</b> <span class="edittable-meal">Spinach salad with balsamic vinegar</span><br>
+                            <b>Drink:</b>  <span class="edittable-meal">Water Melon Juice</span><br>
+                            <b>Dessert:</b> <span class="edittable-meal">Water Melon Cubes</span><br>
+                            <b>Snack:</b> <span class="edittable-meal">Water Melon Cubes</span>.
+                        </p>
+                    </div>
+                </div>
+                <!--End of Day Six Meals-->
+
+                <!--Day Seven Meals-->
+                <div class="clay card recess school-meal" data-title="Recess Meal Break" id="day-seven-recess-section">
+                    <div class="meal-image">
+                        <img class = "lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                    </div>
+                    <div class="text-area">
+                        <p>
+                            Veggie sticks with ranch dip<br>
+                            Whole grain crackers with cheese<br>
+                            Handful of almonds<br>
+                            Apple slices<br>
+                            Mini muffin
+                        </p>
+                    </div>
+                </div>
+
+                <div class="clay card lunch school-meal" data-title="Main Lunch Break" id="day-seven-lunch-section">
+                    <div class="meal-image">
+                        <img class = "lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                    </div>
+                    <div class="text-area">
+                        <p>
+                            <b>Main:</b> <span class="edittable-meal">Spaghetti with marinara sauce and turkey meatballs</span><br>
+                            <b>Sides:</b> <span class="edittable-meal">Side of steamed peas</span><br>
+                            <b>Drink:</b> <span class="edittable-meal">Apple juice</span><br>
+                            <b>Dessert:</b> <span class="edittable-meal">Yogurt</span><br>
+                            <b>Snack:</b> <span class="edittable-meal">Cashew Nuts</span>
+                        </p>
+                    </div>
+                </div>
+                <!--End of Day Seven Meals-->
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle the side navigation
+        function toggleNav() {
+            const sideNav = document.getElementById("sideNav");
+            if (sideNav.style.width === "250px") {
+                sideNav.style.width = "0"; // Close the side nav
+            } else {
+                sideNav.style.width = "250px"; // Open the side nav
+            }
+        }
+
+        // Adding the event listener for the hamburger menu
+        document.querySelector('.hamburger').addEventListener('click', toggleNav);
+
+        // Function to close the sidebar (for "close" button inside side-nav)
+        function closeNav() {
+            const sideNav = document.getElementById("sideNav");
+            sideNav.style.width = "0"; // Close the side nav
+        }
+
+        // Add event listener for close button inside side-nav
+        const closeButton = document.querySelector('.side-nav .closebtn');
+        if (closeButton) {
+            closeButton.addEventListener('click', closeNav); // Close sidebar when close button is clicked
+        }
+
+        // Close the side navbar when clicking Home, Contact, Register/Login buttons
+        const navButtons = document.querySelectorAll('.side-nav button');
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Close the side navbar when a link is clicked except the Create button
+                if (button !== createButton) {
+                    closeNav(); // Close the sidebar
+                }
+            });
+        });
+
+        // Add event listener for other nav links (Home, Contact, etc.)
+        const sideNavLinks = document.querySelectorAll('.side-nav button');
+        sideNavLinks.forEach(link => {
+            link.addEventListener("click", function(event) {
+                if (link !== createButton) {
+                    closeNav(); // Close the side navbar when a link is clicked except the Create button
+                }
+            });
+        });
+
+        //Calendar Javascript
+        const monthYearEl = document.getElementById('monthYear');
+        const calendarDaysEl = document.getElementById('calendarDays');
+        const now = new Date();
+        let currentMonth = now.getMonth();
+        let currentYear = now.getFullYear();
+
+        function renderCalendar(month, year) {
+        const firstDay = new Date(year, month, 1).getDay();
+        const totalDays = new Date(year, month + 1, 0).getDate();
+        const monthName = new Date(year, month).toLocaleString('default', { month: 'long' });
+        monthYearEl.textContent = `${monthName} ${year}`;
+        calendarDaysEl.innerHTML = '';
+
+        // Empty slots for the first week
+        for (let i = 0; i < firstDay; i++) {
+            const empty = document.createElement('div');
+            empty.classList.add('empty');
+            calendarDaysEl.appendChild(empty);
+        }
+
+        // Populate days
+        for (let day = 1; day <= totalDays; day++) {
+            const dayBtn = document.createElement('button');
+            dayBtn.textContent = day;
+            calendarDaysEl.appendChild(dayBtn);
+        }
+        }
+
+        function changeMonth(delta) {
+        currentMonth += delta;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        } else if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
+        renderCalendar(currentMonth, currentYear);
+        }
+
+        renderCalendar(currentMonth, currentYear);
+    </script>
+    
+    <script src="script.js"></script>
+    </body>
+    </html>
