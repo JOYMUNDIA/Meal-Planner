@@ -455,126 +455,34 @@ window.onload = function() {
     toggleMealsByDay();
 };
 
-//Utility: Get Date for Day Index
-function getDateForDayIndex(startDate, dayIndex) {
-    let dateObj = new Date(startDate);
-    if (isNaN(dateObj.getTime())) {
-        // Fallback to tomorrow if invalid
-        dateObj = new Date();
-        dateObj.setDate(dateObj.getDate() + 1);
-    }
-    dateObj.setDate(dateObj.getDate() + dayIndex);
-    return dateObj.toISOString().split('T')[0];
-}
-
-//Utility: Format Date for Week View
-function formatDateForWeekView(dateStr) {
-    // dateStr: "YYYY-MM-DD"
-    const dateObj = new Date(dateStr);
-    // Match the format used in populateDays: "4 Apr"
-    return dateObj.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
-}
-
-//Utility: Get Day and Meal Type
-function toTitleCase(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-}
-
-
-// For meal-type sections in the day view
-function getDayAndMealFromSectionId(sectionId) {
-    // e.g. "day-seven-dinner-section"
-    const parts = sectionId.split('-');
-    return {
-        day: parts[1], // "seven"
-        meal: toTitleCase(parts[2]) // "Dinner"
-    };
-}
-
-// For td elements in the week view table
-function getDayAndMealFromTdClass(td) {
-    const classList = Array.from(td.classList);
-    const mealClass = classList.find(cls => cls.startsWith("day-") && cls.includes("-"));
-    if (!mealClass) return { day: null, meal: null };
-    const parts = mealClass.split('-');
-    return {
-        day: parts[1],
-        meal: toTitleCase(parts[2])
-    };
-}
-
-//Utility: Get Date from td element
-function getTdDate(td) {
-    const tr = td.closest('tr');
-    const dateCell = tr.querySelector('.date-cell .day-month');
-    return dateCell ? dateCell.textContent.trim() : null;
-}
-
-//Utility: Save and Load Meals to/from localStorage
-function saveMeal(date, mealType, value) {
-    let mealData = JSON.parse(localStorage.getItem('familyMeals')) || {};
-    if (!mealData[date]) mealData[date] = {};
-    mealData[date][mealType] = value;
-    localStorage.setItem('familyMeals', JSON.stringify(mealData));
-}
-
-function loadMeal(date, mealType) {
-    let mealData = JSON.parse(localStorage.getItem('familyMeals')) || {};
-    return mealData[date] ? mealData[date][mealType] || "" : "";
-}
-
 
 //Enable edit in Day view of Family Meal Plan
 document.querySelectorAll('.meal-type').forEach(section => {
+    let timeoutId = null;
+
     section.addEventListener('dblclick', () => {
         const paragraph = section.querySelector('p');
+
+        // Enable editing
         paragraph.contentEditable = true;
         paragraph.focus();
 
-        // Move cursor to the end
+        // Move cursor to the end using modern API
         const range = document.createRange();
         range.selectNodeContents(paragraph);
-        range.collapse(false);
+        range.collapse(false); // Collapse to the end
+
         const selection = window.getSelection();
         selection.removeAllRanges();
         selection.addRange(range);
 
-        paragraph.addEventListener('blur', function handler() {
+        // Clear existing timeout if it exists
+        if (timeoutId) clearTimeout(timeoutId);
+
+        // Set timeout to disable editing after 30 seconds
+        timeoutId = setTimeout(() => {
             paragraph.contentEditable = false;
-
-            // Get selected day index from the day selector
-            const daySelector = document.getElementById('day-selector');
-            const selectedIdx = daySelector.selectedIndex; // This is the actual day being viewed
-
-            // Get selected start date and actual date for this section
-            const startDateInput = document.getElementById('start-date');
-            let startDate = startDateInput.value;
-            if (!startDate) {
-                const today = new Date();
-                today.setDate(today.getDate() + 1);
-                startDate = today.toISOString().split('T')[0];
-            }
-            const actualDate = getDateForDayIndex(startDate, selectedIdx);
-
-            // Get meal type from section id
-            const mealType = toTitleCase(section.id.split('-')[2]);
-            const value = paragraph.textContent.trim();
-
-            // Save to localStorage
-            saveMeal(actualDate, mealType, value);
-
-            // Sync Week View: update only td with matching date and meal type
-            document.querySelectorAll('#weekly-timetable-content .meals').forEach(td => {
-                const tdDate = getTdDate(td); // e.g., "4 Apr"
-                const tdInfo = getDayAndMealFromTdClass(td);
-                const formattedActualDate = formatDateForWeekView(actualDate); // e.g., "4 Apr"
-                if (tdDate && tdDate === formattedActualDate && tdInfo.meal === mealType) {
-                    td.textContent = value;
-                }
-            });
-
-            paragraph.removeEventListener('blur', handler);
-        });
+        }, 30000);
     });
 });
 
@@ -818,15 +726,6 @@ document.addEventListener("DOMContentLoaded", function() {
         if (activeCell) {
             activeCell.innerHTML = modalMealCell.innerHTML.trim();
         }
-        // Sync Day View
-        const { day, meal } = getDayAndMealFromTdClass(activeCell);
-        document.querySelectorAll('.meal-type').forEach(section => {
-            const sectionInfo = getDayAndMealFromSectionId(section.id);
-            if (sectionInfo.day === day && sectionInfo.meal === meal) {
-                const paragraph = section.querySelector('p');
-                paragraph.textContent = modalMealCell.textContent.trim();
-            }
-        });
         closeModal();
     });
 
@@ -848,81 +747,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// Week View Modal Handler (Sync & Save by Date)
-let activeTd = null;
 
-document.querySelectorAll('#weekly-timetable-content .meals').forEach(td => {
-    td.addEventListener('dblclick', () => {
-        activeTd = td;
-        document.getElementById('weekly-timetable-modal').style.display = 'block';
-        document.querySelector('.modal-meal').textContent = td.textContent;
-        document.querySelector('.modal-meal').contentEditable = true;
-        document.querySelector('.modal-meal').focus();
-    });
-});
-
-document.querySelector('.modal-enter-btn').addEventListener('click', () => {
-    if (activeTd) {
-        const modalMealCell = document.querySelector('.modal-meal');
-        const value = modalMealCell.textContent.trim();
-        activeTd.textContent = value;
-
-        // Get date and meal type from td
-        const actualDate = getTdDate(activeTd);
-        const mealType = getDayAndMealFromTdClass(activeTd).meal;
-
-        // Save to localStorage
-        saveMeal(actualDate, mealType, value);
-
-        // Sync Day View: update only <p> with matching date and meal type
-        document.querySelectorAll('.meal-type').forEach((section, idx) => {
-            const startDateInput = document.getElementById('start-date');
-            const startDate = startDateInput.value;
-            const sectionDate = getDateForDayIndex(startDate, idx);
-            const sectionMealType = toTitleCase(section.id.split('-')[2]);
-            if (sectionDate === actualDate && sectionMealType === mealType) {
-                const paragraph = section.querySelector('p');
-                paragraph.textContent = value;
-            }
-        });
-
-        document.getElementById('weekly-timetable-modal').style.display = 'none';
-        modalMealCell.contentEditable = false;
-        activeTd = null;
-    }
-});
-
-// Sync Day and Week View when Start Date changes
-document.getElementById('start-date').addEventListener('change', () => {
-    const startDate = document.getElementById('start-date').value;
-    document.querySelectorAll('.meal-type').forEach((section, idx) => {
-        const mealType = toTitleCase(section.id.split('-')[2]);
-        const actualDate = getDateForDayIndex(startDate, idx);
-        const paragraph = section.querySelector('p');
-        paragraph.textContent = loadMeal(actualDate, mealType);
-    });
-    document.querySelectorAll('#weekly-timetable-content .meals').forEach((td, tdIdx) => {
-        // Get the <tr> for this td
-        const tr = td.closest('tr');
-        // Get the date string from the .day-month cell (e.g., "4 Apr")
-        const tdDateStr = tr.querySelector('.day-month').textContent.trim();
-        // Get the meal type from td class
-        const mealType = getDayAndMealFromTdClass(td).meal;
-
-        // For the current start date, find which actualDate matches tdDateStr
-        let found = false;
-        for (let i = 0; i < 7; i++) {
-            const actualDate = getDateForDayIndex(startDate, i);
-            const formattedActualDate = formatDateForWeekView(actualDate);
-            if (tdDateStr === formattedActualDate) {
-                td.textContent = loadMeal(actualDate, mealType);
-                found = true;
-                break;
-            }
-        }
-        if (!found) td.textContent = ""; // Clear if no match
-    });
-});
 
 // Saved Plans Javascript
 
