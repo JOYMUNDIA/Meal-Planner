@@ -933,3 +933,24 @@ function toggleSidebar() {
     sidebar.classList.toggle("active");
     backdrop.classList.toggle("active");
 }
+
+//Adjust Print Button Text based on View
+document.addEventListener('DOMContentLoaded', function() {
+    const printDocText = document.querySelector('.print-doc-text');
+    const dailyRadio = document.getElementById('dailyMealPlan');
+    const weeklyRadio = document.getElementById('weeklyMealPlan');
+
+    function updatePrintText() {
+        if (dailyRadio.checked) {
+            printDocText.textContent = 'Print Daily Meal Plan';
+        } else if (weeklyRadio.checked) {
+            printDocText.textContent = 'Print Weekly Meal Plan';
+        }
+    }
+
+    dailyRadio.addEventListener('change', updatePrintText);
+    weeklyRadio.addEventListener('change', updatePrintText);
+
+    // Set initial text on page load
+    updatePrintText();
+});
