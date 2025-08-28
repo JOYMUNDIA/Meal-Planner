@@ -954,3 +954,37 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set initial text on page load
     updatePrintText();
 });
+
+// Print the currently visible meal plan card
+function printVisibleCard() {
+    // Get both cards
+    const dailyCard = document.querySelector('.family-plan-card-container');
+    const weeklyCard = document.querySelector('.family-weekly-plan-card-container');
+
+    // Remove any previous 'print-scope' classes
+    dailyCard.classList.remove('print-scope');
+    weeklyCard.classList.remove('print-scope');
+
+    // Determine which one is visible (via .flex class)
+    const visibleCard = document.querySelector('.family-plan-card-container.flex, .family-weekly-plan-card-container.flex');
+    if (!visibleCard) {
+        alert('No visible card to print.');
+        return;
+    }
+
+    // Add print-scope to the visible card
+    visibleCard.classList.add('print-scope');
+
+    // Use setTimeout to allow the browser to apply the class
+    setTimeout(() => {
+
+        //Trigger Print
+        window.print();
+
+        //Remove the print-scope from the visible card
+        visibleCard.classList.remove('print-scope');
+    }, 100); // Delay of 100ms should be enough
+
+    // Debugging which card is visible
+    console.log("Visible card:", visibleCard);
+}

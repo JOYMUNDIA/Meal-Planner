@@ -758,3 +758,4 @@ function toggleSidebar() {
     sidebar.classList.toggle("active");
     backdrop.classList.toggle("active");
 }
+
