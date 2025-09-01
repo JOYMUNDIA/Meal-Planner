@@ -180,16 +180,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const schoolLunchWeeklyPlanCard = document.querySelector('.school-lunch-weekly-plan-card-container');
 
     // Function to set the correct display styles based on selected layout
-    function updateLayout() {
-        // Reset all sections to be hidden
+    
+   function updateLayout() {
+        // Hide both cards and remove .flex
         schoolLunchPlanCard.style.display = 'none';
         schoolLunchWeeklyPlanCard.style.display = 'none';
+        schoolLunchPlanCard.classList.remove('flex');
+        schoolLunchWeeklyPlanCard.classList.remove('flex');
 
-        // Show the correct section based on the selected radio button
+        // Show and add .flex to the correct card
         if (schoolDailyMealPlan.checked) {
-            schoolLunchPlanCard.style.display = 'flex'; // Make the Daily Meal Plan visible
+            schoolLunchPlanCard.style.display = 'flex';
+            schoolLunchPlanCard.classList.add('flex');
         } else if (schoolWeeklyMealPlan.checked) {
-            schoolLunchWeeklyPlanCard.style.display = 'flex'; // Make the Weekly Meal Plan visible
+            schoolLunchWeeklyPlanCard.style.display = 'flex';
+            schoolLunchWeeklyPlanCard.classList.add('flex');
         }
     }
 
