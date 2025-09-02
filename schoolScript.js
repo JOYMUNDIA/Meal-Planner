@@ -575,28 +575,36 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Only target .meals inside the main timetable, not inside the modal (School Meal Plan)
     weeklyTimetableContent.querySelectorAll(".school-meals").forEach(cell => {
-        cell.addEventListener("dblclick", () => {
-            activeCell = cell;
+    cell.addEventListener("dblclick", () => {
+        activeCell = cell;
 
-            // Show modal
-            modal.style.display = "block";
-            weeklyTimetableContent.classList.add("blurred");
+        // Show modal
+        modal.style.display = "block";
+        weeklyTimetableContent.classList.add("blurred");
 
-            // Set modal header and meal
-            const mealType = getMealTypeFromClass(cell);
-            modalHeader.textContent = mealType;
+        // Set modal header and meal
+        const mealType = getMealTypeFromClass(cell);
+        modalHeader.textContent = mealType;
 
-            // Copy date from table
-            const dateDiv = getDateContainerFor(cell);
-            modalDateContainer.innerHTML = ""; // Clear existing
-            modalDateContainer.appendChild(dateDiv);
+        // Copy date from table
+        const dateDiv = getDateContainerFor(cell);
+        modalDateContainer.innerHTML = ""; // Clear existing
+        modalDateContainer.appendChild(dateDiv);
 
-            // Load current meal text
-            modalMealCell.textContent = cell.textContent;
-            modalMealCell.contentEditable = true;
-            modalMealCell.focus();
+        // Load current meal HTML so spans are preserved
+        modalMealCell.innerHTML = cell.innerHTML;
+
+        // Make only .edittable-meal spans editable
+        modalMealCell.querySelectorAll('.edittable-meal').forEach(span => {
+            span.setAttribute('contenteditable', 'true');
         });
+
+
+        // Everything else remains as is for better UX
+
+        modalMealCell.focus();
     });
+});
 
 
     function handleFullstopToLineBreak() {
