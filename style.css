@@ -2777,13 +2777,13 @@
                                     }
                                     /* Break System Css */
                                     /*.school-lunch-plan-card .break-system.flex {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 4rem;
-    row-gap: 9rem;
-}*/
+                                        display: flex;
+                                        flex-wrap: wrap;
+                                        justify-content: center;
+                                        align-items: center;
+                                        gap: 4rem;
+                                        row-gap: 9rem;
+                                    }*/
                                     
                                     .school-lunch-plan-card .break-system {
                                         display: flex;
