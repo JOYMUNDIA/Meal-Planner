@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Meal Plan</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            font-family: 'Cormorant', sans-serif;
+        }
+
+        .body-div {
+            width: 100vw;
+            background-image: url('images/white-wall.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .nav-links {
+                display: none;
+            }
+
+        .hamburger-menu {
+                display: block;
+                z-index: 25;
+                position: relative;
+                left: 94vw;
+        }
+
+        @media screen and (max-width: 768px) {
+            .hamburger-menu {
+                left: 90vw;
+            }
+        }
+
+        .side-nav {
+                width: 0;
+        }
+
+        .family-plan-parent-container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .family-plan-parent-container .layout-header{
+            width: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem 1rem;
+        }
+
+        .family-plan-parent-container .layout-header .radio-inputs {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            border-radius: 1rem;
+            background: linear-gradient(145deg, #e6e6e6, #ffffff);
+            box-sizing: border-box;
+            box-shadow:
+                5px 5px 15px rgba(0, 0, 0, 0.15),
+                -5px -5px 15px rgba(255, 255, 255, 0.8);
+            padding: 1rem;
+            width: 22rem;
+            font-size: 1.35rem;
+            gap: 0.5rem;
+        }
+
+        .family-plan-parent-container .layout-header .radio-inputs .radio {
+            flex: 1 1 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .family-plan-parent-container .layout-header .radio-inputs .radio input {
+            display: none;
+        }
+
+        .family-plan-parent-container .layout-header .radio-inputs .radio .name {
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.7rem;
+            border: none;
+            padding: 0.7rem 0;
+            color: #2d3748;
+            font-weight: 500;
+            font-family: inherit;
+            background: linear-gradient(145deg, #ffffff, #e6e6e6);
+            box-shadow:
+                3px 3px 6px rgba(0, 0, 0, 0.1),
+                -3px -3px 6px rgba(255, 255, 255, 0.7);
+            transition: all 0.2s ease;
+            overflow: hidden;
+        }
+
+        .family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name {
+            /*background: linear-gradient(145deg, #3b82f6, #2563eb);*/
+            background-image: url('images/family-plan-background.jpg');
+            color: white;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            box-shadow:
+                inset 2px 2px 5px rgba(0, 0, 0, 0.2),
+                inset -2px -2px 5px rgba(255, 255, 255, 0.1),
+                3px 3px 8px rgba(59, 130, 246, 0.3);
+            transform: translateY(2px);
+        }
+
+        /* Hover effect */
+        .family-plan-parent-container .layout-header .radio-inputs .radio:hover .name {
+            background: linear-gradient(145deg, #f0f0f0, #ffffff);
+            transform: translateY(-1px);
+            box-shadow:
+                4px 4px 8px rgba(0, 0, 0, 0.1),
+                -4px -4px 8px rgba(255, 255, 255, 0.8);
+        }
+
+        .family-plan-parent-container .layout-header .radio-inputs .radio:hover input:checked + .name {
+            transform: translateY(1px);
+        }
+
+        /* Animation */
+        .family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name {
+            animation: select 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Particles */
+        .family-plan-parent-container .layout-header .radio-inputs .radio .name::before,
+        .family-plan-parent-container .layout-header .radio-inputs .radio .name::after {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::before,
+        .family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::after {
+            animation: particles 0.8s ease-out forwards;
+        }
+
+        .family-plan-parent-container .layout-header .radio-inputs .radio .name::before {
+            background: #60a5fa;
+            box-shadow: 0 0 6px #60a5fa;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .family-plan-parent-container .layout-header .radio-inputs .radio .name::after {
+            background: #93c5fd;
+            box-shadow: 0 0 8px #93c5fd;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Sparkles */
+        .family-plan-parent-container .layout-header .radio-inputs .radio .name::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: radial-gradient(
+                circle at var(--x, 50%) var(--y, 50%),
+                rgba(59, 130, 246, 0.3) 0%,
+                transparent 50%
+            );
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::after {
+            opacity: 1;
+            animation: sparkle-bg 1s ease-out forwards;
+        }
+
+        /* Multiple particles */
+        .family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name {
+            overflow: visible;
+        }
+
+        .family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::before {
+            box-shadow:
+                0 0 6px #60a5fa,
+                10px -10px 0 #60a5fa,
+                -10px -10px 0 #60a5fa;
+            animation: multi-particles-top 0.8s ease-out forwards;
+        }
+
+        .family-plan-parent-container .layout-header .radio-inputs .family-plan-parent-container .layout-header .radio input:checked + .name::after {
+            box-shadow:
+                0 0 8px #93c5fd,
+                10px 10px 0 #93c5fd,
+                -10px 10px 0 #93c5fd;
+            animation: multi-particles-bottom 0.8s ease-out forwards;
+        }
+
+        @keyframes select {
+            0% {
+                transform: scale(0.95) translateY(2px);
+            }
+            50% {
+                transform: scale(1.05) translateY(-1px);
+            }
+            100% {
+                transform: scale(1) translateY(2px);
+            }
+        }
+
+        @keyframes multi-particles-top {
+            0% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+            40% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px) scale(0);
+                box-shadow:
+                0 0 6px transparent,
+                20px -20px 0 transparent,
+                -20px -20px 0 transparent;
+            }
+        }
+
+        @keyframes multi-particles-bottom {
+            0% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+            40% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px) scale(0);
+                box-shadow:
+                0 0 8px transparent,
+                20px 20px 0 transparent,
+                -20px 20px 0 transparent;
+            }
+        }
+
+        @keyframes sparkle-bg {
+            0% {
+                opacity: 0;
+                transform: scale(0.2);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(2);
+            }
+        }
+
+        /* Ripple effect */
+        .family-plan-parent-container .layout-header .radio-inputs .radio .name::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(
+                circle at var(--x, 50%) var(--y, 50%),
+                rgba(255, 255, 255, 0.5) 0%,
+                transparent 50%
+            );
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::before {
+            animation: ripple 0.8s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                opacity: 1;
+                transform: scale(0.2);
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(2.5);
+            }
+        }
+
+        /* Glowing border */
+        .family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name {
+            position: relative;
+        }
+
+        .family-plan-parent-container .layout-header .radio-inputs .radio input:checked + .name::after {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            background: linear-gradient(
+                45deg,
+                rgba(59, 130, 246, 0.5),
+                rgba(37, 99, 235, 0.5)
+            );
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+                mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: border-glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes border-glow {
+            0% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Default state for all sections */
+        .family-plan-card-container,
+        .family-weekly-plan-card-container {
+            display: none;  /* Initially hidden */
+            opacity: 0;  /* Make them invisible */
+            visibility: hidden; /* Ensure they are hidden from interaction */
+            transition: opacity 0.5s ease, visibility 0.5s ease; /* Smooth fade transition */
+        }
+        
+        /* Specific layout styles */
+        .family-plan-card-container.flex,
+        .family-weekly-plan-card-container.flex {
+            opacity: 1;  /* Fully visible */
+            visibility: visible;  /* Ensure they are interactable */
+        }
+
+        .family-plan-card-container.flex {
+            display: flex;
+        }
+
+        .family-plan-card-container {
+            width: 100%;
+            min-height: 100vh;
+            /*display: flex;*/
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.65);
+            padding: 1rem;
+            overflow-x: hidden;
+        }
+
+        .family-plan-card {
+            width: 88%;
+            position: relative;
+            padding: 1rem;
+            background-image: url('images/family-plan-background.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .family-plan-card-container {
+                padding: 2rem;
+            }
+
+            .family-plan-card {
+                width: 80%;
+            }
+        }
+
+        .ribbon-holder {
+            position: absolute;
+            right: -5px;
+            top: -5px;
+            z-index: 1;
+            width: 75px;
+            height: 75px;
+            text-align: right;
+            overflow: hidden;
+        }
+
+        .ribbon {
+            -ms-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            display: block;
+            box-shadow: 0 3px 10px -8px black;
+            position: absolute;
+            top: 16.3px;
+            right: -21.8px;
+            text-align: center;
+        }
+
+        .ribbon:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 100%;
+            z-index: -1;
+            border-left: 3px solid #666;
+            border-right: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            border-top: 3px solid #666;
+        }
+
+        .ribbon:after {
+            content: '';
+            position: absolute;
+            right: 0%;
+            top: 100%;
+            z-index: -1;
+            border-right: 3px solid #666;
+            border-left: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            border-top: 3px solid #666;
+        }
+
+        .ribbon > span {
+            display: block;
+            width: 100px;
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+            line-height: 20px;
+        }
+
+        .ribbon-outlined > span:before {
+            content: '';
+            border-left: 1px solid #ccc;
+            height: 30px;
+            display: block;
+            -ms-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            position: absolute;
+            top: -4px;
+            left: 11px;
+        }
+
+        .ribbon-outlined > span:after {
+            content: '';
+            border-left: 1px solid #ccc;
+            height: 30px;
+            display: block;
+            -ms-transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            position: absolute;
+            top: -4px;
+            left: 89px;
+        }
+
+        .ribbon-outlined > span {
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+
+        .family-heading-and-day-selector{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            width: 90%;
+            gap: 1rem;
+        }
+
+        .day-selector {
+            position: relative;
+            width: fit-content;
+            height: fit-content;
+            border-radius: 9999px;
+        }
+
+        .day-selector::before {
+            content: "";
+            position: absolute;
+            top: 0%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            background: #06b5d4;
+            border-radius: 50%;
+            filter: blur(30px);
+            opacity: 0.8;
+            transition: all 0.6s cubic-bezier(1, 0, 0, 1);
+        }
+
+        .day-selector:hover::before {
+            width: 100%;
+            height: 25px;
+        }
+
+        .day-selector-dropdown {
+            cursor: pointer;
+            position: relative;
+            padding: 20px 48px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: #083344;
+            background-image: url("data:image/svg+xml;utf8,<svg fill='%23fefefe' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");/*Custom SVG arrow (white, scalable, editable) */
+            background-repeat: no-repeat;
+            background-position: right 16px center; /* Moves it closer to the text. */
+            background-size: 2rem 2rem; /* Controls chevron size. */
+            padding-right: 3.5rem; /* space for the chevron,  Ensures text doesn’t overlap the icon. */
+            font-size: 1.5rem;
+            font-family: 'Cormorant', sans-serif;
+            color: #fefefe;
+            font-weight: 500;
+            border: none;
+            border-radius: 9999px;
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+            box-shadow: inset 0px 1px 1px #67e8f9;
+            transition: all 0.3s ease-in-out, box-shadow 0.1s ease-in-out;
+            overflow: hidden;
+        }
+
+        .day-selector-dropdown::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            box-shadow: 0px 0px 25px 3px #67e8f97e;
+            transition: all 0.5s cubic-bezier(1, 0, 0, 1);
+        }
+
+        .day-selector-dropdown::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            width: 0;
+            height: 0;
+            background-image: linear-gradient(
+                to right,
+                #06b5d400,
+                #4ec4db00,
+                #72d0e200,
+                #90ddea3d,
+                #ace9f277,
+                #ace9f2,
+                #ace9f2,
+                #ace9f277,
+                #90ddea3d,
+                #72d0e200,
+                #4ec3db00,
+                #06b6d400
+            );
+            border-radius: 0 0 50% 50%;
+            opacity: 0.8;
+            filter: drop-shadow(0px 0px 30px #06b6d4);
+            transition: all 0.5s cubic-bezier(1, 0, 0, 1);
+        }
+
+        .day-selector:hover .day-selector-dropdown {
+            background: #18181898;
+            box-shadow: inset 0px 0px 0px #fefefe;
+        }
+
+        .day-selector:hover .day-selector-dropdown::before {
+            width: 30%;
+            height: 2px;
+        }
+
+        .day-selector:hover .day-selector-dropdown::after {
+            width: 100%;
+            height: 2px;
+        }
+
+        .family-plan-card h1 {
+            position: relative;
+            color: white;
+            font-size: 3rem;
+            padding: 1rem;
+        }
+
+        .family-plan-card .meal-sections {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            gap: 4rem;
+        }
+
+        .family-plan-card .meal-sections .breakfast-section,
+        .family-plan-card .meal-sections .lunch-section,
+        .family-plan-card .meal-sections .snacks-section,
+        .family-plan-card .meal-sections .dinner-section {
+            width: 90%;
+            min-height: 10rem;
+            box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Position text closer to the top boundary */
+        .family-plan-card .meal-sections .breakfast-section::before,
+        .family-plan-card .meal-sections .lunch-section::before,
+        .family-plan-card .meal-sections .snacks-section::before,
+        .family-plan-card .meal-sections .dinner-section::before {
+            content: attr(data-title);
+            font-size: 2.5rem;
+            color: white;
+            position: absolute;
+            top: -1.5rem; /* Adjust to move the text closer to the top */
+            left: 50%;
+            transform: translateX(-50%); /* Center the text horizontally */
+            z-index: 3;
+            background-color: rgba(31,32,37,255);
+            padding: 0.2rem;
+            font-family: 'Mea Culpa', 'Roboto', sans-serif;
+        }
+
+        /* Image positioning */
+        .breakfast-section img,
+        .lunch-section img,
+        .snacks-section img,
+        .dinner-section img {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            height: 5rem; /* Set height of image */
+            width: auto;
+        }
+
+        .breakfast-section img {
+            left: -1.6rem; /* Image on the left boundary of breakfast */
+        }
+
+        .lunch-section img {
+            height: 4rem;
+            right: -2rem; /* Image on the right boundary of lunch */
+        }
+
+        .snacks-section img {
+            height: 7rem;
+            left: -2rem; /* Image on the left boundary of snacks */
+        }
+
+        .dinner-section img {
+            right: -1.5rem; /* Image on the right boundary of dinner */
+        }
+
+        .breakfast-section p,
+        .lunch-section p,
+        .snacks-section p,
+        .dinner-section p {
+            position: relative;
+            color: #fff;
+            padding: 0.5rem;
+            font-size: 1.65rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .breakfast-section .text-area,
+        .lunch-section .text-area,
+        .snacks-section .text-area,
+        .dinner-section .text-area {
+            position: relative;
+            width: 50%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        /* Weekly Plan Css */
+        .family-weekly-plan-card-container.flex{
+            display: flex;
+        }
+
+        .family-weekly-plan-card-container{
+            width: 98%;
+            position: relative;
+            padding: 1rem;
+            background-size: cover;
+            /*display: flex;*/
+            justify-content: center;
+            align-items: center;
+        }
+
+        .family-weekly-plan-card {
+            width: 98%;
+            position: relative;
+            padding: 1rem;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: rgba(0, 0, 0, 0.12) 1px 2px 3px, rgba(0, 0, 0, 0.24) 1px 2px 3px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .family-weekly-plan-card-container {
+                padding: 2rem;
+            }
+
+            .family-weekly-plan-card {
+                width: 90%;
+            }
+        }
+
+        .family-weekly-plan-card table{
+            width: 95%;
+            background-color: rgba(255, 255, 255, 0.45);
+            box-shadow: rgba(9, 30, 66, 0.432) 0px 1px 1px, rgba(9, 30, 66, 0.247) 0px 0px 1px 1px;
+        }
+
+        .family-weekly-plan-card table , td, th {
+            /*border: 1px solid #595959;*/
+            border-collapse: collapse;
+            font-size: 1.5rem;
+        }
+
+        .family-weekly-plan-card td, th {
+            padding: 1rem;
+            width: auto;
+            height: auto;
+            border: 1px solid #595959;
+        }
+
+        .family-weekly-plan-card table .plan-header{
+            margin-top: 2rem;
+        }
+
+        .family-weekly-plan-card table .user-edit-guide{
+            margin-top: 2rem;
+            font-size: 1.25rem;
+            color: rgba(48, 48, 48, 0.959);
+        }
+
+        @media screen and (max-width: 768px) {
+            .family-weekly-plan-card table , td, th {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media screen and (max-width: 580px) {
+            .family-weekly-plan-card table , td, th {
+                font-size: 1.2rem;
+            }
+
+            .family-weekly-plan-card td, th {
+                padding: 0.5rem;
+            }
+        }
+
+        @media screen and (max-width: 522px) {
+            .family-weekly-plan-card-container {
+                padding: 0.5rem;
+            }
+
+            .family-weekly-plan-card table{
+                width: 85%;
+            }
+
+            .family-weekly-plan-card table , td, th {
+                font-size: 4vw;
+            }
+        }
+
+        .family-weekly-plan-card th {
+            background: #f0e6cc;
+        }
+
+        .family-weekly-plan-card .actual-start-end-date{
+            text-align: center;
+        }
+
+        .family-weekly-plan-card .date-container,
+        .family-weekly-plan-card .deeds-meta-header,
+        .family-weekly-plan-card .deeds-meta-header .start-end-date,
+        .family-weekly-plan-card .deeds-meta-header .calendar-image,
+        .family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .family-weekly-plan-card .date-container,
+        .family-weekly-plan-card .deeds-meta-header{
+            gap: 2%;
+            width: 100%;
+            position: relative;
+        }
+
+        .family-weekly-plan-card .deeds-meta-header .start-end-date{
+            width: 90%;
+            padding: 0.5rem;
+            position: relative;
+        }
+
+        .family-weekly-plan-card .deeds-meta-header .calendar-image{
+            position: relative;
+            width: 6rem;
+            padding: 0.5rem;
+        }
+
+        .family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container{
+            width: 90%;
+            padding: 0.5rem;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+                        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+                        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container:hover{
+            transform: translateY(-0.5rem); /* Lift by 8px */
+            box-shadow: rgba(50, 50, 93, 0.4) 0px 6.25rem 12.5rem -2.5rem,
+                        rgba(0, 0, 0, 0.4) 0px 3.75rem 7.5rem -3.75rem,
+                        rgba(10, 37, 64, 0.4) 0px -0.25rem 0.625rem 0px inset;
+        }
+
+        .family-weekly-plan-card .deeds-meta-header .calendar-image .icon-container img{
+            width: 50%;
+        }
+
+        .family-weekly-plan-card .date-container{
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .family-weekly-plan-card .date-container .day-month{
+            font-size: 1.15rem;
+            color: #303030b7;
+        }
+
+        @media screen and (max-width: 522px) {
+            .family-weekly-plan-card .date-container .day-month{
+                font-size: 3.5vw;
+            }
+        }
+
+        /* Calendar styling */
+        .calendar-container {
+            display: none;
+            position: absolute;
+            top: 4%;
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            width: 20rem;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .calendar-header{
+            width: 100%;
+            padding: 1rem 0.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            background-image: linear-gradient(to bottom, #d5d5d5, #e8e8e8);
+        }
+
+        .calendar-header span{
+            font-size: 1.6rem;
+            color: #333;
+        }
+
+        .calendar-header .close-calendar-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            border-radius: 50%;
+            padding: 0.125em;
+            background-image: linear-gradient(to bottom, #d5d5d5, #e8e8e8);
+            box-shadow: 0 1px 1px rgb(255 255 255 / 0.6);
+            font-size: 1.55em;
+            font-family:'Open Sans', sans-serif;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .calendar-header .close-calendar-container:hover {
+            cursor: pointer;
+        }
+
+        .calendar-header .inner-ring {
+            display: flex;
+            align-items: center;
+            position: relative;
+            border-radius: 50%;
+            width: 2em;
+            height: 2em;
+            background-color: #e8e8e8;
+            box-shadow:
+                inset 0 0 0.0625em 0.125em rgb(255 255 255 / 0.2),
+                inset 0 0.0625em 0.125em rgb(0 0 0 / 0.4);
+        }
+
+        .calendar-header .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: #e8e8e8;
+            box-shadow:
+                inset 0 -0.0625em 0.0625em 0.125em rgb(0 0 0 / 0.1),
+                inset 0 -0.125em 0.0625em rgb(0 0 0 / 0.2),
+                inset 0 0.1875em 0.0625em rgb(255 255 255 / 0.3),
+                0 0.125em 0.125em rgb(0 0 0 / 0.5);
+            transition: 200ms ease-out;
+        }
+
+        .calendar-header .button:active {
+            transform: translate(-50%, -50%) scale(0.95);
+        }
+
+        .calendar-header .button:hover {
+            color: red;
+        }
+
+        .calendar-container input[type="date"]{
+            font-size: 1.3rem;
+            color: #333;
+            padding: 0.8rem;
+            width: 18.5rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="body-div">
+            <!-- Navigation section (10% of the body height) -->
+            <div class="nav-div">
+                <!-- register-div on the left -->
+                <!--<div class="register-div">
+                    <button class="register-login">Register/Login</button><br>
+                </div>-->
+    
+                <!-- Navigation links section -->
+                <div class="nav-links">
+                    
+    
+                    <a href="index.html" target="_blank"><button>Home</button></a>
+                    
+                    <!-- Create dropdown button -->
+                    <div class="dropdown">
+                        <button class="dropbtn active">Create</button>
+                        <div class="dropdown-content">
+                            <a href="familyplan.html" target="_blank">Family Meal Plan</a>
+                            <a href="schoollunch.html" target="_blank">School Lunch Meal Plan</a>
+                            <!--<a href="#">Work Meal Plan</a>-->
+                            <!--<a href="#">Special Occasion/Festival Meal Plan</a>-->
+                        </div>
+                    </div>
+    
+                    <button>Contact</button>
+                    
+                </div>
+    
+                <!-- Hamburger menu for smaller screens -->
+                <div class="hamburger-menu" onclick="toggleNav()">
+                    &#9776;
+                </div>
+            </div>
+    
+            <!-- Side Navbar (for smaller screens) -->
+            <div class="side-nav" id="sideNav">
+                <!-- Close button to close the sidebar -->
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    
+                <button onclick="closeNav()">Register/Login</button><br>
+
+                <a href="index.html" target="_blank">
+                    <button onclick="closeNav()">Home</button>
+                </a>
+                
+                <div class="dropdown">
+                    <button class="dropbtn">Create</button>
+                    <div class="dropdown-content">
+                        <!-- Inside the .dropdown-content -->
+                            <a href="familyplan.html" target="_blank" onclick="handleDropdownSelection(this)">Family Meal Plan</a>
+                            <a href="schoollunch.html" target="_blank" onclick="handleDropdownSelection(this)">School Lunch Meal Plan</a>
+                            <!--<a href="#" onclick="handleDropdownSelection(this)">Work Meal Plan</a>-->
+                            <!--<a href="#" onclick="handleDropdownSelection(this)">Special Occasion/Festival Meal Plan</a>-->
+    
+                    </div>
+                </div>
+                <button class="contact-button" onclick="closeNav()">Contact</button>
+                
+            </div>
+
+        <div class="family-plan-parent-container">
+
+            <div class="layout-header">
+                <div class="radio-inputs">
+                    <label class="radio">
+                        <input id="dailyMealPlan" checked="" name="radio" type="radio" />
+                        <span class="name">Day Meal Plan</span>
+                    </label>
+                    <label class="radio">
+                        <input id="weeklyMealPlan" name="radio" type="radio" />
+                        <span class="name">Week Meal Plan</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="familyPlanCard" class="family-plan-card-container">
+
+                <div class="family-plan-card">
+                    <div class="ribbon-holder">
+                        <div class="ribbon ribbon-outlined">
+                            <span>Family Plan</span>
+                        </div>
+                    </div>
+
+                    <div class="family-heading-and-day-selector">
+                        <div class="day-selector">
+                                <select class="day-selector-dropdown" id="day-selector" onchange="toggleMealsByDay()">
+                                    <option value="day-one">Monday 21 April</option>
+                                    <option value="day-two">Tuesday 22 April</option>
+                                    <option value="day-three">Wednesday 23 April</option>
+                                    <option value="day-four">Thursday 24 April</option>
+                                    <option value="day-five">Friday 25 April</option>
+                                    <option value="day-six">Saturday 26 April</option>
+                                    <option value="day-seven">Sunday 27 April</option>
+                                </select>
+                        </div>
+                        
+                        <h1>Family Meal Plan</h1>
+                    </div>
+
+
+                    <div class="meal-sections">
+
+                        <!--Day One Meals-->
+                        <div class="breakfast-section meal-type" id= "day-one-breakfast-section" data-title="Breakfast">
+                            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                            <div class="text-area">
+                                <p class="day-one-breakfast">Oats topped with raspberries and blueberries, served alongside a glass of orange juice.</p>
+                            </div>
+                            
+                        </div>
+
+                        <div class="lunch-section meal-type" id="day-one-lunch-section" data-title="Lunch">
+                            <img src="images/spaghetti.png" alt="Spaghetti">
+                            <div class="text-area">
+                                <p class="day-one-lunch">Spaghetti Bolognese</p>
+                            </div>
+                        </div>
+
+                        <div class="snacks-section meal-type" id="day-one-snacks-section" data-title="Snacks">
+                            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                            <div class="text-area">
+                                <p class="day-one-snacks">Granola Bars with some Yoghurt</p>
+                            </div>
+                        </div>
+
+                        <div class="dinner-section meal-type" id="day-one-dinner-section" data-title="Dinner">
+                            <img src="images/sandwich.png" alt="Sandwich">
+                            <div class="text-area">
+                                <p class="day-one-dinner">A ham Sandwich</p>
+                            </div>
+                        </div>
+                        <!--End: Day One Meals-->
+
+                        <!--Day Two Meals-->
+                        <div class="breakfast-section meal-type" id="day-two-breakfast-section" data-title="Breakfast">
+                            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                            <div class="text-area">
+                                <p class="day-two-breakfast">
+                                    Greek yogurt with honey, chia seeds, and sliced almonds
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="lunch-section meal-type" id="day-two-lunch-section" data-title="Lunch">
+                            <img src="images/spaghetti.png" alt="Spaghetti">
+                            <div class="text-area">
+                                <p class="day-two-lunch">
+                                    Grilled chicken wrap with lettuce, tomato, and hummus
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="snacks-section meal-type" id="day-two-snacks-section" data-title="Snacks">
+                            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                            <div class="text-area">
+                                <p class="day-two-snacks">
+                                    Apple slices with peanut butter
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="dinner-section meal-type" id="day-two-dinner-section" data-title="Dinner">
+                            <img src="images/sandwich.png" alt="Sandwich">
+                            <div class="text-area">
+                                <p class="day-two-dinner">
+                                    Baked salmon with quinoa and steamed broccoli
+                                </p>
+                            </div>
+                        </div>
+                        <!--End: Day Two Meals-->
+
+                        <!--Day Three Meals-->
+                        <div class="breakfast-section meal-type" id="day-three-breakfast-section" data-title="Breakfast">
+                            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                            <div class="text-area">
+                                <p class="day-three-breakfast">
+                                    Whole grain toast with avocado and poached egg
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="lunch-section meal-type" id="day-three-lunch-section" data-title="Lunch">
+                            <img src="images/spaghetti.png" alt="Spaghetti">
+                            <div class="text-area">
+                                <p class="day-three-lunch">
+                                    Lentil soup with a side of whole-grain bread
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="snacks-section meal-type" id="day-three-snacks-section" data-title="Snacks">
+                            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                            <div class="text-area">
+                                <p class="day-three-snacks">
+                                    A handful of mixed nuts
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="dinner-section meal-type" id="day-three-dinner-section" data-title="Dinner">
+                            <img src="images/sandwich.png" alt="Sandwich">
+                            <div class="text-area">
+                                <p class="day-three-dinner">
+                                    Turkey stir-fry with brown rice and mixed vegetables
+                                </p>
+                            </div>
+                        </div>
+                        <!--End: Day Three Meals-->
+
+                        <!--Day Four Meals-->
+                        <div class="breakfast-section meal-type" id="day-four-breakfast-section" data-title="Breakfast">
+                            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                            <div class="text-area">
+                                <p class="day-four-breakfast">
+                                    Smoothie (banana, spinach, protein powder, almond milk, and flaxseed)
+                                </p>
+                            </div>
+                            
+                        </div>
+
+                        <div class="lunch-section meal-type" id="day-four-lunch-section" data-title="Lunch">
+                            <img src="images/spaghetti.png" alt="Spaghetti">
+                            <div class="text-area">
+                                <p class="day-four-lunch">
+                                    Quinoa salad with chickpeas, cucumber, cherry tomatoes, and feta
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="snacks-section meal-type" id="day-four-snacks-section" data-title="Snacks">
+                            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                            <div class="text-area">
+                                <p class="day-four-snacks">
+                                    Carrot sticks with hummus
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="dinner-section meal-type" id="day-four-dinner-section" data-title="Dinner">
+                            <img src="images/sandwich.png" alt="Sandwich">
+                            <div class="text-area">
+                                <p class="day-four-dinner">
+                                    Grilled tilapia with sweet potato mash and green beans
+                                </p>
+                            </div>
+                        </div>
+                        <!--End: Day Four Meals-->
+
+                        <!--Day Five Meals-->
+                        <div class="breakfast-section meal-type" id="day-five-breakfast-section" data-title="Breakfast">
+                            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                            <div class="text-area">
+                                <p class="day-five-breakfast">
+                                    Pancakes made with oats and banana, topped with fresh strawberries
+                                </p>
+                            </div>
+                            
+                        </div>
+
+                        <div class="lunch-section meal-type" id="day-five-lunch-section" data-title="Lunch">
+                            <img src="images/spaghetti.png" alt="Spaghetti">
+                            <div class="text-area">
+                                <p class="day-five-lunch">
+                                    Turkey and cheese sandwich on whole grain bread, side of cucumber slices
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="snacks-section meal-type" id="day-five-snacks-section" data-title="Snacks">
+                            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                            <div class="text-area">
+                                <p class="day-five-snacks">
+                                    Cottage cheese with pineapple
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="dinner-section meal-type" id="day-five-dinner-section" data-title="Dinner">
+                            <img src="images/sandwich.png" alt="Sandwich">
+                            <div class="text-area">
+                                <p class="day-five-dinner">
+                                    Chicken curry with basmati rice and steamed peas
+                                </p>
+                            </div>
+                        </div>
+                        <!--End: Day Five Meals-->
+
+                        <!--Day Six Meals-->
+                        <div class="breakfast-section meal-type" id="day-six-breakfast-section" data-title="Breakfast">
+                            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                            <div class="text-area">
+                                <p class="day-six-breakfast">
+                                    Scrambled eggs with spinach and whole grain toast
+                                </p>
+                            </div>
+                            
+                        </div>
+
+                        <div class="lunch-section meal-type" id="day-six-lunch-section" data-title="Lunch">
+                            <img src="images/spaghetti.png" alt="Spaghetti">
+                            <div class="text-area">
+                                <p class="day-six-lunch">
+                                    Tuna salad stuffed into whole wheat pita pockets
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="snacks-section meal-type" id="day-six-snacks-section" data-title="Snacks">
+                            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                            <div class="text-area">
+                                <p class="day-six-snacks">
+                                    Orange slices or a small fruit salad
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="dinner-section meal-type" id="day-six-dinner-section" data-title="Dinner">
+                            <img src="images/sandwich.png" alt="Sandwich">
+                            <div class="text-area">
+                                <p class="day-six-dinner">
+                                    Veggie lasagna with a side garden salad
+                                </p>
+                            </div>
+                        </div>
+                        <!--End: Day Six Meals-->
+
+                        <!--Day Seven Meals-->
+                        <div class="breakfast-section meal-type" id="day-seven-breakfast-section" data-title="Breakfast">
+                            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                            <div class="text-area">
+                                <p class="day-seven-breakfast">
+                                    Overnight oats with almond butter and sliced banana
+                                </p>
+                            </div>
+                            
+                        </div>
+
+                        <div class="lunch-section meal-type" id="day-seven-lunch-section" data-title="Lunch">
+                            <img src="images/spaghetti.png" alt="Spaghetti">
+                            <div class="text-area">
+                                <p class="day-seven-lunch">
+                                    Grilled veggie wrap with tzatziki sauce
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="snacks-section meal-type" id="day-seven-snacks-section" data-title="Snacks">
+                            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                            <div class="text-area">
+                                <p class="day-seven-snacks">
+                                    Greek yogurt and a handful of trail mix
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="dinner-section meal-type" id="day-seven-dinner-section" data-title="Dinner">
+                            <img src="images/sandwich.png" alt="Sandwich">
+                            <div class="text-area">
+                                <p class="day-seven-dinner">
+                                    Baked chicken thighs with roasted potatoes and asparagus
+                                </p>
+                            </div>
+                        </div>
+                        <!--End: Day Seven Meals-->
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="familyWeeklyPlanCard" class="family-weekly-plan-card-container">
+                <div class="family-weekly-plan-card">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td rowspan="2">
+                                    <p class="plan-header">Weekly Family Meal Plan</p>
+                                    <p class="user-edit-guide">Double-tap to edit a meal...</p>
+                                </td>
+                                <td colspan="4" class="actual-start-end-date">
+                                    <div class="deeds-meta-header">
+                                        <div class="start-end-date" id="start-end-date-text">
+                                            01 April 2025 - 07 April 2025
+                                        </div>
+                                        <div class="calendar-image">
+                                            <div class="icon-container">
+                                                <img src="images/calendar.png" alt="Calendar Icon">
+                                                <img src="images/clock-icon.png" alt="Clock Icon">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Breakfast</th>
+                                <th>Lunch</th>
+                                <th>Snacks</th>
+                                <th>Dinner</th>
+                            </tr>
+                            <!-- Add rows for each day -->
+                            <tr id="day-1">
+                                <td>
+                                    <div class="date-container">
+                                        <div class="day-name day-one-name">Tuesday</div>
+                                        <div class="day-month day-one-date">01 April</div>
+                                    </div>
+                                </td>
+                                <td class="meals day-one-breakfast">Oats topped with raspberries and blueberries</td>
+                                <td class="meals day-one-lunch">Spaghetti Bolognese</td>
+                                <td class="meals day-one-snacks">Granola Bars</td>
+                                <td class="meals day-one-dinner">Ham Sandwich</td>
+                            </tr>
+                            <tr id="day-2">
+                                <td>
+                                    <div class="date-container">
+                                        <div class="day-name day-two-name">Wednesday</div>
+                                        <div class="day-month day-two-date">02 April</div>
+                                    </div>
+                                </td>
+                                <td class="meals day-two-breakfast">Greek yogurt with honey, chia seeds, and sliced almonds</td>
+                                <td class="meals day-two-lunch">Grilled chicken wrap with lettuce, tomato, and hummus</td>
+                                <td class="meals day-two-snacks">Apple slices with peanut butter</td>
+                                <td class="meals day-two-dinner">Baked salmon with quinoa and steamed broccoli</td>
+                            </tr>
+                            <tr id="day-3">
+                                <td>
+                                    <div class="date-container">
+                                        <div class="day-name day-three-name">
+                                            Thursday
+                                        </div>
+                                        <div class="day-month day-three-date">
+                                            03 April
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="meals day-three-breakfast">Whole grain toast with avocado and poached egg</td>
+                                <td class="meals day-three-lunch">Lentil soup with a side of whole-grain bread</td>
+                                <td class="meals day-three-snacks">A handful of mixed nuts</td>
+                                <td class="meals day-three-dinner">Turkey stir-fry with brown rice and mixed vegetables</td>
+                            </tr>
+                            <tr id="day-4">
+                                <td>
+                                    <div class="date-container">
+                                        <div class="day-name day-four-name">
+                                            Friday
+                                        </div>
+                                        <div class="day-month day-four-date">
+                                            04 April
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="meals day-four-breakfast">Smoothie (banana, spinach, protein powder, almond milk, and flaxseed)</td>
+                                <td class="meals day-four-lunch">Quinoa salad with chickpeas, cucumber, cherry tomatoes, and feta</td>
+                                <td class="meals day-four-snacks">Carrot sticks with hummus</td>
+                                <td class="meals day-four-dinner">Grilled tilapia with sweet potato mash and green beans</td>
+                            </tr>
+                            <tr id="day-5">
+                                <td>
+                                    <div class="date-container">
+                                        <div class="day-name day-five-name">
+                                            Saturday
+                                        </div>
+                                        <div class="day-month day-five-date">
+                                            05 April
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="meals day-five-breakfast">Pancakes made with oats and banana, topped with fresh strawberries</td>
+                                <td class="meals day-five-lunch">Turkey and cheese sandwich on whole grain bread, side of cucumber slices</td>
+                                <td class="meals day-five-snacks">Cottage cheese with pineapple</td>
+                                <td class="meals day-five-dinner">Chicken curry with basmati rice and steamed peas</td>
+                            </tr>
+                            <tr id="day-6">
+                                <td>
+                                    <div class="date-container">
+                                        <div class="day-name day-six-name">
+                                            Sunday
+                                        </div>
+                                        <div class="day-month day-six-date">
+                                            06 April
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="meals day-six-breakfast">Scrambled eggs with spinach and whole grain toast</td>
+                                <td class="meals day-six-lunch">Tuna salad stuffed into whole wheat pita pockets</td>
+                                <td class="meals day-six-snacks">Orange slices or a small fruit salad</td>
+                                <td class="meals day-six-dinner">Veggie lasagna with a side garden salad</td>
+                            </tr>
+                            <tr id="day-7">
+                                <td>
+                                    <div class="date-container">
+                                        <div class="day-name day-seven-name">
+                                            Monday
+                                        </div>
+                                        <div class="day-month day-seven-date">
+                                            07 April
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="meals day-seven-breakfast">Overnight oats with almond butter and sliced banana</td>
+                                <td class="meals day-seven-lunch">Grilled veggie wrap with tzatziki sauce</td>
+                                <td class="meals day-seven-snacks">Greek yogurt and a handful of trail mix</td>
+                                <td class="meals day-seven-dinner">Baked chicken thighs with roasted potatoes and asparagus</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Floating Calendar -->
+                    <div id="calendar-container" class="calendar-container">
+                        <div class="calendar-header">
+                            <span>Please select a start date...</span>
+                            <div id="close-calendar-container" class="close-calendar-container">
+                                <div class="inner-ring">
+                                    <div class="button">X</div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="date" id="start-date" onchange="updateStartDate()">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

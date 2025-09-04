@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School lunch Meal Plan</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            font-family: 'Cormorant', sans-serif;
+        }
+        
+        .body-div {
+            width: 100vw;
+            background-image: url('images/white-wall.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        
+        .nav-links {
+            display: none;
+        }
+        
+        .hamburger-menu {
+            display: block;
+            z-index: 25;
+            position: relative;
+            left: 94vw;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .hamburger-menu {
+                left: 90vw;
+            }
+        }
+        
+        .side-nav {
+            width: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body-div">
+        <div class="body-div">
+            <!-- Navigation section (10% of the body height) -->
+            <div class="nav-div">
+                <!-- register-div on the left -->
+                <!--<div class="register-div">
+                    <button class="register-login">Register/Login</button><br>
+                </div>-->
+
+                <!-- Navigation links section -->
+                <div class="nav-links">
+
+                    <a href="index.html" target="_blank"><button>Home</button></a>
+
+                    <!-- Create dropdown button -->
+                    <div class="dropdown">
+                        <button class="dropbtn active">Create</button>
+                        <div class="dropdown-content">
+                            <a href="familyplan.html" target="_blank">Family Meal Plan</a>
+                            <a href="schoollunch.html" target="_blank">School Lunch Meal Plan</a>
+                            <!--<a href="#">Work Meal Plan</a>-->
+                            <!--<a href="#">Special Occasion/Festival Meal Plan</a>-->
+                        </div>
+                    </div>
+
+                    <button>Contact</button>
+
+                </div>
+
+                <!-- Hamburger menu for smaller screens -->
+                <div class="hamburger-menu" onclick="toggleNav()">
+                    &#9776;
+                </div>
+            </div>
+
+            <!-- Side Navbar (for smaller screens) -->
+            <div class="side-nav" id="sideNav">
+                <!-- Close button to close the sidebar -->
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+
+                <!--<button onclick="closeNav()">Register/Login</button><br>-->
+
+                <a href="index.html" target="_blank">
+                    <button onclick="closeNav()">Home</button>
+                </a>
+
+                <a href="savedPlans.html" target="_blank">
+                    <button onclick="closeNav()">Saved Plans</button>
+                </a>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Create</button>
+                    <div class="dropdown-content">
+                        <!-- Inside the .dropdown-content -->
+                        <a href="familyplan.html" target="_blank" onclick="handleDropdownSelection(this)">Family Meal Plan</a>
+                        <a href="schoollunch.html" target="_blank" onclick="handleDropdownSelection(this)">School Lunch Meal Plan</a>
+                        <!--<a href="#" onclick="handleDropdownSelection(this)">Work Meal Plan</a>-->
+                        <!--<a href="#" onclick="handleDropdownSelection(this)">Special Occasion/Festival Meal Plan</a>-->
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="school-lunch-plan-parent-container">
+
+                <div class="layout-header">
+                    <div class="radio-inputs">
+                        <label class="radio" for="schoolDailyMealPlan">
+                        <input id="schoolDailyMealPlan" checked="" name="radio" type="radio" />
+                        <span class="name">Day Meal Plan</span>
+                    </label>
+                        <label class="radio" for="schoolWeeklyMealPlan">
+                        <input id="schoolWeeklyMealPlan" name="radio" type="radio" />
+                        <span class="name">Week Meal Plan</span>
+                    </label>
+                    </div>
+                </div>
+
+                <div id="schoolLunchDailyPlanCard" class="school-lunch-plan-card-container">
+                    <div class="school-lunch-plan-card">
+                        <div class="image-container">
+                            <!-- Bento Lunchbox Image -->
+                            <img class="circle-img" src="images/bento-lunchbox1.png" alt="Bento Lunch Box">
+                            <div class="header">
+                                <p>School Lunch Meal Plan</p>
+                                <p class="Day-view-user-guide">Double Tap to edit a meal...</p>
+                            </div>
+                        </div>
+
+                        <div class="text-container">
+
+                            <div class="day-selector-container">
+                                <div class="day-selector">
+                                    <select class="day-selector-dropdown" id="day-selector" onchange="toggleMealsByDay()">
+                                    <option value="day-one">Monday 21 April</option>
+                                    <option value="day-two">Tuesday 22 April</option>
+                                    <option value="day-three">Wednesday 23 April</option>
+                                    <option value="day-four">Thursday 24 April</option>
+                                    <option value="day-five">Friday 25 April</option>
+                                    <option value="day-six">Saturday 26 April</option>
+                                    <option value="day-seven">Sunday 27 April</option>
+                                </select>
+                                </div>
+                            </div>
+
+                            <!--<div class="layout-selection">
+
+                            <div class="selection-question">
+                                <p><i>Please Select a Meal Plan Layout...</i></p>
+                            </div>
+
+                            <div class="layout-options">
+                                <div class="meal-selection-layout-radio-btn">
+                                    <label for="General-layout">
+                                        <div class="inputAndLeftText">
+                                            <input id="General-layout" type="radio" name="radio-examples" checked>
+                                            <div>
+                                            <span class="title">General Layout</span>
+                                            <span class="desc">Appetizer, Main Course, Laitage, Dessert, Side Snacks.</span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+    
+                                <div class="meal-selection-layout-radio-btn">
+                                    <label for="General-layout">
+                                        <div class="inputAndLeftText">
+                                            <input id="break-system-layout" type="radio" name="radio-examples">
+                                            <div>
+                                            <span class="title">Break System Layout</span>
+                                            <span class="desc">Recess Meal Break, Main Lunch Break</span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+    
+                                <div class="meal-selection-layout-radio-btn">
+                                    <label for="General-layout">
+                                        <div class="inputAndLeftText">
+                                            <input id="meal-category-layout" type="radio" name="radio-examples">
+                                            <div>
+                                            <span class="title">Meal Category Layout</span>
+                                            <span class="desc">Fruits, Vegetables, Carbs and Fibre, Treats/Snacks...</span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                        </div>-->
+
+                            <!--Menu By General Meal Layout-->
+                            <!--<div class="meal-sections">
+
+                            <div class="appetizer" data-title="Appetizer / Entrée">
+                                <img src="images/appetizer.png" alt="Ham & Cheese Skewers">
+                                <div class="text-area">
+                                    <p>
+                                        Ham &amp; Cheese Skewers<br>
+                                        Carrot Sticks with Tomato Ketchup Dip<br>
+                                        Deviled Eggs.
+                                    </p>
+                                </div>
+                                
+                            </div>
+    
+                            <div class="main-course" data-title="Main Course">
+                                <img src="images/main-course.png" alt="Curry Rice with Smoked Sausages">
+                                <div class="text-area">
+                                    <p>
+                                        Curry Rice with Smoked Sausages<br>
+                                        Ham &amp; Cheese Wrap<br>
+                                        With Mango Juice.
+                                    </p>
+                                </div>
+                            </div>
+    
+                            <div class="laitage" data-title="Laitage / Dairy">
+                                <img src="images/fruity-Yoghurt.png" alt="Yoghurt with tons of fruit">
+                                <div class="text-area">
+                                    <p>
+                                        Yoghurt topped with Fruits.
+                                    </p>
+                                </div>
+                            </div>
+    
+                            <div class="dessert" data-title="Dessert">
+                                <img src="images/muffin-fruit-salad.png" alt="Muffin with a bowl of Fruit Salad">
+                                <div class="text-area">
+                                    <p>
+                                        Muffin<br>
+                                        Fruit Salad: A mix of Kiwi, Papaya, and Grapes.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="snacks" data-title="Side Snacks">
+                                <img src="images/side-snack.png" alt="Granola Bars, Almonds, Chocolate Chip Cookies">
+                                <div class="text-area">
+                                    <p>
+                                        Granola Bars<br>
+                                        Almonds<br>
+                                        Chocolate Chip Cookies.
+                                    </p>
+                                </div>
+                            </div>
+    
+                        </div>-->
+                            <!--End of Menu By General Meal Layout-->
+
+                            <!--Menu By School Break System-->
+                            <div class="break-system">
+
+                                <!--Day One Meals-->
+                                <div class="recess school-meal" data-title="Recess Meal Break" id="day-one-recess-section">
+                                    <div class="meal-image">
+                                        <img class="lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                                    </div>
+                                    <div class="text-area">
+                                        <p>
+                                            Ham and cheese skewers.<br> Carrot sticks with a side of tomato ketchup dip.<br> Deviled egg.<br> Almond seeds.<br> Granola Bars.<br> Fruit salad.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="lunch school-meal" data-title="Main Lunch Break" id="day-one-lunch-section">
+                                    <div class="meal-image">
+                                        <img class="lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                                    </div>
+                                    <div class="text-area">
+                                        <p>
+                                            <b>Main:</b> <span class="edittable-meal">Spicy curry rice with smoked sausages</span><br>
+                                            <b>Sides:</b> <span class="edittable-meal">Ham and cheese wrap</span><br>
+                                            <b>Drink:</b> <span class="edittable-meal">Mango juice</span><br>
+                                            <b>Dessert:</b> <span class="edittable-meal">Yogurt with fruit</span><br>
+                                            <b>Snack:</b> <span class="edittable-meal">Muffin</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--End of Day One Meals-->
+
+                                <!--Day Two Meals-->
+                                <div class="recess school-meal" data-title="Recess Meal Break" id="day-two-recess-section">
+                                    <div class="meal-image">
+                                        <img class="lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                                    </div>
+                                    <div class="text-area">
+                                        <p>
+                                            Ham and cheese pinwheels<br> Cherry tomatoes and cucumber<br> Yogurt with granola<br> Banana chips<br> Mixed nuts
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="lunch school-meal" data-title="Main Lunch Break" id="day-two-lunch-section">
+                                    <div class="meal-image">
+                                        <img class="lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                                    </div>
+                                    <div class="text-area">
+                                        <p>
+                                            <b>Main:</b> <span class="edittable-meal">Grilled chicken and quinoa salad with mixed greens</span><br>
+                                            <b>Sides:</b> <span class="edittable-meal">Sweet potato wedges</span><br>
+                                            <b>Drink:</b> <span class="edittable-meal">Apple Juice</span><br>
+                                            <b>Dessert:</b> <span class="edittable-meal">Pineapple chunks</span><br>
+                                            <b>Snack:</b> <span class="edittable-meal">Whole wheat roll</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--End of Day Two Meals-->
+
+                                <!--Day Three Meals-->
+                                <div class="recess school-meal" data-title="Recess Meal Break" id="day-three-recess-section">
+                                    <div class="meal-image">
+                                        <img class="lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                                    </div>
+                                    <div class="text-area">
+                                        <p>
+                                            Rice cakes with almond butter and banana slices<br> Baby carrots<br> Boiled eggs<br> A handful of mixed nuts<br> Fruit smoothie (spinach, banana, berries)
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="lunch school-meal" data-title="Main Lunch Break" id="day-three-lunch-section">
+                                    <div class="meal-image">
+                                        <img class="lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                                    </div>
+                                    <div class="text-area">
+                                        <p>
+                                            <b>Main:</b> <span class="edittable-meal">Veggie and cheese quesadilla</span><br>
+                                            <b>Sides:</b> <span class="edittable-meal">Avocado salsa</span><br>
+                                            <b>Drink:</b> <span class="edittable-meal">Peach Juice</span><br>
+                                            <b>Dessert:</b> <span class="edittable-meal">Peach slices</span><br>
+                                            <b>Snack:</b> <span class="edittable-meal">Chocolate pudding</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--End of Day Three Meals-->
+
+                                <!--Day Four Meals-->
+                                <div class="recess school-meal" data-title="Recess Meal Break" id="day-four-recess-section">
+                                    <div class="meal-image">
+                                        <img class="lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                                    </div>
+                                    <div class="text-area">
+                                        <p>
+                                            Veggie sticks with hummus<br> String cheese<br> Roasted chickpeas<br> Dried fruit mix (raisins, apricots)<br> Cantaloupe cubes
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="lunch school-meal" data-title="Main Lunch Break" id="day-four-lunch-section">
+                                    <div class="meal-image">
+                                        <img class="lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                                    </div>
+                                    <div class="text-area">
+                                        <p>
+                                            <b>Main:</b> <span class="edittable-meal">Turkey and avocado wrap with lettuce</span><br>
+                                            <b>Sides:</b> <span class="edittable-meal">Roasted vegetable mix (zucchini, bell pepper, carrots)</span><br>
+                                            <b>Drink:</b> <span class="edittable-meal">Fresh orange Juice</span><br>
+                                            <b>Dessert:</b> <span class="edittable-meal">Plain yogurt with granola</span><br>
+                                            <b>Snack:</b> <span class="edittable-meal">Orange Slices</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--End of Day Four Meals-->
+
+                                <!--Day Five Meals-->
+                                <div class="recess school-meal" data-title="Recess Meal Break" id="day-five-recess-section">
+                                    <div class="meal-image">
+                                        <img class="lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                                    </div>
+                                    <div class="text-area">
+                                        <p>
+                                            Mini pita pockets with hummus and cucumber<br> Sliced strawberries and blueberries<br> Rice crackers<br> Mixed seeds (pumpkin, sunflower)<br> Trail mix (unsweetened)
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="lunch school-meal" data-title="Main Lunch Break" id="day-five-lunch-section">
+                                    <div class="meal-image">
+                                        <img class="lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                                    </div>
+                                    <div class="text-area">
+                                        <p>
+                                            <b>Main:</b> <span class="edittable-meal">Grilled salmon with brown rice</span><br>
+                                            <b>Sides:</b> <span class="edittable-meal">Steamed broccoli</span><br>
+                                            <b>Drink:</b> <span class="edittable-meal">Pineapple Juice</span><br>
+                                            <b>Dessert:</b> <span class="edittable-meal">Fresh pineapple slices</span><br>
+                                            <b>Snack:</b> <span class="edittable-meal">Fresh pineapple slices</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--End of Day Five Meals-->
+
+                                <!--Day Six Meals-->
+                                <div class="recess school-meal" data-title="Recess Meal Break" id="day-six-recess-section">
+                                    <div class="meal-image">
+                                        <img class="lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                                    </div>
+                                    <div class="text-area">
+                                        <p>
+                                            Whole grain crackers with cheese and grapes<br> Mini celery sticks with peanut butter<br> Unsweetened dried fruit
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="lunch school-meal" data-title="Main Lunch Break" id="day-six-lunch-section">
+                                    <div class="meal-image">
+                                        <img class="lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                                    </div>
+                                    <div class="text-area">
+                                        <p>
+                                            <b>Main:</b> <span class="edittable-meal">Chicken noodle soup with whole grain crackers</span><br>
+                                            <b>Sides:</b> <span class="edittable-meal">Spinach salad with balsamic vinegar</span><br>
+                                            <b>Drink:</b> <span class="edittable-meal">Water Melon Juice</span><br>
+                                            <b>Dessert:</b> <span class="edittable-meal">Water Melon Cubes</span><br>
+                                            <b>Snack:</b> <span class="edittable-meal">Water Melon Cubes</span>.
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--End of Day Six Meals-->
+
+                                <!--Day Seven Meals-->
+                                <div class="recess school-meal" data-title="Recess Meal Break" id="day-seven-recess-section">
+                                    <div class="meal-image">
+                                        <img class="lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                                    </div>
+                                    <div class="text-area">
+                                        <p>
+                                            Veggie sticks with ranch dip<br> Whole grain crackers with cheese<br> Handful of almonds<br> Apple slices<br> Mini muffin
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="lunch school-meal" data-title="Main Lunch Break" id="day-seven-lunch-section">
+                                    <div class="meal-image">
+                                        <img class="lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                                    </div>
+                                    <div class="text-area">
+                                        <p>
+                                            <b>Main:</b> <span class="edittable-meal">Spaghetti with marinara sauce and turkey meatballs</span><br>
+                                            <b>Sides:</b> <span class="edittable-meal">Side of steamed peas</span><br>
+                                            <b>Drink:</b> <span class="edittable-meal">Apple juice</span><br>
+                                            <b>Dessert:</b> <span class="edittable-meal">Yogurt</span><br>
+                                            <b>Snack:</b> <span class="edittable-meal">Cashew Nuts</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--End of Day Seven Meals-->
+
+                            </div>
+                            <!--End of Menu By School Break System-->
+
+                            <!--Menu By Meal Categories-->
+                            <!--<div class="meal-categories">
+
+                            <div class="card">
+                                <div class="category-heading">
+                                    <h1>Fruits</h1>
+                                </div>
+                                <ul>
+                                    <li>Kiwi</li>
+                                    <li>Papaya</li>
+                                    <li>Grapes</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Vegetables</h1>
+                                <ul>
+                                    <li>Carrots</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Dairy</h1>
+                                <ul>
+                                    <li>Yoghurt</li>
+                                    <li>Chedder Cheese</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Treats/Snacks</h1>
+                                <ul>
+                                    <li>Chocolate Chip Cookies</li>
+                                    <li>Muffin</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Meats, Fish and Meat Alternatives</h1>
+                                <ul>
+                                    <li>Ham</li>
+                                    <li>Smoked Sausages</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Non-Meat Protein Sources</h1>
+                                <ul>
+                                    <li>Deviled Eggs</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Carbs and Fibre</h1>
+                                <ul>
+                                    <li>Curry Rice</li>
+                                    <li>Granola Bars</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Nuts and Seeds</h1>
+                                <ul>
+                                    <li>Almonds</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Sauces/ Condiments / Dips</h1>
+                                <ul>
+                                    <li>Tomato Ketchup</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h1>Drinks</h1>
+                                <ul>
+                                    <li>Water</li>
+                                    <li>Mango Juice</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>-->
+                            <!--End of Menu By Meal Categories-->
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="schoolLunchWeeklyPlanCard" class="school-lunch-weekly-plan-card-container">
+                    <div class="school-lunch-weekly-plan-card">
+                        <table id="weekly-timetable-content">
+                            <tbody>
+                                <tr>
+                                    <td rowspan="2">
+                                        <p class="plan-header">Weekly School Meal Plan</p>
+                                        <p class="user-edit-guide">Double-tap to edit a meal...</p>
+                                    </td>
+                                    <td colspan="2" class="actual-start-end-date">
+                                        <div class="deeds-meta-header">
+                                            <div class="start-end-date" id="start-end-date-text">
+                                                01 April 2025 - 07 April 2025
+                                            </div>
+                                            <div class="calendar-image">
+                                                <div class="icon-container">
+                                                    <img src="images/calendar.png" alt="Calendar Icon">
+                                                    <img src="images/clock-icon.png" alt="Clock Icon">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th>Recess Meal Break</th>
+                                    <th>Main Lunch Break</th>
+                                </tr>
+
+                                <!-- Add rows for each day -->
+                                <tr>
+                                    <td colspan="5" class="header-body-row-spacer"></td>
+                                </tr>
+
+                                <!-- Add rows for each day -->
+                                <tr id="day-1">
+                                    <td class="date-cell">
+                                        <div class="date-container">
+                                            <div class="day-name day-one-name">Tuesday</div>
+                                            <div class="day-month day-one-date">01 April</div>
+                                        </div>
+                                    </td>
+                                    <td class="school-meals day-one-recess">
+                                        󠁯•󠁏 &nbsp Ham and cheese skewers.<br> Carrot sticks with a side of tomato ketchup dip.<br> Deviled egg.<br> Almond seeds.<br> Granola Bars.<br> Fruit salad.
+                                    </td>
+                                    <td class="school-meals day-one-lunch">
+                                        <span class="non-edittable-guide"><b>Main: </b></span> <span class="edittable-meal">Spicy curry rice with smoked sausages</span>
+                                        <span class="non-edittable-guide"><br><b>Sides: </b></span> <span class="edittable-meal">Ham and cheese wrap</span>
+                                        <span class="non-edittable-guide"><br><b>Drink: </b></span> <span class="edittable-meal">Mango juice</span>
+                                        <span class="non-edittable-guide"><br><b>Dessert: </b></span> <span class="edittable-meal">Yogurt with fruit</span>
+                                        <span class="non-edittable-guide"><br><b>Snack: </b></span> <span class="edittable-meal">Muffin</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="5" class="row-spacer"></td>
+                                </tr>
+
+                                <tr id="day-2">
+                                    <td class="date-cell">
+                                        <div class="date-container">
+                                            <div class="day-name day-two-name">Wednesday</div>
+                                            <div class="day-month day-two-date">02 April</div>
+                                        </div>
+                                    </td>
+                                    <td class="school-meals day-two-recess">
+                                        Ham and cheese pinwheels<br> Cherry tomatoes and cucumber<br> Yogurt with granola<br> Banana chips<br> Mixed nuts
+                                    </td>
+                                    <td class="school-meals day-two-lunch">
+                                        <span class="non-edittable-guide"><b>Main: </b></span> <span class="edittable-meal">Grilled chicken and quinoa salad with mixed greens</span>
+                                        <span class="non-edittable-guide"><br><b>Sides: </b></span> <span class="edittable-meal">Sweet potato wedges</span>
+                                        <span class="non-edittable-guide"><br><b>Drink: </b></span> <span class="edittable-meal">Apple Juice</span>
+                                        <span class="non-edittable-guide"><br><b>Dessert: </b></span> <span class="edittable-meal">Pineapple chunks</span>
+                                        <span class="non-edittable-guide"><br><b>Snack: </b></span> <span class="edittable-meal">Whole wheat roll</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="5" class="row-spacer"></td>
+                                </tr>
+
+                                <tr id="day-3">
+                                    <td class="date-cell">
+                                        <div class="date-container">
+                                            <div class="day-name day-three-name">
+                                                Thursday
+                                            </div>
+                                            <div class="day-month day-three-date">
+                                                03 April
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="school-meals day-three-recess">
+                                        Rice cakes with almond butter and banana slices<br> Baby carrots<br> Boiled eggs<br> A handful of mixed nuts<br> Fruit smoothie (spinach, banana, berries)<br>
+                                    </td>
+                                    <td class="school-meals day-three-lunch">
+                                        <span class="non-edittable-guide"><b>Main: </b></span> <span class="edittable-meal">Veggie and cheese quesadilla</span>
+                                        <span class="non-edittable-guide"><br><b>Sides: </b></span> <span class="edittable-meal">Avocado salsa</span>
+                                        <span class="non-edittable-guide"><br><b>Drink: </b></span> <span class="edittable-meal">Peach Juice</span>
+                                        <span class="non-edittable-guide"><br><b>Dessert: </b></span> <span class="edittable-meal">Peach slices</span>
+                                        <span class="non-edittable-guide"><br><b>Snack: </b></span> <span class="edittable-meal">Chocolate pudding</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="5" class="row-spacer"></td>
+                                </tr>
+
+                                <tr id="day-4">
+                                    <td class="date-cell">
+                                        <div class="date-container">
+                                            <div class="day-name day-four-name">
+                                                Friday
+                                            </div>
+                                            <div class="day-month day-four-date">
+                                                04 April
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="school-meals day-four-recess">
+                                        Veggie sticks with hummus<br> String cheese<br> Roasted chickpeas<br> Dried fruit mix (raisins, apricots)<br> Cantaloupe cubes
+                                    </td>
+                                    <td class="school-meals day-four-lunch">
+                                        <span class="non-edittable-guide"><b>Main: </b></span> <span class="edittable-meal">Turkey and avocado wrap with lettuce</span>
+                                        <span class="non-edittable-guide"><br><b>Sides: </b></span> <span class="edittable-meal">Roasted vegetable mix (zucchini, bell pepper, carrots)</span>
+                                        <span class="non-edittable-guide"><br><b>Drink: </b></span> <span class="edittable-meal">Fresh orange Juice</span>
+                                        <span class="non-edittable-guide"><br><b>Dessert: </b></span> <span class="edittable-meal">Plain yogurt with granola</span>
+                                        <span class="non-edittable-guide"><br><b>Snack: </b></span> <span class="edittable-meal">Orange Slices</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="5" class="row-spacer"></td>
+                                </tr>
+
+                                <tr id="day-5">
+                                    <td class="date-cell">
+                                        <div class="date-container">
+                                            <div class="day-name day-five-name">
+                                                Saturday
+                                            </div>
+                                            <div class="day-month day-five-date">
+                                                05 April
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="school-meals day-five-recess">
+                                        Mini pita pockets with hummus and cucumber<br> Sliced strawberries and blueberries<br> Rice crackers<br> Mixed seeds (pumpkin, sunflower)<br> Trail mix (unsweetened)
+                                    </td>
+                                    <td class="school-meals day-five-lunch">
+                                        <span class="non-edittable-guide"><b>Main: </b></span> <span class="edittable-meal">Grilled salmon with brown rice</span>
+                                        <span class="non-edittable-guide"><br><b>Sides: </b></span> <span class="edittable-meal">Steamed broccoli</span>
+                                        <span class="non-edittable-guide"><br><b>Drink: </b></span> <span class="edittable-meal">Pineapple Juice</span>
+                                        <span class="non-edittable-guide"><br><b>Dessert: </b></span> <span class="edittable-meal">Fresh pineapple slices</span>
+                                        <span class="non-edittable-guide"><br><b>Snack: </b></span> <span class="edittable-meal">Fresh pineapple slices</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="5" class="row-spacer"></td>
+                                </tr>
+
+                                <tr id="day-6">
+                                    <td class="date-cell">
+                                        <div class="date-container">
+                                            <div class="day-name day-six-name">
+                                                Sunday
+                                            </div>
+                                            <div class="day-month day-six-date">
+                                                06 April
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="school-meals day-six-recess">
+                                        Whole grain crackers with cheese and grapes<br> Mini celery sticks with peanut butter<br> Dried fruit
+                                    </td>
+                                    <td class="school-meals day-six-lunch">
+                                        <span class="non-edittable-guide"><b>Main: </b></span> <span class="edittable-meal">Chicken noodle soup with whole grain crackers</span>
+                                        <span class="non-edittable-guide"><br><b>Sides: </b></span> <span class="edittable-meal">Spinach salad with balsamic vinegar</span>
+                                        <span class="non-edittable-guide"><br><b>Drink: </b></span> <span class="edittable-meal">Water Melon Juice</span>
+                                        <span class="non-edittable-guide"><br><b>Dessert: </b></span> <span class="edittable-meal">Water Melon Cubes</span>
+                                        <span class="non-edittable-guide"><br><b>Snack: </b></span> <span class="edittable-meal">Water Melon Cubes</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="5" class="row-spacer"></td>
+                                </tr>
+
+                                <tr id="day-7">
+                                    <td class="date-cell">
+                                        <div class="date-container">
+                                            <div class="day-name day-seven-name">
+                                                Monday
+                                            </div>
+                                            <div class="day-month day-seven-date">
+                                                07 April
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="school-meals day-seven-recess">
+                                        Veggie sticks with ranch dip<br> Whole grain crackers with cheese<br> Handful of almonds<br> Apple slices<br> Mini muffin
+                                    </td>
+                                    <td class="school-meals day-seven-lunch">
+                                        <span class="non-edittable-guide"><b>Main: </b></span><span class="edittable-meal">Spaghetti with marinara sauce and turkey meatballs</span>
+                                        <span class="non-edittable-guide"><br><b>Sides: </b></span><span class="edittable-meal">Side of steamed peas</span>
+                                        <span class="non-edittable-guide"><br><b>Drink: </b></span><span class="edittable-meal">Apple juice</span>
+                                        <span class="non-edittable-guide"><br><b>Dessert: </b></span><span class="edittable-meal">Yogurt</span>
+                                        <span class="non-edittable-guide"><br><b>Snack: </b></span><span class="edittable-meal">Cashew Nuts</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="5" class="row-spacer"></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <!-- Floating Calendar -->
+                        <div id="calendar-container" class="calendar-container">
+                            <div class="calendar-header">
+                                <span>Please select a start date...</span>
+                                <div id="close-calendar-container" class="close-calendar-container">
+                                    <div class="inner-ring">
+                                        <div class="button">X</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="date" id="start-date" onchange="updateStartDate()">
+                        </div>
+
+                        <!--Modal Pop Up-->
+                        <div class="weekly-timetable-modal" id="weekly-timetable-modal">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th class="style-preserver-cell"></th>
+                                        <th class="modal-header">recess</th>
+                                        <tr>
+                                            <td class="date-cell">
+                                                <div class="date-container">
+                                                    <div class="day-name day-one-name">Tuesday</div>
+                                                    <div class="day-month day-one-date">01 April</div>
+                                                </div>
+                                            </td>
+                                            <td class="modal-meal school-meals day-one-recess">Oats topped with raspberries and blueberries</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="modal-popUp-btns" colspan="2">
+                                                <div class="clear-enter-btns">
+                                                    <button class="modal-clear-btn" role="button">Clear</button>
+                                                    <button class="modal-enter-btn" role="button">Enter</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a class="close-modal-button"></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="save-document">
+                <button class="Documents-btn" id="saveMealPlanButton">
+                <span class="folderContainer">
+                    <svg
+                    class="fileBack"
+                    width="146"
+                    height="113"
+                    viewBox="0 0 146 113"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                    <path
+                        d="M0 4C0 1.79086 1.79086 0 4 0H50.3802C51.8285 0 53.2056 0.627965 54.1553 1.72142L64.3303 13.4371C65.2799 14.5306 66.657 15.1585 68.1053 15.1585H141.509C143.718 15.1585 145.509 16.9494 145.509 19.1585V109C145.509 111.209 143.718 113 141.509 113H3.99999C1.79085 113 0 111.209 0 109V4Z"
+                        fill="url(#paint0_linear_117_4)"
+                    ></path>
+                    <defs>
+                        <linearGradient
+                        id="paint0_linear_117_4"
+                        x1="0"
+                        y1="0"
+                        x2="72.93"
+                        y2="95.4804"
+                        gradientUnits="userSpaceOnUse"
+                        >
+                        <stop stop-color="#8F88C2"></stop>
+                        <stop offset="1" stop-color="#5C52A2"></stop>
+                        </linearGradient>
+                    </defs>
+                    </svg>
+                    <svg
+                    class="filePage"
+                    width="88"
+                    height="99"
+                    viewBox="0 0 88 99"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                    <rect width="88" height="99" fill="url(#paint0_linear_117_6)"></rect>
+                    <defs>
+                        <linearGradient
+                        id="paint0_linear_117_6"
+                        x1="0"
+                        y1="0"
+                        x2="81"
+                        y2="160.5"
+                        gradientUnits="userSpaceOnUse"
+                        >
+                        <stop stop-color="white"></stop>
+                        <stop offset="1" stop-color="#686868"></stop>
+                        </linearGradient>
+                    </defs>
+                    </svg>
+
+                    <svg
+                        class="fileFront"
+                        width="160"
+                        height="79"
+                        viewBox="0 0 160 79"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M0.29306 12.2478C0.133905 9.38186 2.41499 6.97059 5.28537 6.97059H30.419H58.1902C59.5751 6.97059 60.9288 6.55982 62.0802 5.79025L68.977 1.18034C70.1283 0.410771 71.482 0 72.8669 0H77H155.462C157.87 0 159.733 2.1129 159.43 4.50232L150.443 75.5023C150.19 77.5013 148.489 79 146.474 79H7.78403C5.66106 79 3.9079 77.3415 3.79019 75.2218L0.29306 12.2478Z"
+                            fill="url(#paint0_linear_117_5)">
+                        </path>
+                        <defs>
+                            <linearGradient
+                            id="paint0_linear_117_5"
+                            x1="38.7619"
+                            y1="8.71323"
+                            x2="66.9106"
+                            y2="82.8317"
+                            gradientUnits="userSpaceOnUse"
+                            >
+                            <stop stop-color="#C3BBFF"></stop>
+                            <stop offset="1" stop-color="#51469A"></stop>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </span>
+                <p class="save-doc-text">Save Plan</p>
+                </button>
+                <button class="Documents-print-btn" id="printMealPlanButton" onclick="printVisibleCard()">
+                    <span class="printer-icon">
+                        <div class="printerWrapper">
+                        <div class="paperWrapper">
+                            <div class="paperIn page1">Printing...</div>
+                            <div class="paperIn page2">Printing...</div>
+                            <div class="paperInsert"></div>
+                            <div class="paperSlot"></div>
+                            <div class="paperHide"></div>    
+                        </div>
+                        <div class="printerTop"></div>
+                        <div class="printerBody"></div>
+                        <div class="bayWrapper">
+                            <div class="lightLarge">
+                            <div class="light">
+                            </div>
+                            </div>
+                            <div class="lightSmall">
+                            <div class="light">
+                            </div>
+                            </div>
+                            <div class="facePlate"></div>
+                            <div class="bayOpening"></div>
+                            <div class="bayTray"></div>
+                            <div class="paperOut"></div>
+                            <div class="paperOutShadow"></div>
+                        </div>
+                        </div>
+                    </span>
+                    <p class="print-doc-text">Print Daily Meal Plan</p>
+                </button>
+            </div>
+        </div>
+
+        <!--<script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+        // Get all the radio buttons
+            const generalLayoutRadio = document.getElementById('General-layout');
+            const breakSystemLayoutRadio = document.getElementById('break-system-layout');
+            const mealCategoryLayoutRadio = document.getElementById('meal-category-layout');
+
+        // Get the sections
+            const mealSections = document.querySelector('.meal-sections');
+            const breakSystem = document.querySelector('.break-system');
+            const mealCategories = document.querySelector('.meal-categories');
+
+        // Function to set the correct display styles based on selected layout
+            function updateLayout() {
+                // Reset all sections to be invisible
+                    mealSections.classList.remove('flex');
+                    breakSystem.classList.remove('flex');
+                    mealCategories.classList.remove('grid');
+
+                // Hide all sections initially by removing the visibility classes
+                    mealSections.style.visibility = 'hidden';
+                    breakSystem.style.visibility = 'hidden';
+                    mealCategories.style.visibility = 'hidden';
+
+                // Add transitions to the selected section
+                    if (generalLayoutRadio.checked) {
+                        mealSections.classList.add('flex');
+                        mealSections.style.visibility = 'visible';  // Make it visible
+                    }
+                    else if (breakSystemLayoutRadio.checked) {
+                        breakSystem.classList.add('flex');
+                        breakSystem.style.visibility = 'visible';  // Make it visible
+                    }
+                    else if (mealCategoryLayoutRadio.checked) {
+                        mealCategories.classList.add('grid');
+                        mealCategories.style.visibility = 'visible';  // Make it visible
+                    }
+            }
+
+            // Add event listeners for the radio buttons
+                generalLayoutRadio.addEventListener('change', updateLayout);
+                breakSystemLayoutRadio.addEventListener('change', updateLayout);
+                mealCategoryLayoutRadio.addEventListener('change', updateLayout);
+
+            // Initialize the layout on page load
+                updateLayout();
+        });
+
+    </script>-->
+    </div>
+    <script src="schoolScript.js"></script>
+
+</body>
+
+</html>

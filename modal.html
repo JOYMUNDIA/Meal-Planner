@@ -1,0 +1,223 @@
+Absolutely! Here's a complete solution for a **responsive modal pop-up** with: * A **blurred background** effect, * A **card-like shadow**, * A **textured background image** (e.g., white tablecloth), * A decorative **image on the right**, * Your custom
+**Google Fonts**, and * A **close button** to reset the view. --- ## ✅ Complete Code (HTML + CSS + JS) ### ✅ HTML ```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Static Site Notice</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Mea+Culpa&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== GLOBAL STYLES ===== */
+        
+        body {
+            margin: 0;
+            font-family: 'Cormorant', serif;
+            transition: filter 0.3s ease;
+        }
+        
+        .blurred {
+            filter: blur(5px);
+            pointer-events: none;
+            user-select: none;
+        }
+        
+        .content {
+            padding: 2rem;
+            text-align: center;
+        }
+        /* ===== BUTTON TO TRIGGER MODAL ===== */
+        
+        .trigger-btn {
+            font-size: 1.2rem;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            background-color: #444;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        /* ===== MODAL OVERLAY ===== */
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        /* ===== MODAL CARD ===== */
+        
+        .modal {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            background: url('images/modal-background.jpg'), white;
+            background-size: cover;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            max-width: 800px;
+            width: 90%;
+            min-height: 300px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .modal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.65);
+            /* White overlay */
+            z-index: 0;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        /* Ensure modal content is above overlay */
+        
+        .modal-text,
+        .modal-image,
+        .close-btn {
+            position: relative;
+            z-index: 1;
+        }
+        /* ===== MODAL LEFT (TEXT) ===== */
+        
+        .modal-text {
+            flex: 1;
+            padding: 2rem;
+        }
+        
+        .modal-text h2 {
+            font-family: 'Cormorant', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-text p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        /* ===== MODAL RIGHT (IMAGE) ===== */
+        
+        .modal-image {
+            flex: 1;
+            background: url('images/modal-plate.png') no-repeat center center;
+            background-size: cover;
+        }
+        /* ===== CLOSE BUTTON ===== */
+        
+        .modal .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            width: 2.8rem;
+            height: 2.8rem;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            transition: background 0.2s ease;
+        }
+        
+        .modal .close-btn:hover {
+            background: rgba(255, 255, 255, 0.6);
+            color: red;
+        }
+        
+        @media (max-width: 768px) {
+            .modal {
+                flex-direction: column;
+            }
+            .modal-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- MAIN CONTENT -->
+    <div class="content" id="mainContent">
+        <h1>Welcome to Our Site</h1>
+        <p>This is a demo of how we inform users about login functionality.</p>
+        <button class="trigger-btn" onclick="openModal()">Register / Login</button>
+    </div>
+
+    <!-- MODAL OVERLAY -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-text">
+                <h2>Register/Login Not Available</h2>
+                <p>
+                    Hi there! 😊 Just a quick note — the Register and Login features aren't active on this page right now. This is a simple version of the website, so you can look around and explore freely, but signing in or creating an account isn’t possible here.
+                    <br><br> Thanks for your understanding, and we’re glad you're visiting! 💙
+                </p>
+            </div>
+            <div class="modal-image"></div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        const modalOverlay = document.getElementById('modalOverlay');
+        const mainContent = document.getElementById('mainContent');
+
+        function openModal() {
+            modalOverlay.classList.add('active');
+            mainContent.classList.add('blurred');
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            mainContent.classList.remove('blurred');
+        }
+    </script>
+
+</body>
+
+</html>
+``` --- ## 📌 Customization Tips * **Background Texture:** You can swap the URL of the texture image (`white-diamond.png`) with any other from [TransparentTextures](https://www.transparenttextures.com/). * **Right-Side Image:** Replace the Unsplash image
+URL with your preferred one. * **Responsiveness:** It's mobile-friendly, but feel free to adjust media queries for more breakpoints. Would you like me to make this into a reusable component or tailor the look for a specific color scheme?
+
+</body>
+
+</html>
+``` --- ## 📌 Customization Tips * **Background Texture:** You can swap the URL of the texture image (`white-diamond.png`) with any other from [TransparentTextures](https://www.transparenttextures.com/). * **Right-Side Image:** Replace the Unsplash image
+URL with your preferred one. * **Responsiveness:** It's mobile-friendly, but feel free to adjust media queries for more breakpoints. Would you like me to make this into a reusable component or tailor the look for a specific color scheme?

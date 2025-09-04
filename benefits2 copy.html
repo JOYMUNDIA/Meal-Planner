@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circles in a Circle</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    .circle-container {
+      position: relative;
+      width: 40vw; /* Increased the size of the container */
+      height: 40vw; /* Increased the size of the container */
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .circle {
+      position: absolute;
+      width: 13rem; /* Increased the size of the circles */
+      height: 13rem; /* Increased the size of the circles */
+      border-radius: 50%;
+      background-image: url('images/grey-wall.jpg');
+    background-size: cover;
+    }
+
+    /* Positioning each circle at an equal angle */
+    .circle:nth-child(1) {
+      transform: rotate(0deg) translateX(13rem) rotate(-0deg);
+    }
+
+    .circle:nth-child(2) {
+      transform: rotate(60deg) translateX(13rem) rotate(-60deg);
+    }
+
+    .circle:nth-child(3) {
+      transform: rotate(120deg) translateX(13rem) rotate(-120deg);
+    }
+
+    .circle:nth-child(4) {
+      transform: rotate(180deg) translateX(13rem) rotate(-180deg);
+    }
+
+    .circle:nth-child(5) {
+      transform: rotate(240deg) translateX(13rem) rotate(-240deg);
+    }
+
+    .circle:nth-child(6) {
+      transform: rotate(300deg) translateX(13rem) rotate(-300deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="circle-container">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
+</body>
+</html>

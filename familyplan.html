@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Meal Plan</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            font-family: 'Cormorant', sans-serif;
+        }
+        
+        .body-div {
+            width: 100vw;
+            background-image: url('images/white-wall.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        
+        .nav-links {
+            display: none;
+        }
+        
+        .hamburger-menu {
+            display: block;
+            z-index: 25;
+            position: relative;
+            left: 94vw;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .hamburger-menu {
+                left: 90vw;
+            }
+        }
+        
+        .side-nav {
+            width: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body-div">
+        <!-- Navigation section (10% of the body height) -->
+        <div class="nav-div">
+            <!-- register-div on the left -->
+            <!--<div class="register-div">
+                    <button class="register-login">Register/Login</button><br>
+                </div>-->
+
+            <!-- Navigation links section -->
+            <div class="nav-links">
+
+
+                <a href="index.html" target="_blank"><button>Home</button></a>
+
+                <!-- Create dropdown button -->
+                <div class="dropdown">
+                    <button class="dropbtn active">Create</button>
+                    <div class="dropdown-content">
+                        <a href="familyplan.html" target="_blank">Family Meal Plan</a>
+                        <a href="schoollunch.html" target="_blank">School Lunch Meal Plan</a>
+                        <!--<a href="#">Work Meal Plan</a>-->
+                        <!--<a href="#">Special Occasion/Festival Meal Plan</a>-->
+                    </div>
+                </div>
+
+                <button>Contact</button>
+
+            </div>
+
+            <!-- Hamburger menu for smaller screens -->
+            <div class="hamburger-menu" onclick="toggleNav()">
+                &#9776;
+            </div>
+        </div>
+
+        <!-- Side Navbar (for smaller screens) -->
+        <div class="side-nav" id="sideNav">
+            <!-- Close button to close the sidebar -->
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+
+            <!--<button onclick="closeNav()">Register/Login</button><br>-->
+
+            <a href="index.html" target="_blank">
+                <button onclick="closeNav()">Home</button>
+            </a>
+
+            <a href="savedPlans.html" target="_blank">
+                <button onclick="closeNav()">Saved Plans</button>
+            </a>
+
+            <div class="dropdown">
+                <button class="dropbtn">Create</button>
+                <div class="dropdown-content">
+                    <!-- Inside the .dropdown-content -->
+                    <a href="familyplan.html" target="_blank" onclick="handleDropdownSelection(this)">Family Meal Plan</a>
+                    <a href="schoollunch.html" target="_blank" onclick="handleDropdownSelection(this)">School Lunch Meal Plan</a>
+                    <!--<a href="#" onclick="handleDropdownSelection(this)">Work Meal Plan</a>-->
+                    <!--<a href="#" onclick="handleDropdownSelection(this)">Special Occasion/Festival Meal Plan</a>-->
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="family-plan-parent-container">
+
+            <div class="layout-header">
+                <div class="radio-inputs">
+                    <label class="radio" for="dailyMealPlan">
+                        <input id="dailyMealPlan" checked="" name="radio" type="radio" />
+                        <span class="name">Day Meal Plan</span>
+                    </label>
+                    <label class="radio" for="weeklyMealPlan">
+                        <input id="weeklyMealPlan" name="radio" type="radio" />
+                        <span class="name">Week Meal Plan</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="familyPlanCard" class="family-plan-card-container">
+
+                <div class="family-plan-card">
+                    <div class="ribbon-holder">
+                        <div class="ribbon ribbon-outlined">
+                            <span>Family Plan</span>
+                        </div>
+                    </div>
+
+                    <div class="family-heading-and-day-selector">
+                        <div class="day-selector">
+                            <select class="day-selector-dropdown" id="day-selector" onchange="toggleMealsByDay()">
+                                    <option value="day-one">Monday 21 April</option>
+                                    <option value="day-two">Tuesday 22 April</option>
+                                    <option value="day-three">Wednesday 23 April</option>
+                                    <option value="day-four">Thursday 24 April</option>
+                                    <option value="day-five">Friday 25 April</option>
+                                    <option value="day-six">Saturday 26 April</option>
+                                    <option value="day-seven">Sunday 27 April</option>
+                                </select>
+                        </div>
+
+                        <h1>Family Meal Plan</h1>
+                    </div>
+
+                    <p class="day-view-user-guide">Double Tap to edit the meal...</p>
+
+                    <div class="meal-sections">
+
+                        <!--Day One Meals-->
+                        <div class="breakfast-section meal-type" id="day-one-breakfast-section" data-title="Breakfast">
+                            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                            <div class="text-area">
+                                <p class="day-one-breakfast">Oats topped with raspberries and blueberries, served alongside a glass of orange juice.</p>
+                            </div>
+                        </div>
+
+                        <div class="lunch-section meal-type" id="day-one-lunch-section" data-title="Lunch">
+                            <img src="images/spaghetti.png" alt="Spaghetti">
+                            <div class="text-area">
+                                <p class="day-one-lunch">Spaghetti Bolognese</p>
+                            </div>
+                        </div>
+
+                        <div class="snacks-section meal-type" id="day-one-snacks-section" data-title="Snacks">
+                            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                            <div class="text-area">
+                                <p class="day-one-snacks">Granola Bars with some Yoghurt</p>
+                            </div>
+                        </div>
+
+                        <div class="dinner-section meal-type" id="day-one-dinner-section" data-title="Dinner">
+                            <img src="images/sandwich.png" alt="Sandwich">
+                            <div class="text-area">
+                                <p class="day-one-dinner">A ham Sandwich</p>
+                            </div>
+                        </div>
+                        <!--End: Day One Meals-->
+
+                        <!--Day Two Meals-->
+                        <div class="breakfast-section meal-type" id="day-two-breakfast-section" data-title="Breakfast">
+                            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                            <div class="text-area">
+                                <p class="day-two-breakfast">
+                                    Greek yogurt with honey, chia seeds, and sliced almonds
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="lunch-section meal-type" id="day-two-lunch-section" data-title="Lunch">
+                            <img src="images/spaghetti.png" alt="Spaghetti">
+                            <div class="text-area">
+                                <p class="day-two-lunch">
+                                    Grilled chicken wrap with lettuce, tomato, and hummus
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="snacks-section meal-type" id="day-two-snacks-section" data-title="Snacks">
+                            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                            <div class="text-area">
+                                <p class="day-two-snacks">
+                                    Apple slices with peanut butter
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="dinner-section meal-type" id="day-two-dinner-section" data-title="Dinner">
+                            <img src="images/sandwich.png" alt="Sandwich">
+                            <div class="text-area">
+                                <p class="day-two-dinner">
+                                    Baked salmon with quinoa and steamed broccoli
+                                </p>
+                            </div>
+                        </div>
+                        <!--End: Day Two Meals-->
+
+                        <!--Day Three Meals-->
+                        <div class="breakfast-section meal-type" id="day-three-breakfast-section" data-title="Breakfast">
+                            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                            <div class="text-area">
+                                <p class="day-three-breakfast">
+                                    Whole grain toast with avocado and poached egg
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="lunch-section meal-type" id="day-three-lunch-section" data-title="Lunch">
+                            <img src="images/spaghetti.png" alt="Spaghetti">
+                            <div class="text-area">
+                                <p class="day-three-lunch">
+                                    Lentil soup with a side of whole-grain bread
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="snacks-section meal-type" id="day-three-snacks-section" data-title="Snacks">
+                            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                            <div class="text-area">
+                                <p class="day-three-snacks">
+                                    A handful of mixed nuts
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="dinner-section meal-type" id="day-three-dinner-section" data-title="Dinner">
+                            <img src="images/sandwich.png" alt="Sandwich">
+                            <div class="text-area">
+                                <p class="day-three-dinner">
+                                    Turkey stir-fry with brown rice and mixed vegetables
+                                </p>
+                            </div>
+                        </div>
+                        <!--End: Day Three Meals-->
+
+                        <!--Day Four Meals-->
+                        <div class="breakfast-section meal-type" id="day-four-breakfast-section" data-title="Breakfast">
+                            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                            <div class="text-area">
+                                <p class="day-four-breakfast">
+                                    Smoothie (banana, spinach, protein powder, almond milk, and flaxseed)
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="lunch-section meal-type" id="day-four-lunch-section" data-title="Lunch">
+                            <img src="images/spaghetti.png" alt="Spaghetti">
+                            <div class="text-area">
+                                <p class="day-four-lunch">
+                                    Quinoa salad with chickpeas, cucumber, cherry tomatoes, and feta
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="snacks-section meal-type" id="day-four-snacks-section" data-title="Snacks">
+                            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                            <div class="text-area">
+                                <p class="day-four-snacks">
+                                    Carrot sticks with hummus
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="dinner-section meal-type" id="day-four-dinner-section" data-title="Dinner">
+                            <img src="images/sandwich.png" alt="Sandwich">
+                            <div class="text-area">
+                                <p class="day-four-dinner">
+                                    Grilled tilapia with sweet potato mash and green beans
+                                </p>
+                            </div>
+                        </div>
+                        <!--End: Day Four Meals-->
+
+                        <!--Day Five Meals-->
+                        <div class="breakfast-section meal-type" id="day-five-breakfast-section" data-title="Breakfast">
+                            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                            <div class="text-area">
+                                <p class="day-five-breakfast">
+                                    Pancakes made with oats and banana, topped with fresh strawberries
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="lunch-section meal-type" id="day-five-lunch-section" data-title="Lunch">
+                            <img src="images/spaghetti.png" alt="Spaghetti">
+                            <div class="text-area">
+                                <p class="day-five-lunch">
+                                    Turkey and cheese sandwich on whole grain bread, side of cucumber slices
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="snacks-section meal-type" id="day-five-snacks-section" data-title="Snacks">
+                            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                            <div class="text-area">
+                                <p class="day-five-snacks">
+                                    Cottage cheese with pineapple
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="dinner-section meal-type" id="day-five-dinner-section" data-title="Dinner">
+                            <img src="images/sandwich.png" alt="Sandwich">
+                            <div class="text-area">
+                                <p class="day-five-dinner">
+                                    Chicken curry with basmati rice and steamed peas
+                                </p>
+                            </div>
+                        </div>
+                        <!--End: Day Five Meals-->
+
+                        <!--Day Six Meals-->
+                        <div class="breakfast-section meal-type" id="day-six-breakfast-section" data-title="Breakfast">
+                            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                            <div class="text-area">
+                                <p class="day-six-breakfast">
+                                    Scrambled eggs with spinach and whole grain toast
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="lunch-section meal-type" id="day-six-lunch-section" data-title="Lunch">
+                            <img src="images/spaghetti.png" alt="Spaghetti">
+                            <div class="text-area">
+                                <p class="day-six-lunch">
+                                    Tuna salad stuffed into whole wheat pita pockets
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="snacks-section meal-type" id="day-six-snacks-section" data-title="Snacks">
+                            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                            <div class="text-area">
+                                <p class="day-six-snacks">
+                                    Orange slices or a small fruit salad
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="dinner-section meal-type" id="day-six-dinner-section" data-title="Dinner">
+                            <img src="images/sandwich.png" alt="Sandwich">
+                            <div class="text-area">
+                                <p class="day-six-dinner">
+                                    Veggie lasagna with a side garden salad
+                                </p>
+                            </div>
+                        </div>
+                        <!--End: Day Six Meals-->
+
+                        <!--Day Seven Meals-->
+                        <div class="breakfast-section meal-type" id="day-seven-breakfast-section" data-title="Breakfast">
+                            <img src="images/breakfast.png" alt="Oats with Rasberry, blueberry, and a glass of orange juice">
+                            <div class="text-area">
+                                <p class="day-seven-breakfast">
+                                    Overnight oats with almond butter and sliced banana
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="lunch-section meal-type" id="day-seven-lunch-section" data-title="Lunch">
+                            <img src="images/spaghetti.png" alt="Spaghetti">
+                            <div class="text-area">
+                                <p class="day-seven-lunch">
+                                    Grilled veggie wrap with tzatziki sauce
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="snacks-section meal-type" id="day-seven-snacks-section" data-title="Snacks">
+                            <img src="images/healthy-snacks.png" alt="Granola bars, yoghurt and juice">
+                            <div class="text-area">
+                                <p class="day-seven-snacks">
+                                    Greek yogurt and a handful of trail mix
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="dinner-section meal-type" id="day-seven-dinner-section" data-title="Dinner">
+                            <img src="images/sandwich.png" alt="Sandwich">
+                            <div class="text-area">
+                                <p class="day-seven-dinner">
+                                    Baked chicken thighs with roasted potatoes and asparagus
+                                </p>
+                            </div>
+                        </div>
+                        <!--End: Day Seven Meals-->
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="familyWeeklyPlanCard" class="family-weekly-plan-card-container">
+                <div class="family-weekly-plan-card">
+                    <table id="weekly-timetable-content">
+                        <tbody>
+                            <tr>
+                                <td rowspan="2">
+                                    <p class="plan-header">Weekly Family Meal Plan</p>
+                                    <p class="user-edit-guide">Double-tap to edit a meal...</p>
+                                </td>
+                                <td colspan="4" class="actual-start-end-date">
+                                    <div class="deeds-meta-header">
+                                        <div class="start-end-date" id="start-end-date-text">
+                                            01 April 2025 - 07 April 2025
+                                        </div>
+                                        <div class="calendar-image">
+                                            <div class="icon-container">
+                                                <img src="images/calendar.png" alt="Calendar Icon">
+                                                <img src="images/clock-icon.png" alt="Clock Icon">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Breakfast</th>
+                                <th>Lunch</th>
+                                <th>Snacks</th>
+                                <th>Dinner</th>
+                            </tr>
+
+                            <!-- Add rows for each day -->
+                            <tr>
+                                <td colspan="5" class="header-body-row-spacer"></td>
+                            </tr>
+
+                            <!-- Add rows for each day -->
+                            <tr id="day-1">
+                                <td class="date-cell">
+                                    <div class="date-container">
+                                        <div class="day-name day-one-name">Tuesday</div>
+                                        <div class="day-month day-one-date">01 April</div>
+                                    </div>
+                                </td>
+                                <td class="meals day-one-breakfast">Oats topped with raspberries and blueberries</td>
+                                <td class="meals day-one-lunch">Spaghetti Bolognese</td>
+                                <td class="meals day-one-snacks">Granola Bars</td>
+                                <td class="meals day-one-dinner">Ham Sandwich</td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="5" class="row-spacer"></td>
+                            </tr>
+
+                            <tr id="day-2">
+                                <td class="date-cell">
+                                    <div class="date-container">
+                                        <div class="day-name day-two-name">Wednesday</div>
+                                        <div class="day-month day-two-date">02 April</div>
+                                    </div>
+                                </td>
+                                <td class="meals day-two-breakfast">Greek yogurt with honey, chia seeds, and sliced almonds</td>
+                                <td class="meals day-two-lunch">Grilled chicken wrap with lettuce, tomato, and hummus</td>
+                                <td class="meals day-two-snacks">Apple slices with peanut butter</td>
+                                <td class="meals day-two-dinner">Baked salmon with quinoa and steamed broccoli</td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="5" class="row-spacer"></td>
+                            </tr>
+
+                            <tr id="day-3">
+                                <td class="date-cell">
+                                    <div class="date-container">
+                                        <div class="day-name day-three-name">
+                                            Thursday
+                                        </div>
+                                        <div class="day-month day-three-date">
+                                            03 April
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="meals day-three-breakfast">Whole grain toast with avocado and poached egg</td>
+                                <td class="meals day-three-lunch">Lentil soup with a side of whole-grain bread</td>
+                                <td class="meals day-three-snacks">A handful of mixed nuts</td>
+                                <td class="meals day-three-dinner">Turkey stir-fry with brown rice and mixed vegetables</td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="5" class="row-spacer"></td>
+                            </tr>
+
+                            <tr id="day-4">
+                                <td class="date-cell">
+                                    <div class="date-container">
+                                        <div class="day-name day-four-name">
+                                            Friday
+                                        </div>
+                                        <div class="day-month day-four-date">
+                                            04 April
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="meals day-four-breakfast">Smoothie (banana, spinach, protein powder, almond milk, and flaxseed)</td>
+                                <td class="meals day-four-lunch">Quinoa salad with chickpeas, cucumber, cherry tomatoes, and feta</td>
+                                <td class="meals day-four-snacks">Carrot sticks with hummus</td>
+                                <td class="meals day-four-dinner">Grilled tilapia with sweet potato mash and green beans</td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="5" class="row-spacer"></td>
+                            </tr>
+
+                            <tr id="day-5">
+                                <td class="date-cell">
+                                    <div class="date-container">
+                                        <div class="day-name day-five-name">
+                                            Saturday
+                                        </div>
+                                        <div class="day-month day-five-date">
+                                            05 April
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="meals day-five-breakfast">Pancakes made with oats and banana, topped with fresh strawberries</td>
+                                <td class="meals day-five-lunch">Turkey and cheese sandwich on whole grain bread, side of cucumber slices</td>
+                                <td class="meals day-five-snacks">Cottage cheese with pineapple</td>
+                                <td class="meals day-five-dinner">Chicken curry with basmati rice and steamed peas</td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="5" class="row-spacer"></td>
+                            </tr>
+
+                            <tr id="day-6">
+                                <td class="date-cell">
+                                    <div class="date-container">
+                                        <div class="day-name day-six-name">
+                                            Sunday
+                                        </div>
+                                        <div class="day-month day-six-date">
+                                            06 April
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="meals day-six-breakfast">Scrambled eggs with spinach and whole grain toast</td>
+                                <td class="meals day-six-lunch">Tuna salad stuffed into whole wheat pita pockets</td>
+                                <td class="meals day-six-snacks">Orange slices or a small fruit salad</td>
+                                <td class="meals day-six-dinner">Veggie lasagna with a side garden salad</td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="5" class="row-spacer"></td>
+                            </tr>
+
+                            <tr id="day-7">
+                                <td class="date-cell">
+                                    <div class="date-container">
+                                        <div class="day-name day-seven-name">
+                                            Monday
+                                        </div>
+                                        <div class="day-month day-seven-date">
+                                            07 April
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="meals day-seven-breakfast">Overnight oats with almond butter and sliced banana</td>
+                                <td class="meals day-seven-lunch">Grilled veggie wrap with tzatziki sauce</td>
+                                <td class="meals day-seven-snacks">Greek yogurt and a handful of trail mix</td>
+                                <td class="meals day-seven-dinner">Baked chicken thighs with roasted potatoes and asparagus</td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="5" class="row-spacer"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <!-- Floating Calendar -->
+                    <div id="calendar-container" class="calendar-container">
+                        <div class="calendar-header">
+                            <span>Please select a start date...</span>
+                            <div id="close-calendar-container" class="close-calendar-container">
+                                <div class="inner-ring">
+                                    <div class="button">X</div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="date" id="start-date" onchange="updateStartDate()">
+                    </div>
+
+                    <!--Modal Pop Up-->
+                    <div class="weekly-timetable-modal" id="weekly-timetable-modal">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th class="style-preserver-cell"></th>
+                                    <th class="modal-header">Breakfast</th>
+                                    <tr>
+                                        <td class="date-cell">
+                                            <div class="date-container">
+                                                <div class="day-name day-one-name">Tuesday</div>
+                                                <div class="day-month day-one-date">01 April</div>
+                                            </div>
+                                        </td>
+                                        <td class="modal-meal meals day-one-breakfast">Oats topped with raspberries and blueberries</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="modal-popUp-btns" colspan="2">
+                                            <div class="clear-enter-btns">
+                                                <button class="modal-clear-btn" role="button">Clear</button>
+                                                <button class="modal-enter-btn" role="button">Enter</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a class="close-modal-button"></a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="save-document">
+                <button class="Documents-btn" id="saveMealPlanButton">
+                <span class="folderContainer">
+                    <svg
+                    class="fileBack"
+                    width="146"
+                    height="113"
+                    viewBox="0 0 146 113"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                    <path
+                        d="M0 4C0 1.79086 1.79086 0 4 0H50.3802C51.8285 0 53.2056 0.627965 54.1553 1.72142L64.3303 13.4371C65.2799 14.5306 66.657 15.1585 68.1053 15.1585H141.509C143.718 15.1585 145.509 16.9494 145.509 19.1585V109C145.509 111.209 143.718 113 141.509 113H3.99999C1.79085 113 0 111.209 0 109V4Z"
+                        fill="url(#paint0_linear_117_4)"
+                    ></path>
+                    <defs>
+                        <linearGradient
+                        id="paint0_linear_117_4"
+                        x1="0"
+                        y1="0"
+                        x2="72.93"
+                        y2="95.4804"
+                        gradientUnits="userSpaceOnUse"
+                        >
+                        <stop stop-color="#8F88C2"></stop>
+                        <stop offset="1" stop-color="#5C52A2"></stop>
+                        </linearGradient>
+                    </defs>
+                    </svg>
+                    <svg
+                    class="filePage"
+                    width="88"
+                    height="99"
+                    viewBox="0 0 88 99"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                    <rect width="88" height="99" fill="url(#paint0_linear_117_6)"></rect>
+                    <defs>
+                        <linearGradient
+                        id="paint0_linear_117_6"
+                        x1="0"
+                        y1="0"
+                        x2="81"
+                        y2="160.5"
+                        gradientUnits="userSpaceOnUse"
+                        >
+                        <stop stop-color="white"></stop>
+                        <stop offset="1" stop-color="#686868"></stop>
+                        </linearGradient>
+                    </defs>
+                    </svg>
+
+                    <svg
+                        class="fileFront"
+                        width="160"
+                        height="79"
+                        viewBox="0 0 160 79"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M0.29306 12.2478C0.133905 9.38186 2.41499 6.97059 5.28537 6.97059H30.419H58.1902C59.5751 6.97059 60.9288 6.55982 62.0802 5.79025L68.977 1.18034C70.1283 0.410771 71.482 0 72.8669 0H77H155.462C157.87 0 159.733 2.1129 159.43 4.50232L150.443 75.5023C150.19 77.5013 148.489 79 146.474 79H7.78403C5.66106 79 3.9079 77.3415 3.79019 75.2218L0.29306 12.2478Z"
+                            fill="url(#paint0_linear_117_5)">
+                        </path>
+                        <defs>
+                            <linearGradient
+                            id="paint0_linear_117_5"
+                            x1="38.7619"
+                            y1="8.71323"
+                            x2="66.9106"
+                            y2="82.8317"
+                            gradientUnits="userSpaceOnUse"
+                            >
+                            <stop stop-color="#C3BBFF"></stop>
+                            <stop offset="1" stop-color="#51469A"></stop>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </span>
+                <p class="save-doc-text">Save Plan</p>
+                </button>
+                <button class="Documents-print-btn" id="printMealPlanButton" onclick="printVisibleCard()">
+                    <span class="printer-icon">
+                        <div class="printerWrapper">
+                        <div class="paperWrapper">
+                            <div class="paperIn page1">Printing...</div>
+                            <div class="paperIn page2">Printing...</div>
+                            <div class="paperInsert"></div>
+                            <div class="paperSlot"></div>
+                            <div class="paperHide"></div>    
+                        </div>
+                        <div class="printerTop"></div>
+                        <div class="printerBody"></div>
+                        <div class="bayWrapper">
+                            <div class="lightLarge">
+                            <div class="light">
+                            </div>
+                            </div>
+                            <div class="lightSmall">
+                            <div class="light">
+                            </div>
+                            </div>
+                            <div class="facePlate"></div>
+                            <div class="bayOpening"></div>
+                            <div class="bayTray"></div>
+                            <div class="paperOut"></div>
+                            <div class="paperOutShadow"></div>
+                        </div>
+                        </div>
+                    </span>
+                    <p class="print-doc-text">Print Daily Meal Plan</p>
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+</html>

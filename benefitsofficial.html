@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benefits of Meal Planning</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            font-family: 'Cormorant', sans-serif;
+        }
+
+        .body-div {
+            width: 100vw;
+            background-image: url('images/white-wall.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .meal-plan-reasons{
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.75);
+            padding: 1rem;
+        }
+
+        .meal-plan-reasons .intro-text{
+            width: 90%;
+            color: black;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .meal-plan-reasons .intro-text h1{
+            font-size: 3rem;
+            color: black;
+        }
+
+        .meal-plan-reasons .intro-text p{
+            font-size: 1.5rem;
+            padding: 1rem;
+            text-align: left;
+            margin-top: -1rem;
+            font-weight: 450;
+        }
+
+        .meal-plan-reasons .reasons-grid{
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 4rem;
+            padding: 2rem;
+            width: 90%;
+        }
+
+        .meal-plan-reasons .reasons-grid .reason-card{
+            position: relative;
+            width: 20rem;
+            height: 22.5rem;
+            background-color: #f1f1f1;
+            border-top-right-radius: 4.5rem;
+            border-bottom-left-radius: 4.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, 
+                        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, 
+                        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+        }
+
+        .meal-plan-reasons .reasons-grid .reason-card .reason-heading{
+            height: 15%;
+            padding: 0.5rem;
+        }
+
+        .meal-plan-reasons .reasons-grid .reason-card .reason{
+            height: 85%;
+            padding: 0.5rem;
+        }
+
+        .meal-plan-reasons .reasons-grid .reason-card h2{
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .meal-plan-reasons .reasons-grid .reason-card p{
+            font-size: 1.3rem;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        /* Circle styling */
+        .circle {
+            position: absolute;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .circle.top-left {
+            top: -1rem;
+            left: -1rem;
+            background-image: url('images/grey-wall.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .circle.bottom-right {
+            bottom: -1rem;
+            right: -1rem;
+            background-image: url('images/black-brick-wall-textured-backgr.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            font-size: 2rem;
+            font-family: 'Mea Culpa', 'Roboto', sans-serif;
+            font-weight: 650;
+        }
+
+        /* For circle at the top-left */
+        .circle.top-left img {
+            width: 50%;
+            height: 50%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="body-div">
+        <!--Reasons to Plan meals-->
+        <div class="meal-plan-reasons">
+            <div class="intro-text">
+                <div class="reason-heading">
+                    <h1>Why Should I create a Meal Plan?</h1>
+                </div>
+                <div class="reason">
+                    <p>
+                        Creating a meal plan can seem like a waste of time,
+                        or hinder the flow of creativity unleashed when creating meals
+                        on the fly but a meal plan does the opposite.<br>
+                        Here are some of the reasons why you should consider creating a meal plan:
+                    </p>
+                </div>
+            </div>
+
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <!-- Circle at top-left -->
+                    <div class="circle top-left">
+                        <img src="images/some-image.jpg" alt="Image" />
+                    </div>
+                    <!-- Circle at bottom-right -->
+                    <div class="circle bottom-right">
+                        1
+                    </div>
+                    <div class="reason-heading">
+                        <h2>Save Time</h2>
+                    </div>
+                    <div class="reason">
+                        <p>
+                            Set up meal preps ahead of time for even a week's worth of meals.
+                            If Monday's breakfast is oats, then why not make Monday's breakfast overnight oats?
+                        </p>
+                    </div>
+                </div>
+
+                <div class="reason-card">
+                    <!-- Circle at top-left -->
+                    <div class="circle top-left">
+                        <img src="images/some-image.jpg" alt="Image" />
+                    </div>
+                    <!-- Circle at bottom-right -->
+                    <div class="circle bottom-right">
+                        2
+                    </div>
+                    <div class="reason-heading">
+                        <h2>Incorporate Variety</h2>
+                    </div>
+                    <div class="reason">
+                        <p>
+                            Budget-friendly eating doesn't mean sacrificing variety;
+                            try peanut butter porridge and organize themed dinner nights for excitement.
+                            Enjoy a variety of meals from Mexican, Chinese, and Mediterranean.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="reason-card">
+                    <!-- Circle at top-left -->
+                    <div class="circle top-left">
+                        <img src="images/some-image.jpg" alt="Image" />
+                    </div>
+                    <!-- Circle at bottom-right -->
+                    <div class="circle bottom-right">
+                        3
+                    </div>
+                    <div class="reason-heading">
+                        <h2>Eat Healthier</h2>
+                    </div>
+                    <div class="reason">
+                        <p>
+                            Eating a juicy burger with fries sounds epic.
+                            But switching to healthier alternatives may increase your life span
+                            and keep you in an abundance of health wealth.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="reason-card">
+                    <!-- Circle at top-left -->
+                    <div class="circle top-left">
+                        <img src="images/some-image.jpg" alt="Image" />
+                    </div>
+                    <!-- Circle at bottom-right -->
+                    <div class="circle bottom-right">
+                        4
+                    </div>
+                    <div class="reason-heading">
+                        <h2>Reduce Food Waste</h2>
+                    </div>
+                    <div class="reason">
+                        <p>
+                            Cooking on the fly sometimes robs you of the opportunity
+                            to prepare a meal with an Ingredient that is trapped in the
+                            back of your fridge and sitting on its last legs. With a meal plan,
+                            you can seamlessly incorporate Ingredients that are headed for the bin.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="reason-card">
+                    <!-- Circle at top-left -->
+                    <div class="circle top-left">
+                        <img src="images/some-image.jpg" alt="Image" />
+                    </div>
+                    <!-- Circle at bottom-right -->
+                    <div class="circle bottom-right">
+                        5
+                    </div>
+                    <div class="reason-heading">
+                        <h2>Save Money</h2>
+                    </div>
+                    <div class="reason">
+                        <p>
+                            Less food waste equals more money saved.<br>
+                            Pro-tip: Researching meal ideas ahead of time can
+                            help you cook meals that do not break the bank.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="reason-card">
+                    <!-- Circle at top-left -->
+                    <div class="circle top-left">
+                        <img src="images/some-image.jpg" alt="Image" />
+                    </div>
+                    <!-- Circle at bottom-right -->
+                    <div class="circle bottom-right">
+                        6
+                    </div>
+                    <div class="reason-heading">
+                        <h2>Prevent Impulse Eating</h2>
+                    </div>
+                    <div class="reason">
+                        <p>
+                            Sometimes we eat not because we are hungry but
+                            because we are trying to fill an empty space.
+                            Having a meal plan can help us stay motivated to break this habit.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of Reasons to Plan meals Section-->
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School lunch Meal Plan</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            font-family: 'Cormorant', sans-serif;
+        }
+
+        .miniature-body-div {
+            width: 100vw;
+            background-image: url('images/white-wall.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .school-lunch-plan-parent-container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .school-lunch-plan-card-container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 1rem;
+            overflow-x: hidden;
+        }
+
+        .school-lunch-plan-card {
+            width: 88%;
+            position: relative;
+            padding: 1rem;
+            background-color: whitesmoke;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+            overflow: hidden;
+        }
+
+        @media screen and (max-width: 768px) {
+            .school-lunch-plan-card-container {
+                padding: 2rem;
+            }
+
+            .school-lunch-plan-card {
+                width: 80%;
+            }
+        }
+
+        .school-lunch-plan-card .image-container,
+        .school-lunch-plan-card .text-container{
+            position: relative;
+            width: 100%;
+        }
+
+        .school-lunch-plan-card .image-container{
+            height: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url(images/gray-abstract-wireframe-technolo.jpg);
+            background-size: cover;
+            position: relative; /* For absolute positioning of Bento Lunchbox and School Bag */
+        }
+
+        .school-lunch-plan-card .image-container .header{
+            height: 15%;
+            font-family: 'Mea Culpa', 'Cormorant', sans-serif;
+            font-weight: 400;
+            font-size: 4rem;
+            padding: 1rem;
+        }
+
+        .school-lunch-plan-card .image-container img{
+            width: 15%;
+            aspect-ratio: 1/1;
+        }
+
+        /* Bento Lunchbox positioned at the top-left corner and made larger */
+        .school-lunch-plan-card .image-container .circle-img{
+            position: absolute;
+            top: -45px; /* Moves Bento Lunchbox slightly off the top */
+            left: -45px; /* Moves Bento Lunchbox slightly off the left */
+            width: 20vw;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            border: 3px solid grey;
+            object-fit: cover;
+            z-index: 2; /* Ensures it's above the background image */
+        }
+
+        /* Main Body Css */
+
+        .school-lunch-plan-card .text-container{
+            height: 80%;
+            padding: 1rem;
+            width: 90%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .school-lunch-plan-card .text-container .layout-selection{
+            width: 98%;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .school-lunch-plan-card .text-container .layout-selection .selection-question{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            font-size: 1.3rem;
+        }
+
+        .school-lunch-plan-card .text-container .layout-selection .layout-options{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 0.5rem;
+        }
+
+        /* Layout Selection Radio Button */
+                        
+        .meal-selection-layout-radio-btn label {
+            display: flex;
+            align-items: flex-start;
+            text-align: left;
+            min-width: 140px;
+            justify-content: space-between;
+            padding: 11px;
+            border: none;
+            border-radius: 6px;
+            box-shadow: 0 0 0 1px #d8dee4;
+            transition: all 0.2s ease;
+            font-size: 1.2rem;
+        }
+                            
+        .meal-selection-layout-radio-btn label:not(:has(input:disabled)):hover {
+            background: #f5f6f8;
+        }
+                            
+        .meal-selection-layout-radio-btn label:has(input:disabled) {
+            opacity: .8;
+            cursor: not-allowed;
+            background: #f5f6f8;
+        }
+                            
+        .meal-selection-layout-radio-btn label:has(input:checked) {
+            box-shadow: 0 0 0 1.5px rgb(37 99 235), 0 0 0 1px #d8dee4;
+        }
+                            
+        .meal-selection-layout-radio-btn label:has(input:focus) {
+            box-shadow: 0 0 0 1.5px rgb(37 99 235), 0 0 0 4px rgb(191 219 254), 0 0 0 1px #d8dee4;
+        }
+                            
+        .meal-selection-layout-radio-btn label .inputAndLeftText {
+            display: flex;
+            gap: .75em;
+        }
+                            
+        .meal-selection-layout-radio-btn label .inputAndLeftText div {
+            color: rgb(55 65 81);
+            line-height: 1.25rem;
+            display: flex;
+            flex-direction: column;
+        }
+                            
+        .meal-selection-layout-radio-btn label .title {
+            font-weight: 600;
+        }
+                            
+        .meal-selection-layout-radio-btn label .desc {
+            color: rgb(94, 99, 109);
+            font-size: 1.1rem;
+        }
+                            
+        .meal-selection-layout-radio-btn input {
+            color: rgb(37 99 235);
+        }
+                            
+        .meal-selection-layout-radio-btn input {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            display: inline-block;
+            vertical-align: middle;
+            background-origin: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+                            
+            border: 1px solid rgb(209 213 219);
+                            
+            box-shadow: 0 1px 2px 0 #0000000d;
+            border-radius: 9999px;
+            width: 1rem;
+            height: 1rem;
+                            
+            margin: 2px 0 0;
+        }
+                            
+        .meal-selection-layout-radio-btn input:checked {
+            border-color: #0000;
+            background-color: currentColor;
+            background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTYgMTYiIGZpbGw9IiNmZmYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iOCIgY3k9IjgiIHI9IjMiLz48L3N2Zz4=);
+        }
+                            
+        .meal-selection-layout-radio-btn input:focus {
+            box-shadow: 0 0 0 3px rgb(191 219 254), 0 1px 2px 0 #0000000d;
+        }
+                            
+        .meal-selection-layout-radio-btn input:disabled{
+            color: rgb(156 163 175);
+        }
+
+        /* General Menu Layout Css */
+
+        /* Break System Css */
+
+        .school-lunch-plan-card .break-system {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            row-gap: 9rem;
+            width: 100%;
+            padding: 6rem 2rem;
+        }
+
+        .school-lunch-plan-card .break-system .recess,
+        .school-lunch-plan-card .break-system .lunch {
+            width: 30rem;
+            min-height: 10rem;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 3.125rem 6.25rem -1.25rem,
+                        rgba(0, 0, 0, 0.3) 0px 1.875rem 3.75rem -1.875rem,
+                        rgba(10, 37, 64, 0.35) 0px -0.125rem 0.375rem 0px inset;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 4rem;
+        }
+
+        .school-lunch-plan-card .break-system .recess .meal-image,
+        .school-lunch-plan-card .break-system .lunch .meal-image{
+            position: absolute;
+            top: -7rem; /* Adjust to move the text closer to the top */
+            left: 50%;
+            transform: translateX(-50%); /* Center the text horizontally */
+            z-index: 3;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(0deg, #ddd, #fff);
+            padding: 0.5rem;
+            width: 12rem;
+            height: 12rem;
+            border-radius: 50%;
+        }
+
+        .school-lunch-plan-card .break-system .recess .meal-image .lunchbox-image,
+        .school-lunch-plan-card .break-system .lunch .meal-image .lunchbox-image{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        .school-lunch-plan-card .break-system .recess::before,
+        .school-lunch-plan-card .break-system .lunch::before {
+            content: attr(data-title);
+            font-size: 2.5rem;
+            color: rgb(0, 0, 0);
+            position: absolute;
+            left: -11%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            width: 8rem;
+            background-color: rgba(255, 255, 255, 0.75);
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 3.125rem 6.25rem -1.25rem,
+                        rgba(0, 0, 0, 0.3) 0px 1.875rem 3.75rem -1.875rem,
+                        rgba(10, 37, 64, 0.35) 0px -0.125rem 0.375rem 0px inset;
+            padding: 0.8rem;
+            padding-left: 1.4rem;
+            padding-right: 0.6rem;
+            font-family: 'Mea Culpa', 'Roboto', sans-serif;
+        }
+
+        .school-lunch-plan-card .break-system .recess .text-area,
+        .school-lunch-plan-card .break-system .lunch .text-area  {
+            position: relative;
+            left: 8%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 4rem;
+        }
+
+        @media screen and (max-width: 480px) {
+            .school-lunch-plan-card .break-system .recess .text-area,
+            .school-lunch-plan-card .break-system .lunch .text-area  {
+                left: 17%;
+            }
+        }
+
+        .school-lunch-plan-card .break-system .recess .text-area p,
+        .school-lunch-plan-card .break-system .lunch .text-area p {
+            position: relative;
+            color: #000000;
+            padding: 0.5rem;
+            padding-top: 1.5rem;
+            font-size: 1.65rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="miniature-body-div">
+        <div class="school-lunch-plan-parent-container">
+            <div class="school-lunch-plan-card-container">
+                <div class="school-lunch-plan-card">
+                    <div class="image-container">
+                        <!-- Bento Lunchbox Image -->
+                        <img class="circle-img" src="images/bento-lunchbox1.png" alt="Bento Lunch Box">
+                        <div class="header">
+                            <p>School Lunch Meal Plan</p>
+                        </div>
+                    </div>
+
+                    <div class="text-container">
+
+                        <div class="layout-selection">
+
+                            <div class="selection-question">
+                                <p><i>Please Select a Meal Plan Layout...</i></p>
+                            </div>
+
+                            <div class="layout-options">
+                                <div class="meal-selection-layout-radio-btn">
+                                    <label for="General-layout">
+                                        <div class="inputAndLeftText">
+                                            <input id="General-layout" type="radio" name="radio-examples">
+                                            <div>
+                                            <span class="title">General Layout</span>
+                                            <span class="desc">Appetizer, Main Course, Laitage, Dessert, Side Snacks.</span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+    
+                                <div class="meal-selection-layout-radio-btn">
+                                    <label for="General-layout">
+                                        <div class="inputAndLeftText">
+                                            <input id="break-system-layout" type="radio" name="radio-examples" checked>
+                                            <div>
+                                            <span class="title">Break System Layout</span>
+                                            <span class="desc">Recess Meal Break, Main Lunch Break</span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+    
+                                <div class="meal-selection-layout-radio-btn">
+                                    <label for="General-layout">
+                                        <div class="inputAndLeftText">
+                                            <input id="meal-category-layout" type="radio" name="radio-examples">
+                                            <div>
+                                            <span class="title">Meal Category Layout</span>
+                                            <span class="desc">Fruits, Vegetables, Carbs and Fibre, Treats/Snacks...</span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!--Menu By School Break System-->
+                        <div class="break-system">
+                            <div class="recess" data-title="Recess Meal Break">
+                                <div class="meal-image">
+                                    <img class = "lunchbox-image" src="images/break-lunchbox.jpeg" alt="Recess Packed Meal">
+                                </div>
+                                <div class="text-area">
+                                    <p>
+                                        Ham and cheese skewers.<br>
+                                        Carrot sticks with a side of tomato ketchup dip.<br>
+                                        Deviled egg.<br>
+                                        Almond seeds.<br>
+                                        Granola Bars.<br>
+                                        Fruit salad.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="lunch" data-title="Main Lunch Break">
+                                <div class="meal-image">
+                                    <img class = "lunchbox-image" src="images/lunchbox.jpeg" alt="Packed Lunch">
+                                </div>
+                                <div class="text-area">
+                                    <p>
+                                        Spicy curry rice with smoked sausages.<br>
+                                        Ham and cheese wrap.<br>
+                                        Mango juice.<br>
+                                        Yogurt with fruit.<br>
+                                        Muffin.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End of Menu By School Break System-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
