@@ -707,6 +707,11 @@ document.querySelector('.modal-enter-btn').addEventListener('click', () => {
     }
 });
 
+//Modal formatting options
+function formatModal(command) {
+    document.execCommand(command, false, null);
+}
+
 // Sync Day and Week View when Start Date changes
 document.getElementById('start-date').addEventListener('change', () => {
     const startDate = document.getElementById('start-date').value;
